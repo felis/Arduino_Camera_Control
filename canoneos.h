@@ -3,6 +3,14 @@
 
 #include "ptp.h"
 
+/* Canon EOS commands. Checked to work with following cameras:
+  400D
+  450D (XSi)
+  
+  Certain commands are not supported by all cameras
+  */
+
+
 // PTP Operation Codes (EOS specific)
 #define PTP_OC_EOS_GetStorageIDs			0x9101
 #define PTP_OC_EOS_GetStorageInfo			0x9102
