@@ -1,4 +1,5 @@
-/* EOS Capture Example. Works on cameras listed in canoneos.h */
+/* EOS Capture Example. Works with the following cameras: */
+/* 400D, 450D(XSi), 40D, 5D Mark II, 7D                   */
 #include <inttypes.h>
 #include <avr/pgmspace.h>
 

@@ -195,82 +195,9 @@ struct PTPUSBEventContainer
 #define PTP_EC_CaptureComplete				0x400D
 #define PTP_EC_UnreportedStatus				0x400E
 
-/* PTP device info structure (returned by GetDevInfo) */
-struct PTPDeviceInfo 
-{
-	uint16_t StandardVersion;
-	uint32_t VendorExtensionID;
-	uint16_t VendorExtensionVersion;
-	char	*VendorExtensionDesc;
-	uint16_t FunctionalMode;
-	uint32_t OperationsSupported_len;
-	uint16_t *OperationsSupported;
-	uint32_t EventsSupported_len;
-	uint16_t *EventsSupported;
-	uint32_t DevicePropertiesSupported_len;
-	uint16_t *DevicePropertiesSupported;
-	uint32_t CaptureFormats_len;
-	uint16_t *CaptureFormats;
-	uint32_t ImageFormats_len;
-	uint16_t *ImageFormats;
-	char	*Manufacturer;
-	char	*Model;
-	char	*DeviceVersion;
-	char	*SerialNumber;
-};
-
-/* PTP storageIDs structute (returned by GetStorageIDs) */
-struct PTPStorageIDs 
-{
-	uint32_t n;
-	uint32_t *Storage;
-};
-
-/* PTP StorageInfo structure (returned by GetStorageInfo) */
-struct PTPStorageInfo 
-{
-	uint16_t StorageType;
-	uint16_t FilesystemType;
-	uint16_t AccessCapability;
-	uint64_t MaxCapability;
-	uint64_t FreeSpaceInBytes;
-	uint32_t FreeSpaceInImages;
-	char 	*StorageDescription;
-	char	*VolumeLabel;
-};
-
-/* PTP objecthandles structure (returned by GetObjectHandles) */
-struct PTPObjectHandles {
-	uint32_t n;
-	uint32_t *Handler;
-};
-
 #define PTP_HANDLER_SPECIAL					0xffffffff
 #define PTP_HANDLER_ROOT					0x00000000
 
-
-/* PTP objectinfo structure (returned by GetObjectInfo) */
-struct PTPObjectInfo {
-	uint32_t StorageID;
-	uint16_t ObjectFormat;
-	uint16_t ProtectionStatus;
-	uint32_t ObjectCompressedSize;
-	uint16_t ThumbFormat;
-	uint32_t ThumbCompressedSize;
-	uint32_t ThumbPixWidth;
-	uint32_t ThumbPixHeight;
-	uint32_t ImagePixWidth;
-	uint32_t ImagePixHeight;
-	uint32_t ImageBitDepth;
-	uint32_t ParentObject;
-	uint16_t AssociationType;
-	uint32_t AssociationDesc;
-	uint32_t SequenceNumber;
-	char 	*Filename;
-	//time_t	CaptureDate;
-	//time_t	ModificationDate;
-	char	*Keywords;
-};
 
 /* max ptp string length INCLUDING terminating null character */
 #define PTP_MAXSTRLEN						255
@@ -343,33 +270,7 @@ struct PTPObjectInfo {
 #define PTP_AC_ReadOnly							0x0001
 #define PTP_AC_ReadOnly_with_Object_Deletion	0x0002
 
-/* Property Describing Dataset, Range Form */
-struct PTPPropDescRangeForm 
-{
-	void *		MinimumValue;
-	void *		MaximumValue;
-	void *		StepSize;
-};
 
-/* Property Describing Dataset, Enum Form */
-struct PTPPropDescEnumForm {
-	uint16_t	NumberOfValues;
-	void **		SupportedValue;
-};
-
-/* Device Property Describing Dataset (DevicePropDesc) */
-struct PTPDevicePropDesc {
-	uint16_t	DevicePropertyCode;
-	uint16_t	DataType;
-	uint8_t		GetSet;
-	void *		FactoryDefaultValue;
-	void *		CurrentValue;
-	uint8_t		FormFlag;
-	union	{
-		PTPPropDescEnumForm		Enum;
-		PTPPropDescRangeForm	Range;
-	} FORM;
-};
 
 /* DataType Codes */
 #define PTP_DTC_UNDEF						0x0000
@@ -432,8 +333,6 @@ struct PTPDevicePropDesc {
 /* Proprietary vendor extension device property mask */
 #define PTP_DPC_EXTENSION_MASK				0xF000
 #define PTP_DPC_EXTENSION					0xD000
-
-/* Vendor Extensions device property codes */
 
 /* Device Property Form Flag */
 #define PTP_DPFF_None						0x00

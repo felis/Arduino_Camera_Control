@@ -1,16 +1,6 @@
 #include "ptpconst.h"
 #include "ptp.h"
 
-void PTPObjHandleParser::Parse(const uint16_t len, const uint8_t *pbuf, const uint32_t &offset)
-{
-	uint16_t	cntdn	= (uint16_t)len;
-	uint8_t		*p		= (uint8_t*)pbuf;
-
-	arrayParser.Parse(&p, &cntdn, (PTP_ARRAY_EL_FUNC)&PrintHandle);
-}
-
-
-
 void uint16_to_char(uint16_t integer, unsigned char *data)
 {
 	data[0] = (integer & 0xff);
@@ -171,11 +161,11 @@ void PTP::HandleResponse(uint16_t rc)
 {
 	if (((rc >> 8) & 0xFF) == 0x20)
 		if ((rc & 0xFF) > (PTP_RC_SpecificationOfDestinationUnsupported & 0xFF))
-			Message(PSTR("Undefined response: "), rc);
+			Message(PSTR("Undefined response"), rc);
 		else
 			Message((char*)pgm_read_word(&stdResponse[(rc & 0xFF)]), rc);
 	else
-		Message(PSTR("Error: "), rc);
+		Message(PSTR("Error"), rc);
 }
 #endif
 
@@ -190,7 +180,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 		// Make command PTP container header
 		uint16_to_char(PTP_USB_CONTAINER_COMMAND,	(unsigned char*)(cmd + PTP_CONTAINER_CONTYPE_OFF));			// type
 		uint16_to_char(opcode,						(unsigned char*)(cmd + PTP_CONTAINER_OPCODE_OFF));			// code
-		uint32_to_char(++idTransaction,				(unsigned char*)(cmd + PTP_CONTAINER_TRANSID_OFF));			// transaction id
+		uint32_to_char(idTransaction++,				(unsigned char*)(cmd + PTP_CONTAINER_TRANSID_OFF));			// transaction id
 		
 		uint8_t		n = flags->opParams, len;
 
@@ -208,10 +198,9 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 		if (rcode)
 		{
-			Message(PSTR("Transaction: Command block send error."), rcode);
+			Message(PSTR("Transaction: Command block send error"), rcode);
 			return PTP_RC_GeneralError;
 		}
-		//Message(PSTR("Transaction: Command block successfully sent."), rcode);
 		//delay(50);
 	}
 	{
@@ -219,24 +208,45 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 		if (flags->txOperation)
 		{
-			if (flags->typeOfVoid == 3 && pVoid)
+			if (flags->typeOfVoid && !pVoid)
 			{
-				ZerroMemory(PTP_MAX_RX_BUFFER_LEN, data);
+				Notify(PSTR("Transaction: pVoid is NULL\n"));
+				return PTP_RC_GeneralError;
+			}
+			ZerroMemory(PTP_MAX_RX_BUFFER_LEN, data);
 
-				uint8_t		len = PTP_USB_BULK_HDR_LEN + flags->dataSize;
+			uint32_t	bytes_left =	(flags->typeOfVoid == 3) ? PTP_USB_BULK_HDR_LEN + flags->dataSize :
+										((flags->typeOfVoid == 1) ? PTP_USB_BULK_HDR_LEN + ((PTPDataSupplier*)pVoid)->GetDataSize() : 12);
 
-				// Make data PTP container header
-				*((uint8_t*)data) = len;
-				uint16_to_char(PTP_USB_CONTAINER_DATA,		(unsigned char*)(data + PTP_CONTAINER_CONTYPE_OFF));			// type
-				uint16_to_char(opcode,						(unsigned char*)(data + PTP_CONTAINER_OPCODE_OFF));			// code
-				uint32_to_char(idTransaction,				(unsigned char*)(data + PTP_CONTAINER_TRANSID_OFF));			// transaction id
+			// Make data PTP container header
+			*((uint32_t*)data) = bytes_left;
+			uint16_to_char(PTP_USB_CONTAINER_DATA,		(unsigned char*)(data + PTP_CONTAINER_CONTYPE_OFF));		// type
+			uint16_to_char(opcode,						(unsigned char*)(data + PTP_CONTAINER_OPCODE_OFF));			// code
+			uint32_to_char(idTransaction,				(unsigned char*)(data + PTP_CONTAINER_TRANSID_OFF));		// transaction id
 
+			uint16_t	len;
+
+			if (flags->typeOfVoid == 1)
+				len = (bytes_left < PTP_MAX_RX_BUFFER_LEN) ? bytes_left : PTP_MAX_RX_BUFFER_LEN;
+			
+			if (flags->typeOfVoid == 3)
+			{
 				uint8_t		*p1 = (data + PTP_USB_BULK_HDR_LEN);
 				uint8_t		*p2 = (uint8_t*)pVoid;
 
 				for (uint8_t i=flags->dataSize; i; i--, p1++, p2++)
 					*p1 = *p2;
 
+				len = PTP_USB_BULK_HDR_LEN + flags->dataSize;
+			}
+			bool first_time = true;
+
+			while (bytes_left)
+			{
+				if (flags->typeOfVoid == 1)
+					((PTPDataSupplier*)pVoid)->GetData(	(first_time) ? len - PTP_USB_BULK_HDR_LEN : len, 
+														(first_time) ? (data + PTP_USB_BULK_HDR_LEN) : data);
+				
 				rcode = Usb.outTransfer(devAddress, epDataOut, len, (char*)data);
 
 				if (rcode)
@@ -244,8 +254,12 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 					Message(PSTR("Transaction: Data block send error."), rcode);
 					return PTP_RC_GeneralError;
 				}
-				//Message(PSTR("Transaction: Data block successfully sent."), rcode);
-				//delay(50);
+
+				bytes_left -= len;
+
+				len = (bytes_left < PTP_MAX_RX_BUFFER_LEN) ? bytes_left : PTP_MAX_RX_BUFFER_LEN;
+
+				first_time = false;
 			}
 		}
 
@@ -270,7 +284,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 			}
 
 			// This can occure in case of unsupported operation or successive response after data reception stage
-			if (*((uint16_t*)(data + PTP_CONTAINER_CONTYPE_OFF)) == PTP_USB_CONTAINER_RESPONSE)
+			if ((!loops || total == data_off) && *((uint16_t*)(data + PTP_CONTAINER_CONTYPE_OFF)) == PTP_USB_CONTAINER_RESPONSE)
 			{
 				uint16_t	response = *((uint16_t*)(data + PTP_CONTAINER_OPCODE_OFF));
 
@@ -278,10 +292,17 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 				{
 					// number of params = (container length - 12) / 4
 					uint8_t	n = (*((uint32_t*)data) - PTP_USB_BULK_HDR_LEN) >> 2;
-					flags->rsParams = n;
 
-					for (uint32_t *p1 = (uint32_t*)(data + PTP_USB_BULK_HDR_LEN), *p2 = (uint32_t*)params; n--; p1++, p2++)
+					// BUG: n should be checked!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					flags->rsParams = n;
+					
+					for (uint32_t *p1 = (uint32_t*)(data + PTP_USB_BULK_HDR_LEN), *p2 = (uint32_t*)params; n; n--, p1++, p2++)
 						p2 = p1;
+				}
+				if (response != PTP_RC_OK)
+				{
+					Message(PSTR("Transaction: Response recieve error"), response);
+					data_off = 0;
 				}
 				return response;
 			}
@@ -337,7 +358,7 @@ uint16_t PTP::EventCheck(PTPReadParser *pParser)
 
 		default:
 			// in case of a usb error
-			Message(PSTR("EventCheck: USB error: "), rcode);
+			//Message(PSTR("EventCheck: USB error: "), rcode);
 			return PTP_RC_GeneralError;
 		}
 
@@ -387,362 +408,336 @@ bool PTP::EventWait(uint8_t size, uint8_t *event_buf, uint16_t timeout)
 
 uint16_t PTP::OpenSession()
 {
-	uint16_t	ptp_error = PTP_RC_GeneralError;
-
-	idSession ++;
-	
-	Message(PSTR("Opening session #: "), idSession);
-
 	uint32_t	params[1];
-	params[0]	= idSession;
-
 	OperFlags	flags = { 1, 0, 0, 0, 0, 0 };
 
-	if ( (ptp_error = Transaction(PTP_OC_OpenSession, &flags, params)) != PTP_RC_OK)
-		Message(PSTR("OpenSession: Transaction error."), ptp_error);
-	else
-		Message(PSTR("OpenSession: Session opened."), ptp_error);
+	idSession		= 1;
+	idTransaction	= 1;
 
-	return ptp_error;
+	params[0]	= idSession;
+
+	return Transaction(PTP_OC_OpenSession, &flags, params);
 }
 
 uint16_t PTP::ResetDevice()
 {
-	uint16_t	ptp_error = PTP_RC_GeneralError;
 	OperFlags	flags = { 0, 0, 0, 0, 0, 0 };
+	return Transaction(PTP_OC_ResetDevice, &flags);
+}
 
-	if ( (ptp_error = Transaction(PTP_OC_ResetDevice, &flags)) != PTP_RC_OK)
-		Message(PSTR("ResetDevice: Error."), ptp_error);
+uint16_t PTP::GetNumObjects(uint32_t &retval, uint32_t storage_id, uint16_t format, uint32_t assoc)
+{
+	uint16_t	ptp_error = PTP_RC_GeneralError;
+	OperFlags	flags = { 3, 1, 0, 0, 0, 0 };
+	uint32_t	params[3];
+
+	if ( (ptp_error = Transaction(PTP_OC_GetNumObjects, &flags, params)) == PTP_RC_OK)
+		retval = params[0];
 
 	return ptp_error;
+}
+
+uint16_t PTP::GetObject(uint32_t handle, PTPReadParser *parser)
+{
+	OperFlags	flags = { 1, 0, 0, 1, 1, 0 };
+	uint32_t	params[1];
+
+	params[0] = handle;
+
+	return Transaction(PTP_OC_GetObject, &flags, params, parser);
+}
+
+uint16_t PTP::GetThumb(uint32_t handle, PTPReadParser *parser)
+{
+	OperFlags	flags = { 1, 0, 0, 1, 1, 0 };
+	uint32_t	params[1];
+
+	params[0] = handle;
+
+	return Transaction(PTP_OC_GetThumb, &flags, params, parser);
+}
+
+uint16_t PTP::DeleteObject(uint32_t handle, uint16_t format)
+{
+	OperFlags	flags = { 2, 0, 0, 0, 0, 0 };
+	uint32_t	params[2];
+
+	params[0] = handle;
+	params[1] = (uint32_t)format;
+
+	return Transaction(PTP_OC_DeleteObject, &flags, params);
+}
+
+uint16_t PTP::SetObjectProtection(uint32_t handle, uint16_t attrib)
+{
+	OperFlags	flags = { 2, 0, 0, 0, 0, 0 };
+	uint32_t	params[2];
+
+	params[0] = handle;
+	params[1] = (uint32_t)attrib;
+
+	return Transaction(PTP_OC_SetObjectProtection, &flags, params);
+}
+
+uint16_t PTP::MoveObject(uint32_t handle, uint32_t storage_id, uint32_t parent)
+{
+	OperFlags	flags = { 3, 0, 0, 0, 0, 0 };
+	uint32_t	params[2];
+
+	params[0] = handle;
+	params[1] = storage_id;
+	params[2] = parent;
+
+	return Transaction(PTP_OC_MoveObject, &flags, params);
+}
+
+uint16_t PTP::CopyObject(uint32_t handle, uint32_t storage_id, uint32_t parent, uint32_t &new_handle)
+{
+	uint16_t	ptp_error = PTP_RC_GeneralError;
+	OperFlags	flags = { 3, 1, 0, 0, 0, 0 };
+	uint32_t	params[3];
+
+	params[0] = handle;
+	params[1] = storage_id;
+	params[2] = parent;
+
+	if ( (ptp_error = Transaction(PTP_OC_CopyObject, &flags, params)) == PTP_RC_OK)
+		new_handle = params[0];
+
+	return ptp_error;
+}
+
+uint16_t PTP::InitiateCapture(uint32_t storage_id, uint16_t format)
+{
+	uint16_t	ptp_error = PTP_RC_GeneralError;
+	OperFlags	flags = { 2, 0, 0, 0, 0, 0 };
+	uint32_t	params[2];
+
+	params[0] = storage_id;
+	params[1] = (uint32_t)format;
+
+	if ( (ptp_error = Transaction(PTP_OC_InitiateCapture, &flags, params)) == PTP_RC_OK)
+	{}
+
+	return ptp_error;
+}
+
+uint16_t PTP::InitiateOpenCapture(uint32_t storage_id, uint16_t format)
+{
+	uint16_t	ptp_error = PTP_RC_GeneralError;
+	OperFlags	flags = { 2, 0, 0, 0, 0, 0 };
+	uint32_t	params[2];
+
+	params[0] = storage_id;
+	params[1] = (uint32_t)format;
+
+	if ( (ptp_error = Transaction(PTP_OC_InitiateOpenCapture, &flags, params)) == PTP_RC_OK)
+	{}
+
+	return ptp_error;
+}
+	
+uint16_t PTP::TerminateOpenCapture(uint32_t trans_id)
+{
+	OperFlags	flags = { 1, 0, 0, 0, 0, 0 };
+	uint32_t	params[1];
+
+	params[0] = trans_id;
+
+	return Transaction(PTP_OC_TerminateOpenCapture, &flags, params);
 }
 
 uint16_t PTP::PowerDown()
 {
-	uint16_t	ptp_error = PTP_RC_GeneralError;
 	OperFlags	flags = { 0, 0, 0, 0, 0, 0 };
-
-	if ( (ptp_error = Transaction(PTP_OC_PowerDown, &flags)) != PTP_RC_OK)
-		Message(PSTR("PowerDown: Error: "), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_PowerDown, &flags);
 }
 
 uint16_t PTP::SelfTest(uint16_t type = 0)
 {
-	uint16_t	ptp_error = PTP_RC_GeneralError;
 	OperFlags	flags = { 1, 0, 0, 0 };
 	uint32_t	params[1];
 	params[0]	= type;
 
-	if ( (ptp_error = Transaction(PTP_OC_SelfTest, &flags, params)) != PTP_RC_OK)
-		Message(PSTR("SelfTest: Error."), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_SelfTest, &flags, params);
 }
 
 uint16_t PTP::CloseSession()
 {
 	uint16_t	ptp_error = PTP_RC_GeneralError;
-	
-	Message(PSTR("Closing session #: "), idSession);
-
 	OperFlags	flags = { 0, 0, 0, 0, 0, 0 };
 
-	if ( (ptp_error = Transaction(PTP_OC_CloseSession, &flags)) != PTP_RC_OK)
-		Message(PSTR("CloseSession error."), ptp_error);
-	else
-		Message(PSTR("Session closed."), ptp_error);
-
+	if ( (ptp_error = Transaction(PTP_OC_CloseSession, &flags)) == PTP_RC_OK)
+		idSession = idTransaction = 0;
+	
 	return ptp_error;
 }
 
 uint16_t PTP::GetDeviceInfo(PTPReadParser *parser)
 {
-	uint16_t	ptp_error = PTP_RC_GeneralError;
 	OperFlags	flags = { 0, 0, 0, 1, 1, 0 };
+	return Transaction(PTP_OC_GetDeviceInfo, &flags, NULL, parser);
+}
 
-	if ( (ptp_error = Transaction(PTP_OC_GetDeviceInfo, &flags, NULL, parser)) != PTP_RC_OK)
-		Message(PSTR("GetDeviceInfo: Årror."), ptp_error);
+uint16_t PTP::GetObjectInfo(uint32_t handle, PTPReadParser *parser)
+{
+	OperFlags	flags = { 1, 0, 0, 1, 1, 0 };
+	uint32_t	params[1];
+	params[0] = handle;
 
-	return ptp_error;
+	return Transaction(PTP_OC_GetObjectInfo, &flags, params, parser);
 }
 
 uint16_t PTP::GetDevicePropDesc(const uint16_t pcode, PTPReadParser *parser)
 {
-	uint16_t	ptp_error	= PTP_RC_GeneralError;
 	OperFlags	flags		= { 1, 0, 0, 1, 1, 0 };
 	uint32_t	params[1];
 
 	params[0] = (uint32_t)pcode;
 
-	if ( (ptp_error = Transaction(PTP_OC_GetDevicePropDesc, &flags, params, parser)) != PTP_RC_OK)
-		Message(PSTR("GetDevicePropDesc: Årror."), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_GetDevicePropDesc, &flags, params, parser);
 }
 
 uint16_t PTP::GetDevicePropValue(const uint16_t pcode, PTPReadParser *parser)
 {
-	uint16_t	ptp_error	= PTP_RC_GeneralError;
 	OperFlags	flags		= { 1, 0, 0, 1, 1, 0 };
 	uint32_t	params[1];
 
 	params[0] = (uint32_t)pcode;
 
-	if ( (ptp_error = Transaction(PTP_OC_GetDevicePropValue, &flags, params, parser)) != PTP_RC_OK)
-		Message(PSTR("GetDevicePropValue: Årror."), ptp_error);
+	return Transaction(PTP_OC_GetDevicePropValue, &flags, params, parser);
+}
+
+uint16_t PTP::GetDevicePropValue(const uint16_t pcode, uint8_t &val)
+{
+	uint16_t	ptp_error	= PTP_RC_GeneralError;
+	OperFlags	flags		= { 1, 0, 0, 0, 3, 13 };
+	uint32_t	params[1];
+	uint8_t		buf[13];
+
+	params[0] = (uint32_t)pcode;
+
+	if ( (ptp_error = Transaction(PTP_OC_GetDevicePropValue, &flags, params, buf)) == PTP_RC_OK)
+		val = buf[12];
 
 	return ptp_error;
 }
 
-uint16_t PTP::ResetDevicePropValue(const uint16_t pcode)
+uint16_t PTP::GetDevicePropValue(const uint16_t pcode, uint16_t &val)
 {
 	uint16_t	ptp_error	= PTP_RC_GeneralError;
+	OperFlags	flags		= { 1, 0, 0, 0, 3, 14 };
+	uint32_t	params[1];
+	uint16_t	buf[7];
+
+	params[0] = pcode;
+
+	if ( (ptp_error = Transaction(PTP_OC_GetDevicePropValue, &flags, params, buf)) == PTP_RC_OK)
+		val = buf[6];
+
+	return ptp_error;
+}
+
+uint16_t PTP::GetDevicePropValue(const uint16_t pcode, uint32_t &val)
+{
+	uint16_t	ptp_error	= PTP_RC_GeneralError;
+	OperFlags	flags		= { 1, 0, 0, 0, 3, 16 };
+	uint32_t	params[1];
+	uint32_t	buf[4];
+
+	params[0] = pcode;
+
+	if ( (ptp_error = Transaction(PTP_OC_GetDevicePropValue, &flags, params, buf)) == PTP_RC_OK)
+		val = buf[3];
+
+	return ptp_error;
+}
+
+uint16_t PTP::SetDevicePropValue(uint16_t pcode, uint8_t val)
+{
+	OperFlags	flags		= { 1, 0, 1, 1, 3, 1 };
+	uint32_t	params[1];
+	uint8_t		value;
+
+	params[0]	= (uint32_t)pcode;
+	value		= val;
+
+	return Transaction(PTP_OC_SetDevicePropValue, &flags, params, (void*)&value);
+}
+
+uint16_t PTP::SetDevicePropValue(uint16_t pcode, uint16_t val)
+{
+	OperFlags	flags		= { 1, 0, 1, 1, 3, 2 };
+	uint32_t	params[1];
+	uint16_t	value;
+
+	params[0]	= (uint32_t)pcode;
+	value		= val;
+
+	return Transaction(PTP_OC_SetDevicePropValue, &flags, params, (void*)&value);
+}
+
+uint16_t PTP::SetDevicePropValue(uint16_t pcode, uint32_t val)
+{
+	OperFlags	flags		= { 1, 0, 1, 1, 3, 4 };
+	uint32_t	params[1];
+	uint32_t	value;
+
+	params[0]	= (uint32_t)pcode;
+	value		= val;
+
+	return Transaction(PTP_OC_SetDevicePropValue, &flags, params, (void*)&value);
+}
+
+uint16_t PTP::ResetDevicePropValue(const uint16_t pcode)
+{
 	OperFlags	flags		= { 1, 0, 0, 0 };
 	uint32_t	params[1];
 
 	params[0] = (uint32_t)pcode;
 
-	if ( (ptp_error = Transaction(PTP_OC_ResetDevicePropValue, &flags, params)) != PTP_RC_OK)
-		Message(PSTR("ResetDevicePropValue: Årror."), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_ResetDevicePropValue, &flags, params);
 }
 
-//uint16_t PTP::EOSSetEventMask()
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 1, 0, 0, 0, 0, 0 };
-//	uint32_t	params[3];
-//
-//	// 0x911a
-//	//params[0] = 0x7fffffff;
-//	//params[1] = 0x00001000;
-//	//params[2] = 0x00000001;
-//
-//	//params[0] = 0x00000001;
-//
-//	//if ( (ptp_error = Transaction(0x9115, &flags, params)) != PTP_RC_OK)
-//	//	Message(PSTR("EOSSetEventMask: 0x9115 Error."), ptp_error);
-//	//else
-//	//	Message(PSTR("EOSSetEventMask: 0x9115 Success."), ptp_error);
-//
-//	//delay(100);
-//
-//	// 0x9114 - device mode selection
-//	params[0] = 0x00000001;
-//
-//	if ( (ptp_error = Transaction(0x9114, &flags, params)) != PTP_RC_OK)
-//		Message(PSTR("EOSSetEventMask: 0x9114 Error."), ptp_error);
-//	else
-//		Message(PSTR("EOSSetEventMask: 0x9114 Success."), ptp_error);
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOSSet()
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 0, 0, 1, 1, 3, 12 };
-//	uint32_t	params[3];
-//
-//	//flags.opParams = 0;
-//	//flags.rsParams = 1;
-//	//flags.txOperation = 0;
-//	//flags.dataStage = 0;
-//
-//	for (uint8_t i=0; i<0xFF; i+=1)
-//	{
-//		// ISO
-//		params[0] = 0x0000000C;
-//		params[1] = 0x0000D103;
-//		params[2] = (uint32_t)i; //0x00000080;
-//
-//		// F
-//		//params[0] = 0x0000000C;
-//		//params[1] = 0x0000D101;
-//		//params[2] = (uint32_t)i; //0x0000002D;
-//
-//		// T
-//		//params[0] = 0x0000000C;
-//		//params[1] = 0x0000D102;
-//		//params[2] = (uint32_t)i; //0x0000002D;
-//
-//		if ( (ptp_error = Transaction(0x9110, &flags, NULL, (void*)params)) != PTP_RC_OK)
-//			Message(PSTR("EOSSet: Error."), ptp_error);
-//		else
-//			Message(PSTR("EOSSet: Success."), ptp_error);
-//
-//		delay(2500);
-//	}
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS9110(uint8_t size, void *params)
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 0, 0, 1, 1, 3, 12 };
-//
-//	flags.dataSize = size;
-//
-//	if ( (ptp_error = Transaction(0x9110, &flags, NULL, params)) != PTP_RC_OK)
-//		Message(PSTR("EOSSet: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOSSet: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-
-uint16_t PTP::Operation(uint16_t opcode, uint8_t nparams = 0, uint32_t *params = NULL)
+uint16_t PTP::Operation(uint16_t opcode, uint8_t nparams, uint32_t *params)
 {
-	uint16_t	ptp_error	= PTP_RC_GeneralError;
 	OperFlags	flags		= { 0, 0, 0, 0, 0, 0 };
 
 	flags.opParams = nparams;
 
-	if ( (ptp_error = Transaction(opcode, &flags, params)) != PTP_RC_OK)
-		Message(PSTR("Operation: Error."), ptp_error);
-
-	return ptp_error;
+	return Transaction(opcode, &flags, params);
 }
 
 uint16_t PTP::GetStorageInfo(uint32_t storage_id, PTPReadParser *parser)
 {
-	uint16_t	ptp_error	= PTP_RC_GeneralError;
 	OperFlags	flags		= { 1, 0, 0, 1, 1, 0 };
 
 	uint32_t	params[1]; 
 	params[0]	= storage_id;
 
-	if ( (ptp_error = Transaction(PTP_OC_GetStorageInfo, &flags, params, parser)) != PTP_RC_OK)
-		Message(PSTR("GetStorageInfo: Error."), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_GetStorageInfo, &flags, params, parser);
 }
 
 uint16_t PTP::FormatStore(uint32_t storage_id, uint32_t fsformat)
 {
-	uint16_t	ptp_error	= PTP_RC_GeneralError;
 	OperFlags	flags		= { 2, 0, 0, 0, 0, 0 };
 
 	uint32_t	params[2]; 
 	params[0]	= storage_id;
 	params[1]	= fsformat;
 
-	if ( (ptp_error = Transaction(PTP_OC_FormatStore, &flags, params)) != PTP_RC_OK)
-		Message(PSTR("FormatStore: Error."), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_FormatStore, &flags, params);
 }
-
-//uint16_t PTP::EOS911B()
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 0, 0, 0, 0, 0, 0 };
-//	uint32_t	params[7];
-//
-//	if ( (ptp_error = Transaction(0x911B, &flags)) != PTP_RC_OK)
-//		Message(PSTR("EOS911B: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS911B: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS9125()
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 0, 0, 0, 0, 0, 0 };
-//	uint32_t	params[7];
-//
-//	if ( (ptp_error = Transaction(0x9125, &flags)) != PTP_RC_OK)
-//		Message(PSTR("EOS9125: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS9125: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS9126()
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 0, 0, 0, 0, 0, 0 };
-//	uint32_t	params[7];
-//
-//	if ( (ptp_error = Transaction(0x9126, &flags)) != PTP_RC_OK)
-//		Message(PSTR("EOS9126: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS9126: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS911A(uint32_t *p)
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 3, 0, 0, 0, 0, 0 };
-//
-//	if ( (ptp_error = Transaction(0x911A, &flags, p)) != PTP_RC_OK)
-//		Message(PSTR("EOS911A: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS911A: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS911C()
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 0, 0, 0, 0, 0, 0 };
-//
-//	if ( (ptp_error = Transaction(0x911C, &flags)) != PTP_RC_OK)
-//		Message(PSTR("EOS911C: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS911C: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS9155(uint32_t *p)
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 1, 0, 0, 0, 0, 0 };
-//	uint32_t	params[1];
-//
-//	if ( (ptp_error = Transaction(0x9155, &flags, p)) != PTP_RC_OK)
-//		Message(PSTR("EOS9155: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS9155: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
-//
-//uint16_t PTP::EOS9158(uint32_t *p)
-//{
-//	uint16_t	ptp_error	= PTP_RC_GeneralError;
-//	OperFlags	flags		= { 1, 0, 0, 0, 0, 0 };
-//	uint32_t	params[1];
-//
-//	if ( (ptp_error = Transaction(0x9158, &flags, p)) != PTP_RC_OK)
-//		Message(PSTR("EOS9158: Error."), ptp_error);
-//	else
-//		Message(PSTR("EOS9158: Success."), ptp_error);
-//
-//	return ptp_error;
-//}
 
 uint16_t PTP::CaptureImage()
 {
 	uint16_t	ptp_error = PTP_RC_GeneralError;
 	uint32_t	params[2] = {0, 0x00003801};
-
-	Notify(PSTR("CaptureImage: Initiating capture...\n"));
-
 	OperFlags	flags = { 2, 0, 0, 0 };
 
 	if ( (ptp_error = Transaction(PTP_OC_InitiateCapture, &flags, params)) != PTP_RC_OK)
 	{
-		Message(PSTR("CaptureImage: Transaction error."), ptp_error);
+		//Message(PSTR("CaptureImage error"), ptp_error);
 		return ptp_error;
 	}
 	PTPUSBEventContainer	evnt;
@@ -750,81 +745,46 @@ uint16_t PTP::CaptureImage()
 
 	// multiple objects can be added depending on current camera shooting mode
 	while ((occured = EventWait(sizeof(PTPUSBEventContainer), (uint8_t*)&evnt, 500)) && evnt.code == PTP_EC_ObjectAdded)
-		Message(PSTR("CaptureImage: New object added."));
+		; //Message(PSTR("CaptureImage: New object added."));
 	
 	if (!occured)
 	{
-		Notify(PSTR("CaptureImage: Timeout ellapsed."));
+		//Notify(PSTR("CaptureImage: Timeout ellapsed."));
 		return PTP_RC_Undefined;
 	}
 	switch (evnt.code)
 	{
 	case PTP_EC_CaptureComplete:
-		Notify(PSTR("CaptureImage: Image captured."));
+		//Notify(PSTR("CaptureImage: Image captured."));
 		return PTP_RC_OK;
 
 	case PTP_EC_StoreFull:
-		Notify(PSTR("CaptureImage: Storage is full."));
+		//Notify(PSTR("CaptureImage: Storage is full."));
 		return PTP_RC_StoreFull;
 
 	default:
-		Message(PSTR("CaptureImage: Unexpected event"), evnt.code);
+		//Message(PSTR("CaptureImage: Unexpected event"), evnt.code);
 		return PTP_RC_Undefined;
 	}
 }
 
-//uint16_t PTP::GetDevicePropValue(uint16_t pcode, PTPDevicePropDesc *prop)
-//{
-//	uint16_t	ptp_error = PTP_RC_Undefined;
-//
-//	Message(PSTR("GetDevicePropValue: Getting dev. prop. val..."), ptp_error);
-//
-//	uint32_t	params[1];
-//	params[0]	= (uint32_t)pcode;
-//
-//	OperFlags	flags = { 1, 0, 0, 1 };
-//
-//	if ( (ptp_error = Transaction(PTP_OC_GetDevicePropValue, &flags, params)) != PTP_RC_OK)
-//		Message(PSTR("GetDevicePropValue: Unable to get dev. prop. val."), ptp_error);
-//		
-//	return ptp_error;
-//}
-
 uint16_t PTP::GetStorageIDs(PTPReadParser *parser)
 {
-	uint16_t	ptp_error = PTP_RC_Undefined;
-
-	Notify(PSTR("GetStorageIDs: Getting storage IDs...\n"));
-
 	OperFlags	flags = { 0, 0, 0, 1, 1, 0 };
-
-	if ( (ptp_error = Transaction(PTP_OC_GetStorageIDs, &flags, NULL, parser)) != PTP_RC_OK)
-		Message(PSTR("GetStorageIDs: Transaction error."), ptp_error);
-	return ptp_error;
+	return Transaction(PTP_OC_GetStorageIDs, &flags, NULL, parser);
 }
 
 uint16_t PTP::GetStorageIDs(uint8_t bufsize, uint8_t *pbuf)
 {
-	uint16_t	ptp_error = PTP_RC_Undefined;
-
-	//Notify(PSTR("GetStorageIDs: Getting storage IDs...\n"));
-
 	OperFlags	flags = { 0, 0, 0, 1, 3, 0 };
 
 	flags.dataSize = bufsize;
 
-	if ( (ptp_error = Transaction(PTP_OC_GetStorageIDs, &flags, NULL, pbuf)) != PTP_RC_OK)
-		Message(PSTR("GetStorageIDs: Transaction error."), ptp_error);
-
-	return ptp_error;
+	return Transaction(PTP_OC_GetStorageIDs, &flags, NULL, pbuf);
 }
 
 uint16_t PTP::GetObjectHandles(uint32_t storage_id, uint16_t format, uint16_t assoc, PTPReadParser *parser)
 {
-	uint16_t	ptp_error = PTP_RC_Undefined;
-
-	Notify(PSTR("GetObjectHandles: Getting object handles...\n"));
-
 	OperFlags	flags = { 3, 0, 0, 1, 1, 0 };
 	uint32_t	params[3];
 
@@ -832,27 +792,8 @@ uint16_t PTP::GetObjectHandles(uint32_t storage_id, uint16_t format, uint16_t as
 	params[1] = (uint32_t)format;
 	params[2] = (uint32_t)assoc;
 
-	if ( (ptp_error = Transaction(PTP_OC_GetObjectHandles, &flags, params, parser)) != PTP_RC_OK)
-		Message(PSTR("GetObjectHandles: Transaction error."), ptp_error);
-	return ptp_error;
+	return Transaction(PTP_OC_GetObjectHandles, &flags, params, parser);
 }
-
-//void PTP::PrintDevicePropValue(PTPDevicePropDesc *prop)
-//{
-//	char c, *msg = NULL;
-//	
-//	if (prop && prop->DevicePropertyCode >= PTP_DPC_Undefined && prop->DevicePropertyCode <= PTP_DPC_CopyrightInfo )
-//		msg = (char*)pgm_read_word(&dpValNames[(prop->DevicePropertyCode & 0xFF)]);
-//	else
-//		return;
-//
-//	if(!msg) return;
-//
-//	while((c = pgm_read_byte(msg++)))
-//		Serial.print(c,BYTE);
-//
-//	Serial.println(0,BYTE);
-//}
 
 void PTP::Task()
 {
@@ -903,7 +844,7 @@ void PTP::Task()
 	    if ((rcode = Usb.setConf( devAddress, 0, numConf )))
 	        HaltOnError(MsgErrDeviceConf, rcode);
 		
-	    Message(PSTR("Device configured."));
+	    //Message(PSTR("Device configured."));
 
 		if (pfRunning)
 			pfRunning();
@@ -913,8 +854,6 @@ void PTP::Task()
     }
     if( Usb.getUsbTaskState() == USB_STATE_RUNNING ) 
 	{  
-        //kbd_poll();
-		//CaptureImage();
 		//while(1);
     }
 }
