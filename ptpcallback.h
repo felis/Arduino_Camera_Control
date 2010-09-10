@@ -1,3 +1,18 @@
+/*****************************************************************************
+*
+* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
+*
+* This software may be distributed and modified under the terms of the GNU
+* General Public License version 2 (GPL) as published by the Free Software
+* Foundation and appearing in the file GPL.TXT included in the packaging of
+* this file. Please note that GPL Section 2[b] requires that all works based
+* on this software must also be made publicly available under the terms of
+* the GPL ("Copyleft").
+*
+* Contact information:
+* Circuits At Home Web site:  http://www.circuitsathome.com
+* e-mail:                     support@circuitsathome.com
+*****************************************************************************/
 #ifndef __PTPCALLBACK_H__
 #define __PTPCALLBACK_H__
 
@@ -42,7 +57,7 @@ class ByteSkipper
 {
 	uint8_t				*pBuf;
 	uint8_t				nStage;
-	uint8_t				countDown;
+	uint16_t			countDown;
 
 public:
 	ByteSkipper() : pBuf(NULL), nStage(0), countDown(0) {};
@@ -53,7 +68,7 @@ public:
 		countDown = 0; 
 	};
 
-	bool Skip(uint8_t **pp, uint16_t *pcntdn, uint8_t bytes_to_skip)
+	bool Skip(uint8_t **pp, uint16_t *pcntdn, uint16_t bytes_to_skip)
 	{
 		switch (nStage)
 		{

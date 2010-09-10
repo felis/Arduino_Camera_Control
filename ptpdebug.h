@@ -1,3 +1,18 @@
+/*****************************************************************************
+*
+* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
+*
+* This software may be distributed and modified under the terms of the GNU
+* General Public License version 2 (GPL) as published by the Free Software
+* Foundation and appearing in the file GPL.TXT included in the packaging of
+* this file. Please note that GPL Section 2[b] requires that all works based
+* on this software must also be made publicly available under the terms of
+* the GPL ("Copyleft").
+*
+* Contact information:
+* Circuits At Home Web site:  http://www.circuitsathome.com
+* e-mail:                     support@circuitsathome.com
+*****************************************************************************/
 #ifndef __PTPDEBUG_H__
 #define __PTPDEBUG_H__
 
@@ -21,6 +36,21 @@ void PrintHex(T val)
 		mask >>= 4;
     }
     Serial.print(val, HEX);
+}
+
+template <class T> 
+void PrintHex2(Print *prn, T val)
+{
+    T    mask = (((T)1) << (((sizeof(T) << 1) - 1) << 2));
+    
+    while (mask > 1)
+    {
+		if (val < mask)
+		  prn->print("0");
+
+		mask >>= 4;
+    }
+    prn->print(val, HEX);
 }
 
 class HexDump : public PTPReadParser

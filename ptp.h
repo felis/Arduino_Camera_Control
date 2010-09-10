@@ -1,3 +1,18 @@
+/*****************************************************************************
+*
+* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
+*
+* This software may be distributed and modified under the terms of the GNU
+* General Public License version 2 (GPL) as published by the Free Software
+* Foundation and appearing in the file GPL.TXT included in the packaging of
+* this file. Please note that GPL Section 2[b] requires that all works based
+* on this software must also be made publicly available under the terms of
+* the GPL ("Copyleft").
+*
+* Contact information:
+* Circuits At Home Web site:  http://www.circuitsathome.com
+* e-mail:                     support@circuitsathome.com
+*****************************************************************************/
 #ifndef __PTP_H__
 #define __PTP_H__
 
@@ -16,15 +31,45 @@
 
 typedef void (*PTPMAIN)();
 
+// States
+#define PTP_STATE_DEVICE_DISCONNECTED           1
+#define PTP_STATE_SESSION_NOT_OPENED            2
+#define PTP_STATE_SESSION_OPENED                        3
+#define PTP_STATE_DEVICE_INITIALIZED            4
+#define PTP_STATE_DEVICE_NOT_RESPONDING         5
+#define PTP_STATE_DEVICE_BUSY                           6
+
+#define FAILED(rc)(rc != PTP_RC_OK)
+
+class PTP;
+
+class PTPStateHandlers
+{
+public:
+        virtual void OnDeviceDisconnectedState(PTP *ptp);
+        virtual void OnSessionNotOpenedState(PTP *ptp);
+        virtual void OnSessionOpenedState(PTP *ptp);
+        virtual void OnDeviceInitializedState(PTP *ptp);
+        virtual void OnDeviceNotRespondingState(PTP *ptp);
+        virtual void OnDeviceBusyState(PTP *ptp);
+};
+
 class PTP
 {
-#ifdef PTP_HANDLE_RESPONSES
-        static const char* stdResponse[];
-#endif
+        uint8_t         theState;
+        uint8_t         busyTime;
+        uint8_t         hangTime;
 
+protected:
+        void SetInitialState();
+
+        void Task2();
+
+
+private:
         //static const char* dpValNames[];
-        static const char* dtNames1[];
-        static const char* dtNames2[];
+        //static const char* dtNames1[];
+        //static const char* dtNames2[];
 
         uint8_t                         devAddress;
         uint8_t                         epDataIn;
@@ -38,9 +83,13 @@ class PTP
         uint16_t                        idTransaction;
         uint16_t                        idSession;
 
-        PTPMAIN                         pfRunning;
+        PTPStateHandlers                *stateMachine;
+
+        //PTPMAIN                               pfRunning;
 
 protected:
+        EP_RECORD                       epRecord[ 4 ];
+
         struct OperFlags
         {
                 uint16_t        opParams        :       3;                      // 7    - maximum number of operation parameters
@@ -67,13 +116,14 @@ protected:
         void HaltOnError(const char* msg, uint16_t rcode) { Message(msg, rcode); while(1); };
         //void PrintDevicePropValue(PTPDevicePropDesc *prop);
 
-#ifdef PTP_HANDLE_RESPONSES
-        // outputs human readable response messages
-        void HandleResponse(uint16_t rc);
-#endif
-
 public:
-        PTP(uint8_t addr, uint8_t epin, uint8_t epout, uint8_t epint, uint8_t nconf, PTPMAIN pfunc);
+        PTP(uint8_t addr, uint8_t epin, uint8_t epout, uint8_t epint, uint8_t nconf, PTPStateHandlers *s);
+
+        MAX3421E* GetMax() { return &Max; };
+        USB* GetUsb() { return &Usb; };
+
+        void SetState(uint8_t state) { theState = state; };
+        uint8_t GetState() { return theState; };
 
         virtual uint16_t EventCheck(PTPReadParser *parser);
 
@@ -126,6 +176,39 @@ public:
 
 private:
         uint8_t GetConfDescr( byte addr, byte conf );
+};
+
+
+
+// Simple algorithm templates which make life easier
+
+template <class ValueType, const uint8_t ListSize>
+class AlgStack
+{
+        uint8_t         nowInList;
+        ValueType       objList[ListSize];
+
+public:
+        AlgStack() : nowInList(0) {};
+
+        bool IsEmpty()
+        {
+                return (nowInList == 0);
+        };
+        bool Push(ValueType obj)
+        {
+                if (nowInList >= ListSize)
+                        return false;
+                objList[nowInList++] = obj;
+                return true;
+        };
+        bool Pop(ValueType &obj)
+        {
+                if (!nowInList)
+                        return false;
+                obj = objList[--nowInList];
+                return true;
+        };
 };
 
 #endif // __PTP_H__

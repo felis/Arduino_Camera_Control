@@ -1,5 +1,57 @@
+/*****************************************************************************
+*
+* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
+*
+* This software may be distributed and modified under the terms of the GNU
+* General Public License version 2 (GPL) as published by the Free Software
+* Foundation and appearing in the file GPL.TXT included in the packaging of
+* this file. Please note that GPL Section 2[b] requires that all works based
+* on this software must also be made publicly available under the terms of
+* the GPL ("Copyleft").
+*
+* Contact information:
+* Circuits At Home Web site:  http://www.circuitsathome.com
+* e-mail:                     support@circuitsathome.com
+*****************************************************************************/
 #include "ptpconst.h"
 #include "ptp.h"
+#include "ptpdebug.h"
+
+void PTP::SetInitialState()
+{
+	busyTime = 0;
+	hangTime = 0;
+	idSession = 0;
+	idTransaction = 0;
+	SetState(PTP_STATE_SESSION_NOT_OPENED);
+}
+
+void PTPStateHandlers::OnDeviceDisconnectedState(PTP *ptp)
+{
+}
+
+void PTPStateHandlers::OnSessionNotOpenedState(PTP *ptp)
+{
+	if (ptp->OpenSession() == PTP_RC_OK)
+		ptp->SetState(PTP_STATE_SESSION_OPENED);
+}
+
+void PTPStateHandlers::OnSessionOpenedState(PTP *ptp)
+{
+	ptp->SetState(PTP_STATE_DEVICE_INITIALIZED);
+}
+
+void PTPStateHandlers::OnDeviceInitializedState(PTP *ptp)
+{
+}
+
+void PTPStateHandlers::OnDeviceNotRespondingState(PTP *ptp)
+{
+}
+
+void PTPStateHandlers::OnDeviceBusyState(PTP *ptp)
+{
+}
 
 void uint16_to_char(uint16_t integer, unsigned char *data)
 {
@@ -68,83 +120,10 @@ void Message(const char* msg, uint16_t rcode = 0)
 	Serial.println( rcode, HEX );
 }
 
-
-#ifdef PTP_HANDLE_RESPONSES
-const char* PTP::stdResponse[] PROGMEM = {
-	msgUndefined,
-	msgOK,
-	msgGeneralError,
-	msgSessionNotOpen,
-	msgInvalidTransactionID,
-	msgOperationNotSupported,
-	msgParameterNotSupported,
-	msgIncompleteTransfer,
-	msgInvalidStorageId,
-	msgInvalidObjectHandle,
-	msgDevicePropNotSupported,
-	msgInvalidObjectFormatCode,
-	msgStoreFull,
-	msgObjectWriteProtected,
-	msgStoreReadOnly,
-	msgAccessDenied,
-	msgNoThumbnailPresent,
-	msgSelfTestFailed,
-	msgPartialDeletion,
-	msgStoreNotAvailable,
-	msgSpecificationByFormatUnsupported,
-	msgNoValidObjectInfo,
-	msgInvalidCodeFormat,
-	msgUnknownVendorCode,
-	msgCaptureAlreadyTerminated,
-	msgDeviceBusy,
-	msgInvalidParentObject,
-	msgInvalidDevicePropFormat,
-	msgInvalidDevicePropValue,
-	msgInvalidParameter,
-	msgSessionAlreadyOpened,
-	msgTransactionCanceled,
-	msgSpecificationOfDestinationUnsupported
-};	
-#endif
-
-#if 0
-const char* PTP::dpValNames[] PROGMEM = {
-	msgUndefined,
-	msgBatteryLevel,				
-	msgFunctionalMode,				
-	msgImageSize,					
-	msgCompressionSetting,			
-	msgWhiteBalance,				
-	msgRGBGain,						
-	msgFNumber,						
-	msgFocalLength,					
-	msgFocusDistance,				
-	msgFocusMode,					
-	msgExposureMeteringMode,		
-	msgFlashMode,					
-	msgExposureTime,				
-	msgExposureProgramMode,			
-	msgExposureIndex,				
-	msgExposureBiasCompensation,	
-	msgDateTime,					
-	msgCaptureDelay,				
-	msgStillCaptureMode,			
-	msgContrast,					
-	msgSharpness,					
-	msgDigitalZoom,					
-	msgEffectMode,					
-	msgBurstNumber,					
-	msgBurstInterval,				
-	msgTimelapseNumber,				
-	msgTimelapseInterval,			
-	msgFocusMeteringMode,			
-	msgUploadURL,					
-	msgArtist,						
-	msgCopyrightInfo
-};
-#endif
-
-PTP::PTP(uint8_t addr, uint8_t epin, uint8_t epout, uint8_t epint, uint8_t nconf, PTPMAIN pf) : 
+PTP::PTP(uint8_t addr, uint8_t epin, uint8_t epout, uint8_t epint, uint8_t nconf, PTPStateHandlers *s) : 
+	theState(0),
+	busyTime(0),
+	hangTime(0),
 	idTransaction(0), 
 	idSession(0) 
 	,devAddress(addr),
@@ -152,22 +131,45 @@ PTP::PTP(uint8_t addr, uint8_t epin, uint8_t epout, uint8_t epint, uint8_t nconf
 	epDataOut(epout),
 	epInterrupt(epint),
 	numConf(nconf),
-	pfRunning(pf)
+	stateMachine(s)
 {
 };
 
-#ifdef PTP_HANDLE_RESPONSES
-void PTP::HandleResponse(uint16_t rc)
+void PTP::Task2()
 {
-	if (((rc >> 8) & 0xFF) == 0x20)
-		if ((rc & 0xFF) > (PTP_RC_SpecificationOfDestinationUnsupported & 0xFF))
-			Message(PSTR("Undefined response"), rc);
-		else
-			Message((char*)pgm_read_word(&stdResponse[(rc & 0xFF)]), rc);
-	else
-		Message(PSTR("Error"), rc);
+	switch (theState)
+	{
+	//case PTP_STATE_DEVICE_DISCONNECTED:
+//		idSession = 0;
+//		idTransaction = 0;
+//		if (stateMachine)
+	//		stateMachine->OnDeviceDisconnectedState(this);
+	//	break;
+	case PTP_STATE_SESSION_NOT_OPENED:
+		if (stateMachine)
+			stateMachine->OnSessionNotOpenedState(this);
+		break;
+	case PTP_STATE_SESSION_OPENED:
+		if (stateMachine)
+			stateMachine->OnSessionOpenedState(this);
+		break;
+	case PTP_STATE_DEVICE_INITIALIZED:
+		if (stateMachine)
+			stateMachine->OnDeviceInitializedState(this);
+		break;
+	case PTP_STATE_DEVICE_NOT_RESPONDING:
+		if (stateMachine)
+			stateMachine->OnDeviceNotRespondingState(this);
+		break;
+	case PTP_STATE_DEVICE_BUSY:
+		if (stateMachine)
+			stateMachine->OnDeviceBusyState(this);
+		break;
+	// Error state
+	default:
+		;
+	}
 }
-#endif
 
 uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = NULL, void *pVoid = NULL)
 {
@@ -201,7 +203,6 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 			Message(PSTR("Transaction: Command block send error"), rcode);
 			return PTP_RC_GeneralError;
 		}
-		//delay(50);
 	}
 	{
 		uint8_t		data[PTP_MAX_RX_BUFFER_LEN];
@@ -800,11 +801,16 @@ void PTP::Task()
     Max.Task();
     Usb.Task();
 
+    if( Usb.getUsbTaskState() == USB_DETACHED_SUBSTATE_WAIT_FOR_DEVICE ) 
+	{
+		idSession = 0;
+		idTransaction = 0;
+
+		stateMachine->OnDeviceDisconnectedState(this);
+	}
 	//wait for addressing state
     if( Usb.getUsbTaskState() == USB_STATE_CONFIGURING ) 
 	{  
-		EP_RECORD			epRecord[ 4 ];
-
 		/* Initialize data structures */
 	    epRecord[ 0 ] = *( Usb.getDevTableEntry( 0,0 ));  //copy endpoint 0 parameters
 	    
@@ -845,16 +851,15 @@ void PTP::Task()
 	        HaltOnError(MsgErrDeviceConf, rcode);
 		
 	    //Message(PSTR("Device configured."));
-
-		if (pfRunning)
-			pfRunning();
-
-	    delay(20000);
         Usb.setUsbTaskState( USB_STATE_RUNNING );
-    }
+
+		SetInitialState();
+	}
     if( Usb.getUsbTaskState() == USB_STATE_RUNNING ) 
 	{  
-		//while(1);
+		Task2();
+//		if (pfRunning)
+//			pfRunning();
     }
 }
 

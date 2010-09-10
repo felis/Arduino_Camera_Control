@@ -8,8 +8,9 @@
 #include <Usb.h>
 
 #include <ptp.h>
-#include <ptpdebug.h>
-#include "devinfoparser.h"
+//#include <ptpdebug.h>
+#include <canoneos.h>
+#include <simpletimer.h>
 
 #define DEV_ADDR        1
 
@@ -19,10 +20,13 @@
 #define INTERRUPT_EP    3
 #define CONFIG_NUM      1
 
+#define MAX_USB_STRING_LEN 64
+
 void setup();
 void loop();
+void ptpmain();
 
-class CamStateHandlers : public PTPStateHandlers
+class CamStateHandlers : public EOSStateHandlers
 {
       bool stateConnected;
     
@@ -31,16 +35,20 @@ public:
       
       virtual void OnDeviceDisconnectedState(PTP *ptp);
       virtual void OnDeviceInitializedState(PTP *ptp);
-} CamStates;
+};
 
-PTP  Ptp(DEV_ADDR, DATA_IN_EP, DATA_OUT_EP, INTERRUPT_EP, CONFIG_NUM, &CamStates);
+CamStateHandlers  CamStates;
+SimpleTimer  PTPPollTimer;
+CanonEOS  Eos(DEV_ADDR, DATA_IN_EP, DATA_OUT_EP, INTERRUPT_EP, CONFIG_NUM, &CamStates);
+
 
 void CamStateHandlers::OnDeviceDisconnectedState(PTP *ptp)
 {
     if (stateConnected)
     {
         stateConnected = false;
-        Notify(PSTR("Camera disconnected\r\n"));
+        PTPPollTimer.Disable();
+        Notify(PSTR("\r\nDevice disconnected.\r\n"));
     }
 }
 
@@ -49,26 +57,28 @@ void CamStateHandlers::OnDeviceInitializedState(PTP *ptp)
     if (!stateConnected)
     {
         stateConnected = true;
-        {
-        	HexDump          dmp;
-        	Ptp.GetDeviceInfo(&dmp);
-                Notify(PSTR("\n"));
-        }
-        {
-                DevInfoParser    prs;
-        	Ptp.GetDeviceInfo(&prs);
-        }
+        PTPPollTimer.Enable();
     }
 }
 
-void setup() {
-  Serial.begin( 115200 );
-  Serial.println("Start");
-  Ptp.Setup();
-  delay( 200 );
+void OnPTPPollTimer()
+{
+    EOSEventDump  hex;
+    Eos.EventCheck(&hex);
 }
 
-void loop() {
-    Ptp.Task();
+void setup() 
+{
+    Serial.begin( 115200 );
+    Serial.println("Start");
+    Eos.Setup();
+    delay( 200 );
+    PTPPollTimer.Set(OnPTPPollTimer, 500);
+}
+
+void loop() 
+{
+    Eos.Task();
+    PTPPollTimer.Run();
 }
 
