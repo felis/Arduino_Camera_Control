@@ -98,18 +98,20 @@ uint16_t CanonEOS::StopBulb()
 {
 	uint32_t	params[3];
 
-    params[0] = 0xffffffff;
+    	params[0] = 0xffffffff;
 	params[1] = 0x00001000;
 	params[2] = 0x00000000;
 	Operation(0x911A, 3, params);
     
-    params[0] = 0xfffffffc;
+    	params[0] = 0xfffffffc;
 	Operation(0x911A, 3, params);
     
 	Operation(0x9126, 0, NULL);
-    delay(50);
+    	delay(50);
 	Operation(0x911C, 0, NULL);
-    delay(50);
+    	delay(50);
+
+	return PTP_RC_OK;
 }
 
 uint16_t CanonEOS::CancelTransfer(uint32_t object_id)
