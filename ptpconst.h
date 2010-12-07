@@ -10,8 +10,8 @@
 * the GPL ("Copyleft").
 *
 * Contact information:
-* Circuits At Home Web site:  http://www.circuitsathome.com
-* e-mail:                     support@circuitsathome.com
+* Circuits At Home Web site: http://www.circuitsathome.com
+* e-mail: support@circuitsathome.com
 *****************************************************************************/
 #ifndef __PTPCONST_H__
 #define __PTPCONST_H__

@@ -10,8 +10,8 @@
 * the GPL ("Copyleft").
 *
 * Contact information:
-* Circuits At Home Web site:  http://www.circuitsathome.com
-* e-mail:                     support@circuitsathome.com
+* Circuits At Home Web site: http://www.circuitsathome.com
+* e-mail: support@circuitsathome.com
 *****************************************************************************/
 #include "ptpconst.h"
 #include "ptp.h"
@@ -33,7 +33,10 @@ void PTPStateHandlers::OnDeviceDisconnectedState(PTP *ptp)
 void PTPStateHandlers::OnSessionNotOpenedState(PTP *ptp)
 {
 	if (ptp->OpenSession() == PTP_RC_OK)
+	{
+		Notify(PSTR("Session opened\r\n"));
 		ptp->SetState(PTP_STATE_SESSION_OPENED);
+	}
 }
 
 void PTPStateHandlers::OnSessionOpenedState(PTP *ptp)
@@ -217,13 +220,13 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 			ZerroMemory(PTP_MAX_RX_BUFFER_LEN, data);
 
 			uint32_t	bytes_left =	(flags->typeOfVoid == 3) ? PTP_USB_BULK_HDR_LEN + flags->dataSize :
-										((flags->typeOfVoid == 1) ? PTP_USB_BULK_HDR_LEN + ((PTPDataSupplier*)pVoid)->GetDataSize() : 12);
+							((flags->typeOfVoid == 1) ? PTP_USB_BULK_HDR_LEN + ((PTPDataSupplier*)pVoid)->GetDataSize() : 12);
 
 			// Make data PTP container header
 			*((uint32_t*)data) = bytes_left;
 			uint16_to_char(PTP_USB_CONTAINER_DATA,		(unsigned char*)(data + PTP_CONTAINER_CONTYPE_OFF));		// type
-			uint16_to_char(opcode,						(unsigned char*)(data + PTP_CONTAINER_OPCODE_OFF));			// code
-			uint32_to_char(idTransaction,				(unsigned char*)(data + PTP_CONTAINER_TRANSID_OFF));		// transaction id
+			uint16_to_char(opcode,				(unsigned char*)(data + PTP_CONTAINER_OPCODE_OFF));			// code
+			uint32_to_char(idTransaction,			(unsigned char*)(data + PTP_CONTAINER_TRANSID_OFF));		// transaction id
 
 			uint16_t	len;
 
@@ -266,9 +269,9 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 		// Because inTransfer does not return the actual number of bytes recieved, it should be 
 		// calculated here.
-		uint32_t	total = 0, data_off = 0;
-		uint8_t		inbuffer = 0;
-		uint16_t	loops = 0;
+		uint32_t	total = 0, data_off = 0; 	// Total PTP data packet size, Data offset
+		uint8_t		inbuffer = 0;			// Number of bytes read into buffer
+		uint16_t	loops = 0;			// Number of loops necessary to get all the data from device
 		uint8_t		timeoutcnt = 0;
 
 		while (1)
@@ -279,14 +282,18 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 			if (rcode)
 			{
+				Notify(PSTR("Fatal USB Error\r\n"));
+
 				// in some cases NAK handling might be necessary
-				Message(PSTR("Transaction: Response recieve error."), rcode);
+				Message(PSTR("Transaction: Response recieve error"), rcode);
 				return PTP_RC_GeneralError;
 			}
 
 			// This can occure in case of unsupported operation or successive response after data reception stage
 			if ((!loops || total == data_off) && *((uint16_t*)(data + PTP_CONTAINER_CONTYPE_OFF)) == PTP_USB_CONTAINER_RESPONSE)
 			{
+				//Notify(PSTR("Identified as Response\r\n"));
+
 				uint16_t	response = *((uint16_t*)(data + PTP_CONTAINER_OPCODE_OFF));
 
 				if (response == PTP_RC_OK && *((uint32_t*)data) > PTP_USB_BULK_HDR_LEN)
@@ -332,6 +339,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 		} // while(1)
 	} // end of scope
 }
+
 
 uint16_t PTP::EventCheck(PTPReadParser *pParser)
 {
@@ -839,27 +847,20 @@ void PTP::Task()
 	    epRecord[ 3 ].rcvToggle  = bmRCVTOG0;
 	
 	    Usb.setDevTableEntry( devAddress, epRecord );
-	    
-//////////////////////////////////////////////////////
-		GetConfDescr(devAddress, numConf);
-//////////////////////////////////////////////////////
 
 		uint8_t	rcode;
 
 	    /* Configure device */
 	    if ((rcode = Usb.setConf( devAddress, 0, numConf )))
 	        HaltOnError(MsgErrDeviceConf, rcode);
-		
-	    //Message(PSTR("Device configured."));
+
         Usb.setUsbTaskState( USB_STATE_RUNNING );
 
 		SetInitialState();
 	}
-    if( Usb.getUsbTaskState() == USB_STATE_RUNNING ) 
+	if( Usb.getUsbTaskState() == USB_STATE_RUNNING ) 
 	{  
 		Task2();
-//		if (pfRunning)
-//			pfRunning();
     }
 }
 
@@ -882,20 +883,3 @@ uint8_t PTP::GetConfDescr( byte addr, byte conf )
 	rcode = Usb.getConfDescr( addr, 0, total_length, conf, buf ); //get the whole descriptor
 	return( 0 );
 }
-
-//uint8_t PTP::GetConfDescriptor(PTPReadParser *pf)
-//{
-//	uint8_t buf[ PTP_MAX_RX_BUFFER_LEN ];
-//	byte rcode;
-//	byte descr_length;
-//	byte descr_type;
-//	unsigned int total_length;
-//	rcode = Usb.getConfDescr( addr, 0, 4, conf, buf );  //get total length
-//	LOBYTE( total_length ) = buf[ 2 ];
-//	HIBYTE( total_length ) = buf[ 3 ];
-//	if( total_length > BUFSIZE ) {    //check if total length is larger than buffer
-//	Serial.println("Total length truncated to 256 bytes");
-//	total_length = BUFSIZE;
-//	}
-//	rcode = Usb.getConfDescr( addr, 0, total_length, conf, buf ); //get the whole descriptor
-//}

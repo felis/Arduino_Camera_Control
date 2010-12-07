@@ -10,8 +10,8 @@
 * the GPL ("Copyleft").
 *
 * Contact information:
-* Circuits At Home Web site:  http://www.circuitsathome.com
-* e-mail:                     support@circuitsathome.com
+* Circuits At Home Web site: http://www.circuitsathome.com
+* e-mail: support@circuitsathome.com
 *****************************************************************************/
 #include "canoneos.h"
 
@@ -180,34 +180,6 @@ uint16_t CanonEOS::Capture()
 {
 	return Operation(PTP_OC_EOS_Capture, 0, NULL);
 }
-
-/*uint16_t CanonEOS::DigitalZoom(uint16_t magnify)
-{
-	uint16_t ptp_error = PTP_RC_GeneralError;
-	OperFlags flags = { 1, 0, 0, 0, 0, 0 };
-	uint32_t params[1];
-
-	params[0] = (uint32_t) magnify;
-
-	if ( (ptp_error = Transaction(PTP_OC_EOS_Zoom, &flags, params, NULL)) != PTP_RC_OK)
-		Message(PSTR("DigitalZoom error:") , ptp_error);
-
-	return ptp_error;
-}
-*/
-
-/*
-> The other command is 0xD1B8, which I defined as EOS_DPC_VideoStart in 
-> your camera control library within canoneos.h. This command works by 
-> using the SetProperty function:
->
-> Eos.SetProperty(EOS_DPC_VideoStart, 4); // 4 starts video recording
-> Eos.SetProperty(EOS_DPC_VideoStart, 0); // 0 stops video recording
->
-> I found it useful to check the ptp response returned by SetProperty to 
-> verify that the camera started or stopped the video recording, since 
-> it does seem to take the camera a second or so to perform the command.
-*/
 
 
 uint16_t CanonEOS::SetProperty(uint16_t prop, uint32_t val)
