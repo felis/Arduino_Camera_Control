@@ -1,5 +1,5 @@
 /* Digital camera controller board test sketch */
-//#include <Spi.h>
+#include <Spi.h>
 #include <Max3421e.h>
 #include <Usb.h>
 #include <simpletimer.h>
@@ -47,10 +47,13 @@ EEPROMByteList          vlExpCorrection(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIS
 
 class CamStateHandlers : public EOSStateHandlers
 {
-      bool stateConnected;
+      enum CamStates { stInitial, stDisconnected, stConnected };
+      CamStates stateConnected;
     
 public:
-      CamStateHandlers() : stateConnected(false) {};
+      CamStateHandlers() : stateConnected(stInitial) 
+      {
+      };
       
       virtual void OnDeviceDisconnectedState(PTP *ptp);
       virtual void OnDeviceInitializedState(PTP *ptp);
@@ -73,21 +76,22 @@ uint8_t  dpExpComp      = 0;
 
 void CamStateHandlers::OnDeviceDisconnectedState(PTP *ptp)
 {
-    
-    if (stateConnected)
+    if (stateConnected == stConnected || stateConnected == stInitial)
     {
-      Serial.println("Camera Disconnected");
-      stateConnected = false;      
+        stateConnected = stDisconnected;
         PTPPollTimer.Disable();
-        eosConsole.dispatch(&evtTick);
+        Notify(PSTR("Camera disconnected.\r\n"));
+        
+        if (stateConnected == stConnected)
+            eosConsole.dispatch(&evtTick);
     }
 }
 
 void CamStateHandlers::OnDeviceInitializedState(PTP *ptp)
 {
-    if (!stateConnected)
+    if (stateConnected == stDisconnected)
     {
-        stateConnected = true;
+        stateConnected = stConnected;
         PTPPollTimer.Enable();
         eosConsole.dispatch(&evtTick);
     }
