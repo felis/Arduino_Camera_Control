@@ -1,48 +1,55 @@
-/*****************************************************************************
-*
-* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
-*
-* This software may be distributed and modified under the terms of the GNU
-* General Public License version 2 (GPL) as published by the Free Software
-* Foundation and appearing in the file GPL.TXT included in the packaging of
-* this file. Please note that GPL Section 2[b] requires that all works based
-* on this software must also be made publicly available under the terms of
-* the GPL ("Copyleft").
-*
-* Contact information:
-* Circuits At Home Web site: http://www.circuitsathome.com
-* e-mail: support@circuitsathome.com
-*****************************************************************************/
+/* Copyright (C) 2010-2011 Circuits At Home, LTD. All rights reserved.
+
+This software may be distributed and modified under the terms of the GNU
+General Public License version 2 (GPL2) as published by the Free Software
+Foundation and appearing in the file GPL2.TXT included in the packaging of
+this file. Please note that GPL2 Section 2[b] requires that all works based
+on this software must also be made publicly available under the terms of
+the GPL2 ("Copyleft").
+
+Contact information
+-------------------
+
+Circuits At Home, LTD
+Web      :  http://www.circuitsathome.com
+e-mail   :  support@circuitsathome.com
+*/
 #ifndef __CANONPS_H__
 #define __CANONPS_H__
 
 #include "ptp.h"
 
-// PTP Operation Codes (PowerSot specific)
-#define PTP_OC_PS_GetObjectSize				0x9001
-#define PTP_OC_PS_StartShootingMode			0x9008
-#define PTP_OC_PS_EndShootingMode			0x9009
-#define PTP_OC_PS_ViewfinderOn				0x900B
-#define PTP_OC_PS_ViewfinderOff				0x900C
-#define PTP_OC_PS_ReflectChanges			0x900D
-#define PTP_OC_PS_CheckEvent				0x9013
-#define PTP_OC_PS_FocusLock					0x9014
-#define PTP_OC_PS_FocusUnlock				0x9015
-#define PTP_OC_PS_InitiateCaptureInMemory	0x901A
-#define PTP_OC_PS_GetPartialObject			0x901B
-#define PTP_OC_PS_GetViewfinderImage		0x901d
-#define PTP_OC_PS_GetChanges				0x9020
-#define PTP_OC_PS_GetFolderEntries			0x9021
+// PTP Operation Codes (PowerShot specific)
+#define PS_OC_GetObjectSize					0x9001
+#define PS_OC_StartShootingMode				0x9008
+#define PS_OC_EndShootingMode				0x9009
+#define PS_OC_ViewfinderOn					0x900B
+#define PS_OC_ViewfinderOff					0x900C
+#define PS_OC_ReflectChanges				0x900D
+#define PS_OC_CheckEvent					0x9013
+#define PS_OC_FocusLock						0x9014
+#define PS_OC_FocusUnlock					0x9015
+#define PS_OC_InitiateCaptureInMemory		0x901A
+#define PS_OC_GetPartialObject				0x901B
+#define PS_OC_GetViewfinderImage			0x901d
+#define PS_OC_GetChanges					0x9020
+#define PS_OC_GetFolderEntries				0x9021
  
 // PTP PowerShot Extention Events
-#define PTP_EC_PS_ObjectCreated				0xC008
-#define PTP_EC_PS_RequestObjectTransfer		0xC009
-#define PTP_EC_PS_CameraModeChanged			0xC00C
-#define PTP_EC_PS_StorageInfoChanged		0xC00D // ??
-
- // PTP Device Properties
-//#define PTP_DPC_EOS_CameraDescription		0xD402
-
+#define PS_EC_ShutDownCFDoorWasOpened		0xC001		/* The Device has shut down due to the opening of the SD card cover.*/
+#define PS_EC_ResetHwError					0xC005		/* The device has generated a hardware error. */
+#define PS_EC_AbortPCEvf					0xC006		/* The Viewfinder mode has been cancelled. */
+#define PS_EC_EnablePCEvf					0xC007		/* The Viewfinder mode has been enablede. */
+#define PS_EC_FullViewReleased				0xC008		/* Transfer timing of main image data */
+#define PS_EC_ThumbnailReleased				0xC009		/* Transfer timing of thumbnail image data */
+#define PS_EC_ChangeBatteryStatus			0xC00A		/* The power condition of the camera has changed. */
+#define PS_EC_PushedReleaseSw				0xC00B		/* User has pressed the release swtich on camera. */
+#define PS_EC_PropertyChanged				0xC00C		/* A group of properties relating to release control have been changed. */
+#define PS_EC_RotationAngleChanged			0xC00D		/* The angle of rotation of the camera has been changed. */
+#define PS_EC_ChangedByCamUI				0xC00E		/* An operation control on the camera has been operated.*/
+#define PS_EC_Shutdown						0xD001		/* Shutdown */
+#define PS_EC_StartDirectTransfer			0xC011
+#define PS_EC_StopDirectTransfer			0xC013
 
 // PowerShot-specific Device Properties
 #define PS_DPC_BeepMode						0xD001
@@ -119,58 +126,6 @@
 #define PS_DPC_ModelID						0xD049
 
 
-
-
-
-// Non-PTP Device properties
-#define PS_DPC_BeepMode						0xD001
-#define PS_DPC_ViewfinderMode				0xD003
-#define PS_DPC_ImageQuality					0xD006
-#define PS_DPC_D007							0xD007
-#define PS_DPC_ImageSize					0xD008
-#define PS_DPC_FlashMode					0xD00A
-#define PS_DPC_TvAvSetting					0xD00C
-#define PS_DPC_MeteringMode					0xD010
-#define PS_DPC_MacroMode					0xD011
-#define PS_DPC_FocusingPoint				0xD012
-#define PS_DPC_WhiteBalance					0xD013
-#define PS_DPC_ISOSpeed						0xD01C
-#define PS_DPC_Aperture						0xD01D
-#define PS_DPC_ShutterSpeed					0xD01E
-#define PS_DPC_ExpCompensation				0xD01F
-#define PS_DPC_D029							0xD029
-#define PS_DPC_Zoom							0xD02A
-#define PS_DPC_SizeQualityMode				0xD02C
-#define PS_DPC_FlashMemory					0xD031
-#define PS_DPC_CameraModel					0xD032
-#define PS_DPC_CameraOwner					0xD033
-#define PS_DPC_UnixTime						0xD034
-#define PS_DPC_ViewfinderOutput				0xD036
-#define PS_DPC_RealImageWidth				0xD039
-#define PS_DPC_PhotoEffect					0xD040
-#define PS_DPC_AssistLight					0xD041
-#define PS_DPC_D045							0xD045 
-
-
-
-
-// PowerShot-specific Event Codes
-#define PS_EC_ExtendedErrorcode				0xC005	/* ? */
-#define PS_EC_ObjectInfoChanged				0xC008
-#define PS_EC_RequestObjectTransfer			0xC009
-#define PS_EC_CameraModeChanged				0xC00C
-
-#define PS_EC_StartDirectTransfer			0xC011
-#define PS_EC_StopDirectTransfer			0xC013
-
-
-
-// Non-PTP Events
-#define EOS_EC_DevPropChanged				0xC189
-#define EOS_EC_ObjectCreated				0xC186
-
-
-
 class PSStateHandlers : public PTPStateHandlers
 {
 public:
@@ -179,7 +134,7 @@ public:
 
 
 
-class CanonPS : public PTP //, public Camera
+class CanonPS : public PTP
 {
 public:
 	// ISO Speed Values
@@ -204,15 +159,7 @@ public:
 	uint16_t Initialize(bool binit);
 
 	uint16_t Capture();
-	//uint16_t StartBulb();
-	//uint16_t StopBulb();
-	//uint16_t SwitchLiveView(bool on);
-	//uint16_t MoveFocus(uint16_t step);
-	//uint16_t SetProperty(uint16_t prop, uint32_t val);
-
-
 	uint16_t EventCheck(PTPReadParser *parser);
-
 };
 
 #endif // __CANONPS_H__

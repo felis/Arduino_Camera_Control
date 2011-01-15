@@ -1,18 +1,19 @@
-/*****************************************************************************
-*
-* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
-*
-* This software may be distributed and modified under the terms of the GNU
-* General Public License version 2 (GPL) as published by the Free Software
-* Foundation and appearing in the file GPL.TXT included in the packaging of
-* this file. Please note that GPL Section 2[b] requires that all works based
-* on this software must also be made publicly available under the terms of
-* the GPL ("Copyleft").
-*
-* Contact information:
-* Circuits At Home Web site: http://www.circuitsathome.com
-* e-mail: support@circuitsathome.com
-*****************************************************************************/
+/* Copyright (C) 2010-2011 Circuits At Home, LTD. All rights reserved.
+
+This software may be distributed and modified under the terms of the GNU
+General Public License version 2 (GPL2) as published by the Free Software
+Foundation and appearing in the file GPL2.TXT included in the packaging of
+this file. Please note that GPL2 Section 2[b] requires that all works based
+on this software must also be made publicly available under the terms of
+the GPL2 ("Copyleft").
+
+Contact information
+-------------------
+
+Circuits At Home, LTD
+Web      :  http://www.circuitsathome.com
+e-mail   :  support@circuitsathome.com
+*/
 #include "ptpconst.h"
 #include "ptp.h"
 #include "ptpdebug.h"
@@ -34,7 +35,7 @@ void PTPStateHandlers::OnSessionNotOpenedState(PTP *ptp)
 {
 	if (ptp->OpenSession() == PTP_RC_OK)
 	{
-		Notify(PSTR("Session opened\r\n"));
+		PTPTRACE("Session opened\r\n");
 		ptp->SetState(PTP_STATE_SESSION_OPENED);
 	}
 }
@@ -109,27 +110,35 @@ void Notify(const char* msg)
 void Message(const char* msg, uint16_t rcode = 0)
 {
 	Notify(msg);
-	msg = PSTR(": 0x");
-	Notify(msg);
-
-    uint16_t    mask = 0x1000;
-    
-    while (mask > 1)
-    {
-		if (rcode < mask)
-			Serial.print("0");
-		mask >>= 4;
-    }
-	Serial.println( rcode, HEX );
+	Notify(PSTR(": "));
+	PrintHex<uint16_t>(rcode);
+	Notify(PSTR("\r\n"));
 }
+
+//void Message(const char* msg, uint16_t rcode = 0)
+//{
+//	Notify(msg);
+//	msg = PSTR(": 0x");
+//	Notify(msg);
+//
+//    uint16_t    mask = 0x1000;
+//    
+//    while (mask > 1)
+//    {
+//		if (rcode < mask)
+//			Serial.print("0");
+//		mask >>= 4;
+//    }
+//	Serial.println( rcode, HEX );
+//}
 
 PTP::PTP(uint8_t addr, uint8_t epin, uint8_t epout, uint8_t epint, uint8_t nconf, PTPStateHandlers *s) : 
 	theState(0),
 	busyTime(0),
 	hangTime(0),
 	idTransaction(0), 
-	idSession(0) 
-	,devAddress(addr),
+	idSession(0), 
+	devAddress(addr),
 	epDataIn(epin),
 	epDataOut(epout),
 	epInterrupt(epint),
@@ -203,7 +212,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 		if (rcode)
 		{
-			Message(PSTR("Transaction: Command block send error"), rcode);
+			PTPTRACE2("Transaction: Command block send error", rcode);
 			return PTP_RC_GeneralError;
 		}
 	}
@@ -214,7 +223,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 		{
 			if (flags->typeOfVoid && !pVoid)
 			{
-				Notify(PSTR("Transaction: pVoid is NULL\n"));
+				PTPTRACE("Transaction: pVoid is NULL\n");
 				return PTP_RC_GeneralError;
 			}
 			ZerroMemory(PTP_MAX_RX_BUFFER_LEN, data);
@@ -224,8 +233,8 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 			// Make data PTP container header
 			*((uint32_t*)data) = bytes_left;
-			uint16_to_char(PTP_USB_CONTAINER_DATA,		(unsigned char*)(data + PTP_CONTAINER_CONTYPE_OFF));		// type
-			uint16_to_char(opcode,				(unsigned char*)(data + PTP_CONTAINER_OPCODE_OFF));			// code
+			uint16_to_char(PTP_USB_CONTAINER_DATA,	(unsigned char*)(data + PTP_CONTAINER_CONTYPE_OFF));		// type
+			uint16_to_char(opcode,					(unsigned char*)(data + PTP_CONTAINER_OPCODE_OFF));			// code
 			uint32_to_char(idTransaction,			(unsigned char*)(data + PTP_CONTAINER_TRANSID_OFF));		// transaction id
 
 			uint16_t	len;
@@ -255,7 +264,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 				if (rcode)
 				{
-					Message(PSTR("Transaction: Data block send error."), rcode);
+					PTPTRACE2("Transaction: Data block send error.", rcode);
 					return PTP_RC_GeneralError;
 				}
 
@@ -282,18 +291,16 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 
 			if (rcode)
 			{
-				Notify(PSTR("Fatal USB Error\r\n"));
+				PTPTRACE("Fatal USB Error\r\n");
 
 				// in some cases NAK handling might be necessary
-				Message(PSTR("Transaction: Response recieve error"), rcode);
+				PTPTRACE2("Transaction: Response recieve error", rcode);
 				return PTP_RC_GeneralError;
 			}
 
 			// This can occure in case of unsupported operation or successive response after data reception stage
 			if ((!loops || total == data_off) && *((uint16_t*)(data + PTP_CONTAINER_CONTYPE_OFF)) == PTP_USB_CONTAINER_RESPONSE)
 			{
-				//Notify(PSTR("Identified as Response\r\n"));
-
 				uint16_t	response = *((uint16_t*)(data + PTP_CONTAINER_OPCODE_OFF));
 
 				if (response == PTP_RC_OK && *((uint32_t*)data) > PTP_USB_BULK_HDR_LEN)
@@ -309,7 +316,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 				}
 				if (response != PTP_RC_OK)
 				{
-					Message(PSTR("Transaction: Response recieve error"), response);
+					PTPTRACE2("Transaction: Response recieve error", response);
 					data_off = 0;
 				}
 				return response;
@@ -335,7 +342,7 @@ uint16_t PTP::Transaction(uint16_t opcode, OperFlags *flags, uint32_t *params = 
 			data_off += inbuffer;
 
 			loops ++;
-			//delay(100);
+			//delay(10);
 		} // while(1)
 	} // end of scope
 }
@@ -367,7 +374,7 @@ uint16_t PTP::EventCheck(PTPReadParser *pParser)
 
 		default:
 			// in case of a usb error
-			//Message(PSTR("EventCheck: USB error: "), rcode);
+			PTPTRACE2("EventCheck USB error: ", rcode);
 			return PTP_RC_GeneralError;
 		}
 
@@ -746,7 +753,7 @@ uint16_t PTP::CaptureImage()
 
 	if ( (ptp_error = Transaction(PTP_OC_InitiateCapture, &flags, params)) != PTP_RC_OK)
 	{
-		//Message(PSTR("CaptureImage error"), ptp_error);
+		PTPTRACE2("CaptureImage error", ptp_error);
 		return ptp_error;
 	}
 	PTPUSBEventContainer	evnt;
@@ -754,25 +761,25 @@ uint16_t PTP::CaptureImage()
 
 	// multiple objects can be added depending on current camera shooting mode
 	while ((occured = EventWait(sizeof(PTPUSBEventContainer), (uint8_t*)&evnt, 500)) && evnt.code == PTP_EC_ObjectAdded)
-		; //Message(PSTR("CaptureImage: New object added."));
+		PTPTRACE("CaptureImage: New object added.\r\n");
 	
 	if (!occured)
 	{
-		//Notify(PSTR("CaptureImage: Timeout ellapsed."));
+		PTPTRACE("CaptureImage: Timeout ellapsed.\r\n");
 		return PTP_RC_Undefined;
 	}
 	switch (evnt.code)
 	{
 	case PTP_EC_CaptureComplete:
-		//Notify(PSTR("CaptureImage: Image captured."));
+		PTPTRACE("CaptureImage: Image captured.\r\n");
 		return PTP_RC_OK;
 
 	case PTP_EC_StoreFull:
-		//Notify(PSTR("CaptureImage: Storage is full."));
+		PTPTRACE("CaptureImage: Storage is full.\r\n");
 		return PTP_RC_StoreFull;
 
 	default:
-		//Message(PSTR("CaptureImage: Unexpected event"), evnt.code);
+		PTPTRACE2("CaptureImage: Unexpected event\r\n", evnt.code);
 		return PTP_RC_Undefined;
 	}
 }

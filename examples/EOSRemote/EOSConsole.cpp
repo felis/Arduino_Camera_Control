@@ -1,5 +1,5 @@
 #include "eosconsole.h"
-#include "valuetitles.h"
+#include <eosvaluetitles.h>
 #include <valuelist.h>
 
 extern CanonEOS                Eos;
@@ -8,7 +8,7 @@ extern EEPROMByteList          vlShutterSpeed;
 extern EEPROMByteList          vlWhiteBalance;
 extern EEPROMByteList          vlPictureStyle;
 extern EEPROMByteList          vlIso;
-extern EEPROMByteList          vlExpCorrection;
+extern EEPROMByteList          vlExpCompensation;
 
 extern uint8_t                 dpMode;
 extern uint8_t                 dpAperture;
@@ -28,19 +28,19 @@ const char* menuUpDown[] = {"<<", ">>"};
 void EOSConsole::ShowParams()
 {
     Notify(PSTR("\r\nMode:"));
-    Notify((char*)FindTitle<uint8_t, 4>(VT_MODE_COUNT, ModeTitles, dpMode));
+    Notify((char*)FindTitle<VT_MODE, VT_MODE_TEXT_LEN>(VT_MODE_COUNT, ModeTitles, dpMode));
     Notify(PSTR("\r\nF:"));
-    Notify((char*)FindTitle<uint8_t, 4>(VT_APT_COUNT, ApertureTitles, dpAperture));
+    Notify((char*)FindTitle<VT_APERTURE, VT_APT_TEXT_LEN>(VT_APT_COUNT, ApertureTitles, dpAperture));
     Notify(PSTR("\r\nT:"));
-    Notify((char*)FindTitle<uint8_t, 5>(VT_SHSPEED_COUNT, ShutterSpeedTitles, dpShutterSpeed));
+    Notify((char*)FindTitle<VT_SHSPEED, VT_SHSPEED_TEXT_LEN>(VT_SHSPEED_COUNT, ShutterSpeedTitles, dpShutterSpeed));
     Notify(PSTR("\r\nWB:"));
-    Notify((char*)FindTitle<uint8_t, 4>(VT_WB_COUNT, WbTitles, dpWb));
+    Notify((char*)FindTitle<VT_WB, VT_WB_TEXT_LEN>(VT_WB_COUNT, WbTitles, dpWb));
     Notify(PSTR("\r\nPict Style:"));
-    Notify((char*)FindTitle<uint8_t, 4>(VT_PSTYLE_COUNT, PStyleTitles, dpPStyle));
+    Notify((char*)FindTitle<VT_PSTYLE, VT_PSTYLE_TEXT_LEN>(VT_PSTYLE_COUNT, PStyleTitles, dpPStyle));
     Notify(PSTR("\r\nISO:"));
-    Notify((char*)FindTitle<uint8_t, 5>(VT_ISO_COUNT, IsoTitles, dpIso));
+    Notify((char*)FindTitle<VT_ISO, VT_ISO_TEXT_LEN>(VT_ISO_COUNT, IsoTitles, dpIso));
     Notify(PSTR("\r\nExp Comp:"));
-    Notify((char*)FindTitle<uint8_t, 7>(VT_EXPCOR_COUNT, ExpCorTitles, dpExpComp));
+    Notify((char*)FindTitle<VT_EXPCOMP, VT_EXPCOMP_TEXT_LEN>(VT_EXPCOMP_COUNT, ExpCompTitles, dpExpComp));
     Notify(PSTR("\r\n"));
 }
 
@@ -99,7 +99,8 @@ QState EOSConsole::MainMenu(EOSConsole *me, QEvent const *e)
             switch (((MenuSelectEvt*)e)->item_index)
             {
                 case 0:
-                    return Q_TRAN(&EOSConsole::MainMenu);
+                    PrintMenuTitles(3, menuMain);
+                    return Q_HANDLED();
                 case 1:
                     Eos.Capture();
                     return Q_HANDLED();
@@ -203,14 +204,14 @@ QState EOSConsole::ChangeShutterSpeedMenu(EOSConsole *me, QEvent const *e)
                 if (vlShutterSpeed.GetSize() > 0)
                 {
                     new_value = vlShutterSpeed.GetNext(dpShutterSpeed, 1); 
-                    Eos.SetProperty(EOS_DPC_Exposure, new_value);
+                    Eos.SetProperty(EOS_DPC_ShutterSpeed, new_value);
                 }
                 return Q_HANDLED();
             case 1:
                 if (vlShutterSpeed.GetSize() > 0)
                 {
                     new_value = vlShutterSpeed.GetPrev(dpShutterSpeed, 1); 
-                    Eos.SetProperty(EOS_DPC_Exposure, new_value);
+                    Eos.SetProperty(EOS_DPC_ShutterSpeed, new_value);
                 }
                 return Q_HANDLED();
             } // switch (((MenuSelectEvt*)e)->item_index)
@@ -344,17 +345,17 @@ QState EOSConsole::ChangeExpCompMenu(EOSConsole *me, QEvent const *e)
                 return Q_TRAN(&EOSConsole::ChangeSettingsMenu);
             
             case 2:
-                if (vlExpCorrection.GetSize() > 0)
+                if (vlExpCompensation.GetSize() > 0)
                 {
-                    new_value = vlExpCorrection.GetNext(dpExpComp, 1); 
-                    Eos.SetProperty(EOS_DPC_ExposureCorrection, new_value);
+                    new_value = vlExpCompensation.GetNext(dpExpComp, 1); 
+                    Eos.SetProperty(EOS_DPC_ExposureCompensation, new_value);
                 }
                 return Q_HANDLED();
             case 1:
-                if (vlExpCorrection.GetSize() > 0)
+                if (vlExpCompensation.GetSize() > 0)
                 {
-                    new_value = vlExpCorrection.GetPrev(dpExpComp, 1); 
-                    Eos.SetProperty(EOS_DPC_ExposureCorrection, new_value);
+                    new_value = vlExpCompensation.GetPrev(dpExpComp, 1); 
+                    Eos.SetProperty(EOS_DPC_ExposureCompensation, new_value);
                 }
                 return Q_HANDLED();
             } // switch (((MenuSelectEvt*)e)->item_index)

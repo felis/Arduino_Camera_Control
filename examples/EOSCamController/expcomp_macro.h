@@ -1,3 +1,3 @@
-extern EEPROMByteList          vlExpCorrection;
+extern EEPROMByteList          vlExpCompensation;
 
-#define EXP_COMP_VALUE(i)((uint32_t)vlExpCorrection.Get((i)))
+#define EXP_COMP_VALUE(i)((uint32_t)vlExpCompensation.Get((i)))

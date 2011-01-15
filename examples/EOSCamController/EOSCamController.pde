@@ -1,9 +1,4 @@
-/* Digital camera controller board sketch */
-/* confirmed to work with EOS 400D, 450D(XSi), 7D. */
-/* other EOS cameras may work - if you get it working with camera which is not listed, */
-/* drop a line to support@circuitsathome.com */
-
-
+/* Digital camera controller board test sketch */
 //#include <Spi.h>
 #include <Max3421e.h>
 #include <Usb.h>
@@ -52,8 +47,8 @@ EEPROMByteList          vlAperture(EEP_APERTURE_LIST_OFFSET, EEP_APERTURE_LIST_S
 EEPROMByteList          vlShutterSpeed(EEP_SHTSPEED_LIST_OFFSET, EEP_SHTSPEED_LIST_SIZE);
 EEPROMByteList          vlWhiteBalance(EEP_WBALANCE_LIST_OFFSET, EEP_WBALANCE_LIST_SIZE);
 EEPROMByteList          vlPictureStyle(EEP_PICSTYLE_LIST_OFFSET, EEP_PICSTYLE_LIST_SIZE);
-EEPROMByteList          vlIso(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIST_SIZE);
-EEPROMByteList          vlExpCorrection(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIST_SIZE);
+EEPROMByteList          vlIso(EEP_ISO_LIST_OFFSET, EEP_ISO_LIST_SIZE);
+EEPROMByteList          vlExpCompensation(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIST_SIZE);
 
 class CamStateHandlers : public EOSStateHandlers
 {
@@ -77,13 +72,13 @@ protected:
 };
 
 CamStateHandlers  CamStates;
-Max_LCD           LCD;
-SimpleTimer       ControlTimer, PTPPollTimer;
+Max_LCD               LCD;
+SimpleTimer           ControlTimer, PTPPollTimer;
 
-CanonEOS          Eos(DEV_ADDR, DATA_IN_EP, DATA_OUT_EP, INTERRUPT_EP, CONFIG_NUM, &CamStates);
-CamHDRCapture     hdrCapture(Eos);
-GPInRegister      ExtControls(Eos.GetMax());
-QEvent            evtTick, evtAbort;
+CanonEOS              Eos(DEV_ADDR, DATA_IN_EP, DATA_OUT_EP, INTERRUPT_EP, CONFIG_NUM, &CamStates);
+CamHDRCapture         hdrCapture(Eos);
+GPInRegister          ExtControls(Eos.GetMax());
+QEvent                evtTick, evtAbort;
 
 //--- (0) Message Screen ----------------------------------------------------------------------
 PgmStringDataItem     diFirst(msgCamera);
@@ -114,9 +109,9 @@ ScreenItem            *timerSettingsScreenItems[]  PROGMEM = { &siSelf, &siFrame
 Screen                timerSettingsScreen(6, (ScreenItem*)timerSettingsScreenItems);
 
 //--- (3) Self Timer Screen -------------------------------------------------------------------
-DIT_TIMER_DIGIT_PAIR      diHourSelf(0),  diHourInt(0),
-                          diMinSelf(0),   diMinInt(0),
-                          diSecSelf(0),   diSecInt(0);
+DIT_TIMER_DIGIT_PAIR  diHourSelf(0),  diHourInt(0),
+                      diMinSelf(0),   diMinInt(0),
+                      diSecSelf(0),   diSecInt(0);
 
 ScreenItem            siSelfTimer(0, 0, 16, false,  (const char*)&msgSelfTimer);
 ScreenItem            siHourSelf(3, 1, 2, false, &diHourSelf);
@@ -137,8 +132,8 @@ ScreenItem            *scitmFramesSet[]  PROGMEM = { &siFramesText, &siFramesCou
 Screen                scrFramesSet(2, (ScreenItem*)scitmFramesSet);
 
 //--- (5) Bracketing Screen -------------------------------------------------------------------
-KeyValuePairDataItem<uint8_t, 37, 7>      diBktEV(0, ExpCorTitles);
-KeyValuePairDataItem<uint8_t, 37, 7>      diBktStep(0, ExpCorTitles);
+KeyValuePairDataItem<uint8_t, 37, 7>      diBktEV(0, ExpCompTitles);
+KeyValuePairDataItem<uint8_t, 37, 7>      diBktStep(0, ExpCompTitles);
 uint8_t                                   nBktStep;
 uint8_t                                   nBktNegativeIndex;
 uint8_t                                   nBktPositiveIndex;
@@ -172,13 +167,13 @@ ScreenItem            *scitmRun[]  PROGMEM = { &siRunLeftTime, &siRunIntTime, &s
 Screen                scrRun(4, (ScreenItem*)scitmRun);
 
 //--- (8) Camera Settings Screen ---------------------------------------------------------------
-DIT_MODE            diMode(0, ModeTitles);
-DIT_APERTURE        diAperture(0, ApertureTitles);
-DIT_WB              diWb(0, WbTitles);
-DIT_SHUTTER_SPEED   diShutterSpeed(0, ShutterSpeedTitles);
-DIT_PSTYLE          diPStyle(0, PStyleTitles);
-DIT_ISO             diIso(0, IsoTitles);
-DIT_EXPCOR          diExpCor(0, ExpCorTitles);
+DIT_MODE              diMode(0, ModeTitles);
+DIT_APERTURE          diAperture(0, ApertureTitles);
+DIT_WB                diWb(0, WbTitles);
+DIT_SHUTTER_SPEED     diShutterSpeed(0, ShutterSpeedTitles);
+DIT_PSTYLE            diPStyle(0, PStyleTitles);
+DIT_ISO               diIso(0, IsoTitles);
+DIT_EXPCOMP           diExpComp(0, ExpCompTitles);
 
 ScreenItem            siMode        ( 0, 0, 3, false,  &diMode);
 ScreenItem            siAperture    ( 0, 1, 3, false,  &diAperture);
@@ -186,9 +181,9 @@ ScreenItem            siWb          ( 4, 0, 3, false,  &diWb);
 ScreenItem            siShutterSpeed( 4, 1, 4, false,  &diShutterSpeed);
 ScreenItem            siPStyle      ( 8, 0, 3, false,  &diPStyle);
 ScreenItem            siIso         (12, 0, 4, false,  &diIso);
-ScreenItem            siExpCor      ( 9, 1, 6, false,  &diExpCor);
+ScreenItem            siExpComp     ( 9, 1, 6, false,  &diExpComp);
 
-ScreenItem            *scitmSettings[]  PROGMEM = { &siMode, &siAperture, &siWb, &siShutterSpeed, &siPStyle, &siIso, &siExpCor };
+ScreenItem            *scitmSettings[]  PROGMEM = { &siMode, &siAperture, &siWb, &siShutterSpeed, &siPStyle, &siIso, &siExpComp };
 Screen                scrSettings(7, (ScreenItem*)scitmSettings);
 
 IntSpin<DIT_TIMER_DIGIT_PAIR, uint8_t>    hourSpinSelf(0, 99, 1, &diHourSelf, NULL);
@@ -207,7 +202,7 @@ void SpinSetAperture(DataItemBase *data_item)
 
 void SpinSetShutterSpeed(DataItemBase *data_item)
 {
-    Eos.SetProperty(EOS_DPC_Exposure, ((DIT_SHUTTER_SPEED*)data_item)->Get());
+    Eos.SetProperty(EOS_DPC_ShutterSpeed, ((DIT_SHUTTER_SPEED*)data_item)->Get());
 };
 
 void SpinSetWb(DataItemBase *data_item)
@@ -225,33 +220,33 @@ void SpinSetIso(DataItemBase *data_item)
     Eos.SetProperty(EOS_DPC_Iso, ((DIT_ISO*)data_item)->Get());
 };
 
-void SpinSetExpCor(DataItemBase *data_item)
+void SpinSetExpComp(DataItemBase *data_item)
 {
-    Eos.SetProperty(EOS_DPC_ExposureCorrection, ((DIT_EXPCOR*)data_item)->Get());
+    Eos.SetProperty(EOS_DPC_ExposureCompensation, ((DIT_EXPCOMP*)data_item)->Get());
 };
 
 void SpinUpdateBktStepValues(DataItemBase *data_item);
 void SpinUpdateBktStep(DataItemBase *data_item);
 
-EEPROMListIntSpin<DIT_APERTURE, uint8_t>          spinAperture(&vlAperture, &diAperture, &SpinSetAperture);
-EEPROMListIntSpin<DIT_SHUTTER_SPEED, uint8_t>     spinShutterSpeed(&vlShutterSpeed, &diShutterSpeed, &SpinSetShutterSpeed);
-EEPROMListIntSpin<DIT_WB, uint8_t>                spinWb(&vlWhiteBalance, &diWb, &SpinSetWb);
-EEPROMListIntSpin<DIT_PSTYLE, uint8_t>            spinPStyle(&vlPictureStyle, &diPStyle, &SpinSetPStyle);
-EEPROMListIntSpin<DIT_ISO, uint8_t>               spinIso(&vlIso, &diIso, &SpinSetIso);
+EEPROMListIntSpin<DIT_APERTURE, VT_APERTURE>         spinAperture(&vlAperture, &diAperture, &SpinSetAperture);
+EEPROMListIntSpin<DIT_SHUTTER_SPEED, VT_SHSPEED>     spinShutterSpeed(&vlShutterSpeed, &diShutterSpeed, &SpinSetShutterSpeed);
+EEPROMListIntSpin<DIT_WB, VT_WB>                     spinWb(&vlWhiteBalance, &diWb, &SpinSetWb);
+EEPROMListIntSpin<DIT_PSTYLE, VT_PSTYLE>             spinPStyle(&vlPictureStyle, &diPStyle, &SpinSetPStyle);
+EEPROMListIntSpin<DIT_ISO, VT_ISO>                   spinIso(&vlIso, &diIso, &SpinSetIso);
 
-EEPROMListIntSpin<EXP_COMP_DATA_ITEM, uint8_t>    spinExpCor(&vlExpCorrection, &diExpCor, &SpinSetExpCor);
-EEPROMListIntSpin<EXP_COMP_DATA_ITEM, uint8_t>    spinBktEV (&vlExpCorrection, &diBktEV, &SpinUpdateBktStepValues);
+EEPROMListIntSpin<EXP_COMP_DATA_ITEM, VT_EXPCOMP>    spinExpComp(&vlExpCompensation, &diExpComp, &SpinSetExpComp);
+EEPROMListIntSpin<EXP_COMP_DATA_ITEM, VT_EXPCOMP>    spinBktEV  (&vlExpCompensation, &diBktEV, &SpinUpdateBktStepValues);
 
-BKT_STEP_VALUE_LIST  vlExpCorStep;
+BKT_STEP_VALUE_LIST  vlExpCompStep;
 
-SRAMListIntSpin<EXP_COMP_DATA_ITEM, uint8_t, BKT_STEP_VALUE_LIST>      spinBktStep(&vlExpCorStep, &diBktStep, &SpinUpdateBktStep);
+SRAMListIntSpin<EXP_COMP_DATA_ITEM, VT_EXPCOMP, BKT_STEP_VALUE_LIST>      spinBktStep(&vlExpCompStep, &diBktStep, &SpinUpdateBktStep);
 
 
 void SpinUpdateBktStepValues(DataItemBase *data_item)
 {
     uint8_t cur_value = ((EXP_COMP_DATA_ITEM*)data_item)->Get();
     
-    vlExpCorStep.SetSize(0);
+    vlExpCompStep.SetSize(0);
     
     // Check value for zerro. Exit on zerro.
     if (cur_value == 0)
@@ -262,8 +257,8 @@ void SpinUpdateBktStepValues(DataItemBase *data_item)
     uint8_t positive_value = (cur_value & 0x80) ? ~(cur_value - 1) : cur_value;
     
     // Get indices of negative and positive expo compensation values
-    uint16_t negative_index = vlExpCorrection.GetValueIndex(negative_value);
-    uint16_t positive_index = vlExpCorrection.GetValueIndex(positive_value);
+    uint16_t negative_index = vlExpCompensation.GetValueIndex(negative_value);
+    uint16_t positive_index = vlExpCompensation.GetValueIndex(positive_value);
 
     nBktNegativeIndex = negative_index;
     nBktPositiveIndex = positive_index;
@@ -272,7 +267,7 @@ void SpinUpdateBktStepValues(DataItemBase *data_item)
     uint16_t len = positive_index - negative_index;
 
     // Calculate zerro value index
-    uint16_t zerro_index = vlExpCorrection.GetValueIndex(0);
+    uint16_t zerro_index = vlExpCompensation.GetValueIndex(0);
 
     // Calculate positive index offset
     uint16_t zerro_based_offset = positive_index - zerro_index;
@@ -282,7 +277,7 @@ void SpinUpdateBktStepValues(DataItemBase *data_item)
     {
         // Insert values into the list
         if (len % i == 0)
-            vlExpCorStep.Append(vlExpCorrection.Get(j));
+            vlExpCompStep.Append(vlExpCompensation.Get(j));
     }
     diBktStep.Set(cur_value);
     diBktStep.SetUpdated(true);
@@ -292,7 +287,7 @@ void SpinUpdateBktStep(DataItemBase *data_item)
 {
     uint8_t cur_value = ((EXP_COMP_DATA_ITEM*)data_item)->Get();
     
-    nBktStep = vlExpCorrection.GetValueIndex(cur_value) - vlExpCorrection.GetValueIndex(0);
+    nBktStep = vlExpCompensation.GetValueIndex(cur_value) - vlExpCompensation.GetValueIndex(0);
 };
 
 void MenuExit();
@@ -301,12 +296,12 @@ void MenuSetShutterSpeed();
 void MenuSetWb();
 void MenuSetPStyle();
 void MenuSetIso();
-void MenuSetExpCor();
+void MenuSetExpComp();
 
 extern Menu mainMenu;
 
 //--- Camera Settings Menu -----------------------------------------------------------------
-MenuItem              settingsMenuItems[] = { {&siMode, &MenuExit}, {&siAperture, &MenuSetAperture}, {&siWb, &MenuSetWb}, {&siShutterSpeed, &MenuSetShutterSpeed}, {&siPStyle, &MenuSetPStyle}, {&siIso, &MenuSetIso}, {&siExpCor, &MenuSetExpCor} };
+MenuItem              settingsMenuItems[] = { {&siMode, &MenuExit}, {&siAperture, &MenuSetAperture}, {&siWb, &MenuSetWb}, {&siShutterSpeed, &MenuSetShutterSpeed}, {&siPStyle, &MenuSetPStyle}, {&siIso, &MenuSetIso}, {&siExpComp, &MenuSetExpComp} };
 Menu                  settingsMenu(8, 7, settingsMenuItems, 0, &mainMenu);
 
 void MenuSetAperture() { spinAperture.SetReturnState(&settingsMenu); StateMachine::SetState(&spinAperture); };
@@ -314,7 +309,7 @@ void MenuSetShutterSpeed() { spinShutterSpeed.SetReturnState(&settingsMenu); Sta
 void MenuSetWb(){ spinWb.SetReturnState(&settingsMenu); StateMachine::SetState(&spinWb); };
 void MenuSetPStyle(){ spinPStyle.SetReturnState(&settingsMenu); StateMachine::SetState(&spinPStyle); };
 void MenuSetIso(){ spinIso.SetReturnState(&settingsMenu); StateMachine::SetState(&spinIso); };
-void MenuSetExpCor(){ spinExpCor.SetReturnState(&mainMenu); StateMachine::SetState(&spinExpCor); };
+void MenuSetExpComp(){ spinExpComp.SetReturnState(&mainMenu); StateMachine::SetState(&spinExpComp); };
 
 //--- Self Timer Menu ----------------------------------------------------------------------
 void MenuSelfSetH();
@@ -350,10 +345,27 @@ void MenuBktStepExit();
 MenuItem              bktSetMenuItems[] = { {&siBktEV, &MenuBktSetStep}, {&siBktStep, &MenuBktStepExit} }; 
 Menu                  bktSetMenu(5, 2, bktSetMenuItems, 0, &timerSettingsMenu);
 
-void MenuBktSetStep() { spinBktEV.SetReturnState(&bktSetMenu); StateMachine::SetState(&spinBktEV); };
-void MenuBktStepExit(){ spinBktStep.SetReturnState(&timerSettingsMenu); StateMachine::SetState(&spinBktStep); };
+void MenuBktSetStep() 
+{ 
+    spinBktEV.SetReturnState(&bktSetMenu); 
 
-void MenuBkt()      { StateMachine::SetState(&bktSetMenu); };
+    if (vlExpCompensation.GetSize())
+        StateMachine::SetState(&spinBktEV); 
+};
+
+void MenuBktStepExit()
+{ 
+    spinBktStep.SetReturnState(&timerSettingsMenu); 
+
+    if (vlExpCompensation.GetSize())
+        StateMachine::SetState(&spinBktStep); 
+};
+
+void MenuBkt()      
+{ 
+    if (vlExpCompensation.GetSize())
+        StateMachine::SetState(&bktSetMenu); 
+};
 
 
 IntSpin<IntDataItem<uint16_t, 5>, int16_t>  framesSpin(0, 9999, 1, &diFramesCount, NULL);
@@ -506,8 +518,11 @@ void OnPTPPollTimer()
 void setup()
 {
     StateMachine::SetState(&DisconnectedState);
-  
+ 
+#ifdef PTPDEBUG 
     Serial.begin(115200);
+#endif
+
     Eos.Setup();
     delay( 200 );
   
@@ -527,7 +542,9 @@ void setup()
     evtAbort.sig = ABORT_SIG;
     hdrCapture.init();
 
+#ifdef PTPDEBUG 
     Serial.println("Start");
+#endif    
 }
 
 void loop()

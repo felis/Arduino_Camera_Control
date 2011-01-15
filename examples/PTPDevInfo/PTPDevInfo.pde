@@ -1,7 +1,7 @@
 #include <inttypes.h>
 #include <avr/pgmspace.h>
 
-#include <Spi.h>
+//#include <Spi.h>
 #include <Max3421e.h>
 #include <Max3421e_constants.h>
 #include <Max_LCD.h>
@@ -18,6 +18,10 @@
 #define DATA_OUT_EP     2
 #define INTERRUPT_EP    3
 #define CONFIG_NUM      1
+
+//Nikon Coolpix L110
+#define DATA_IN_EP 2
+#define DATA_OUT_EP 1
 
 void setup();
 void loop();

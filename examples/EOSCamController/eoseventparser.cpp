@@ -1,20 +1,21 @@
 #include "eoseventparser.h"
 #include "dataitem.h"
+#include "camcontroller.h"
 
-extern KeyValuePairDataItem<uint8_t, 16, 4>     diMode;
-extern KeyValuePairDataItem<uint8_t, 54, 4>     diAperture;
-extern KeyValuePairDataItem<uint8_t,  7, 4>     diWb;
-extern KeyValuePairDataItem<uint8_t, 74, 5>     diShutterSpeed;
-extern KeyValuePairDataItem<uint8_t,  9, 4>     diPStyle;
-extern KeyValuePairDataItem<uint8_t, 19, 5>     diIso;
-extern KeyValuePairDataItem<uint8_t, 37, 7>     diExpCor;
+extern DIT_MODE          diMode;
+extern DIT_APERTURE      diAperture;
+extern DIT_WB            diWb;
+extern DIT_SHUTTER_SPEED diShutterSpeed;
+extern DIT_PSTYLE        diPStyle;
+extern DIT_ISO           diIso;
+extern DIT_EXPCOMP       diExpComp;
 
-extern EEPROMByteList          vlAperture;
-extern EEPROMByteList          vlShutterSpeed;
-extern EEPROMByteList          vlWhiteBalance;
-extern EEPROMByteList          vlPictureStyle;
-extern EEPROMByteList          vlExpCorrection;
-extern EEPROMByteList          vlIso;
+extern EEPROMByteList    vlAperture;
+extern EEPROMByteList    vlShutterSpeed;
+extern EEPROMByteList    vlWhiteBalance;
+extern EEPROMByteList    vlPictureStyle;
+extern EEPROMByteList    vlExpCompensation;
+extern EEPROMByteList    vlIso;
 
 bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 {
@@ -64,7 +65,7 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
                                         case EOS_DPC_Aperture:
                                             diAperture.Set(varBuffer);
                                             break;
-                                        case EOS_DPC_Exposure:
+                                        case EOS_DPC_ShutterSpeed:
                                             diShutterSpeed.Set(varBuffer);
                                             break;
                                         case EOS_DPC_ShootingMode:
@@ -79,8 +80,8 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
                                         case EOS_DPC_Iso:
                                             diIso.Set(varBuffer);
                                             break;
-                                        case EOS_DPC_ExposureCorrection:
-                                            diExpCor.Set(varBuffer);
+                                        case EOS_DPC_ExposureCompensation:
+                                            diExpComp.Set(varBuffer);
                                             break;
                                         };
 				}
@@ -94,7 +95,7 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_Aperture:
                                                 vlAperture.SetSize((uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_Exposure:
+					case EOS_DPC_ShutterSpeed:
                                                 vlShutterSpeed.SetSize((uint8_t)varBuffer);
                                                 break;
 					case EOS_DPC_WhiteBalance:
@@ -106,8 +107,8 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_Iso:
                                                 vlIso.SetSize((uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_ExposureCorrection:
-                                                vlExpCorrection.SetSize((uint8_t)varBuffer);
+					case EOS_DPC_ExposureCompensation:
+                                                vlExpCompensation.SetSize((uint8_t)varBuffer);
                                                 break;
                                         };
 				}
@@ -121,7 +122,7 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_Aperture:
                                                 vlAperture.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_Exposure:
+					case EOS_DPC_ShutterSpeed:
                                                 vlShutterSpeed.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
 					case EOS_DPC_WhiteBalance:
@@ -130,8 +131,8 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_PictureStyle:
                                                 vlPictureStyle.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_ExposureCorrection:
-                                                vlExpCorrection.Set(paramCount-5, (uint8_t)varBuffer);
+					case EOS_DPC_ExposureCompensation:
+                                                vlExpCompensation.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
 					case EOS_DPC_Iso:
                                                 vlIso.Set(paramCount-5, (uint8_t)varBuffer);
@@ -162,7 +163,7 @@ void EOSEventParser::InitEOSEventStruct()
 
 void EOSEventParser::Parse(const uint16_t len, const uint8_t *pbuf, const uint32_t &offset)
 {
-	uint8_t		*p		= (uint8_t*) pbuf;
+	uint8_t		*p	= (uint8_t*) pbuf;
 	uint16_t	cntdn	= len;
 
 	switch (nStage)

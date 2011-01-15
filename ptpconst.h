@@ -1,49 +1,26 @@
-/*****************************************************************************
-*
-* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
-*
-* This software may be distributed and modified under the terms of the GNU
-* General Public License version 2 (GPL) as published by the Free Software
-* Foundation and appearing in the file GPL.TXT included in the packaging of
-* this file. Please note that GPL Section 2[b] requires that all works based
-* on this software must also be made publicly available under the terms of
-* the GPL ("Copyleft").
-*
-* Contact information:
-* Circuits At Home Web site: http://www.circuitsathome.com
-* e-mail: support@circuitsathome.com
-*****************************************************************************/
+/* Copyright (C) 2010-2011 Circuits At Home, LTD. All rights reserved.
+
+This software may be distributed and modified under the terms of the GNU
+General Public License version 2 (GPL2) as published by the Free Software
+Foundation and appearing in the file GPL2.TXT included in the packaging of
+this file. Please note that GPL2 Section 2[b] requires that all works based
+on this software must also be made publicly available under the terms of
+the GPL2 ("Copyleft").
+
+Contact information
+-------------------
+
+Circuits At Home, LTD
+Web      :  http://www.circuitsathome.com
+e-mail   :  support@circuitsathome.com
+*/
 #ifndef __PTPCONST_H__
 #define __PTPCONST_H__
 
-#include <stdarg.h>
 #include <inttypes.h>
 
-/* PTP datalayer byteorder */
-
-#define PTP_DL_BE			0xF0
-#define	PTP_DL_LE			0x0F
-
-/* PTP request/response/event general PTP container (transport independent) */
-
-struct _PTPContainer {
-	uint16_t Code;
-	uint32_t SessionID;
-	uint32_t Transaction_ID;
-	/* params  may be of any type of size less or equal to uint32_t */
-	uint32_t Param1;
-	uint32_t Param2;
-	uint32_t Param3;
-	/* events can only have three parameters */
-	uint32_t Param4;
-	uint32_t Param5;
-	/* the number of meaningfull parameters */
-	uint8_t	 Nparam;
-};
-typedef struct _PTPContainer PTPContainer;
-
 /* PTP USB Bulk-Pipe container */
-/* USB bulk max max packet length for high speed endpoints */
+/* USB bulk max max packet length for full speed endpoints */
 #define PTP_USB_BULK_FS_MAX_PACKET_LEN						64
 #define PTP_USB_BULK_HDR_LEN								(2*sizeof(uint32_t)+2*sizeof(uint16_t))
 #define PTP_USB_BULK_PAYLOAD_LEN							(PTP_USB_BULK_FS_MAX_PACKET_LEN-PTP_USB_BULK_HDR_LEN)
@@ -56,24 +33,6 @@ typedef struct _PTPContainer PTPContainer;
 #define PTP_CONTAINER_PARAM1_OFF							12
 #define PTP_CONTAINER_PARAM2_OFF							16
 #define PTP_CONTAINER_PARAM3_OFF							20
-
-struct PTPUSBBulkContainer 
-{
-	uint32_t length;
-	uint16_t type;
-	uint16_t code;
-	uint32_t trans_id;
-	union {
-		struct {
-			uint32_t param1;
-			uint32_t param2;
-			uint32_t param3;
-			uint32_t param4;
-			uint32_t param5;
-		} params;
-		unsigned char data[PTP_USB_BULK_PAYLOAD_LEN];
-	} payload;
-};
 
 #define PTP_USB_INT_PACKET_LEN	8
 
@@ -186,13 +145,6 @@ struct PTPUSBEventContainer
 #define PTP_RC_EXTENSION_MASK				0xF000
 #define PTP_RC_EXTENSION					0xA000
 
-/* libptp2 extended ERROR codes */
-#define PTP_ERROR_IO						0x02FF
-#define PTP_ERROR_DATA_EXPECTED				0x02FE
-#define PTP_ERROR_RESP_EXPECTED				0x02FD
-#define PTP_ERROR_BADPARAM					0x02FC
-#define PTP_ERROR_USB_ERROR					0x02FB
-
 /* PTP Event Codes */
 #define PTP_EC_Undefined					0x4000
 #define PTP_EC_CancelTransaction			0x4001
@@ -212,7 +164,6 @@ struct PTPUSBEventContainer
 
 #define PTP_HANDLER_SPECIAL					0xffffffff
 #define PTP_HANDLER_ROOT					0x00000000
-
 
 /* max ptp string length INCLUDING terminating null character */
 #define PTP_MAXSTRLEN						255
@@ -284,8 +235,6 @@ struct PTPUSBEventContainer
 #define PTP_AC_ReadWrite						0x0000
 #define PTP_AC_ReadOnly							0x0001
 #define PTP_AC_ReadOnly_with_Object_Deletion	0x0002
-
-
 
 /* DataType Codes */
 #define PTP_DTC_UNDEF						0x0000

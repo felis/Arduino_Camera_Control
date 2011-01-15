@@ -1,11 +1,11 @@
 #include "eoseventparser.h"
-#include "valuetitles.h"
+#include <eosvaluetitles.h>
 
 extern EEPROMByteList          vlAperture;
 extern EEPROMByteList          vlShutterSpeed;
 extern EEPROMByteList          vlWhiteBalance;
 extern EEPROMByteList          vlPictureStyle;
-extern EEPROMByteList          vlExpCorrection;
+extern EEPROMByteList          vlExpCompensation;
 extern EEPROMByteList          vlIso;
 
 extern uint8_t  dpMode;
@@ -65,43 +65,43 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
                                         case EOS_DPC_Aperture:
                                             dpAperture = (uint8_t) varBuffer;
                                             Notify(PSTR("F:"));
-                                            Notify((char*)FindTitle<uint8_t, 4>(VT_APT_COUNT, ApertureTitles, dpAperture));
+                                            Notify((char*)FindTitle<VT_APERTURE, VT_APT_TEXT_LEN>(VT_APT_COUNT, ApertureTitles, dpAperture));
                                             Notify(PSTR("\r\n"));
                                             break;
-                                        case EOS_DPC_Exposure:
+                                        case EOS_DPC_ShutterSpeed:
                                             dpShutterSpeed = (uint8_t) varBuffer;
                                             Notify(PSTR("T:"));
-                                            Notify((char*)FindTitle<uint8_t, 5>(VT_SHSPEED_COUNT, ShutterSpeedTitles, dpShutterSpeed));
+                                            Notify((char*)FindTitle<VT_SHSPEED, VT_SHSPEED_TEXT_LEN>(VT_SHSPEED_COUNT, ShutterSpeedTitles, dpShutterSpeed));
                                             Notify(PSTR("\r\n"));
                                             break;
                                         case EOS_DPC_ShootingMode:
                                             dpMode = (uint8_t) varBuffer;
                                             Notify(PSTR("Mode:"));
-                                            Notify((char*)FindTitle<uint8_t, 4>(VT_MODE_COUNT, ModeTitles, dpMode));
+                                            Notify((char*)FindTitle<VT_MODE, VT_MODE_TEXT_LEN>(VT_MODE_COUNT, ModeTitles, dpMode));
                                             Notify(PSTR("\r\n"));
                                             break;
                                         case EOS_DPC_WhiteBalance:
                                             dpWb = (uint8_t) varBuffer;
                                             Notify(PSTR("WB:"));
-                                            Notify((char*)FindTitle<uint8_t, 4>(VT_WB_COUNT, WbTitles, dpWb));
+                                            Notify((char*)FindTitle<VT_WB, VT_WB_TEXT_LEN>(VT_WB_COUNT, WbTitles, dpWb));
                                             Notify(PSTR("\r\n"));
                                             break;
                                         case EOS_DPC_PictureStyle:
                                             dpPStyle = (uint8_t) varBuffer;
                                             Notify(PSTR("Pict Style:"));
-                                            Notify((char*)FindTitle<uint8_t, 4>(VT_PSTYLE_COUNT, PStyleTitles, dpPStyle));
+                                            Notify((char*)FindTitle<VT_PSTYLE, VT_PSTYLE_TEXT_LEN>(VT_PSTYLE_COUNT, PStyleTitles, dpPStyle));
                                             Notify(PSTR("\r\n"));
                                             break;
                                         case EOS_DPC_Iso:
                                             dpIso = (uint8_t) varBuffer;
                                             Notify(PSTR("ISO:"));
-                                            Notify((char*)FindTitle<uint8_t, 5>(VT_ISO_COUNT, IsoTitles, dpIso));
+                                            Notify((char*)FindTitle<VT_ISO, VT_ISO_TEXT_LEN>(VT_ISO_COUNT, IsoTitles, dpIso));
                                             Notify(PSTR("\r\n"));
                                             break;
-                                        case EOS_DPC_ExposureCorrection:
+                                        case EOS_DPC_ExposureCompensation:
                                             dpExpComp = (uint8_t) varBuffer;
                                             Notify(PSTR("Exp Comp:"));
-                                            Notify((char*)FindTitle<uint8_t, 7>(VT_EXPCOR_COUNT, ExpCorTitles, dpExpComp));
+                                            Notify((char*)FindTitle<VT_EXPCOMP, VT_EXPCOMP_TEXT_LEN>(VT_EXPCOMP_COUNT, ExpCompTitles, dpExpComp));
                                             Notify(PSTR("\r\n"));
                                             break;
                                         };
@@ -116,7 +116,7 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_Aperture:
                                                 vlAperture.SetSize((uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_Exposure:
+					case EOS_DPC_ShutterSpeed:
                                                 vlShutterSpeed.SetSize((uint8_t)varBuffer);
                                                 break;
 					case EOS_DPC_WhiteBalance:
@@ -128,8 +128,8 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_Iso:
                                                 vlIso.SetSize((uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_ExposureCorrection:
-                                                vlExpCorrection.SetSize((uint8_t)varBuffer);
+					case EOS_DPC_ExposureCompensation:
+                                                vlExpCompensation.SetSize((uint8_t)varBuffer);
                                                 break;
                                         };
 				}
@@ -143,7 +143,7 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_Aperture:
                                                 vlAperture.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_Exposure:
+					case EOS_DPC_ShutterSpeed:
                                                 vlShutterSpeed.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
 					case EOS_DPC_WhiteBalance:
@@ -152,8 +152,8 @@ bool EOSEventParser::EventRecordParse(uint8_t **pp, uint16_t *pcntdn)
 					case EOS_DPC_PictureStyle:
                                                 vlPictureStyle.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
-					case EOS_DPC_ExposureCorrection:
-                                                vlExpCorrection.Set(paramCount-5, (uint8_t)varBuffer);
+					case EOS_DPC_ExposureCompensation:
+                                                vlExpCompensation.Set(paramCount-5, (uint8_t)varBuffer);
                                                 break;
 					case EOS_DPC_Iso:
                                                 vlIso.Set(paramCount-5, (uint8_t)varBuffer);

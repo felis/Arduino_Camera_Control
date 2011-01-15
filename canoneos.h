@@ -1,63 +1,64 @@
-/*****************************************************************************
-*
-* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
-*
-* This software may be distributed and modified under the terms of the GNU
-* General Public License version 2 (GPL) as published by the Free Software
-* Foundation and appearing in the file GPL.TXT included in the packaging of
-* this file. Please note that GPL Section 2[b] requires that all works based
-* on this software must also be made publicly available under the terms of
-* the GPL ("Copyleft").
-*
-* Contact information:
-* Circuits At Home Web site: http://www.circuitsathome.com
-* e-mail: support@circuitsathome.com
-*****************************************************************************/
+/* Copyright (C) 2010-2011 Circuits At Home, LTD. All rights reserved.
+
+This software may be distributed and modified under the terms of the GNU
+General Public License version 2 (GPL2) as published by the Free Software
+Foundation and appearing in the file GPL2.TXT included in the packaging of
+this file. Please note that GPL2 Section 2[b] requires that all works based
+on this software must also be made publicly available under the terms of
+the GPL2 ("Copyleft").
+
+Contact information
+-------------------
+
+Circuits At Home, LTD
+Web      :  http://www.circuitsathome.com
+e-mail   :  support@circuitsathome.com
+*/
 #ifndef __CANONEOS_H__
 #define __CANONEOS_H__
 
+#include "WProgram.h"
 #include "ptp.h"
 
 // PTP Operation Codes (EOS specific)
-#define PTP_OC_EOS_GetStorageIDs			0x9101
-#define PTP_OC_EOS_GetStorageInfo			0x9102
-#define PTP_OC_EOS_GetObject				0x9107
-#define PTP_OC_EOS_GetDeviceInfoEx			0x9108
-#define PTP_OC_EOS_GetObjectIDs				0x9109
-#define PTP_OC_EOS_Capture				0x910f
-#define PTP_OC_EOS_SetDevicePropValue			0x9110
-#define PTP_OC_EOS_SetPCConnectMode			0x9114
-#define PTP_OC_EOS_SetExtendedEventInfo			0x9115
-#define PTP_OC_EOS_GetEvent				0x9116
-#define PTP_OC_EOS_TransferComplete			0x9117
-#define PTP_OC_EOS_CancelTransfer			0x9118
-#define PTP_OC_EOS_ResetTransfer			0x9119
-#define PTP_OC_EOS_GetDevicePropValue 			0x9127
-#define PTP_OC_EOS_GetLiveViewPicture			0x9153
-#define PTP_OC_EOS_MoveFocus				0x9155
+#define EOS_OC_GetStorageIDs				0x9101
+#define EOS_OC_GetStorageInfo				0x9102
+#define EOS_OC_GetObject					0x9107
+#define EOS_OC_GetDeviceInfoEx				0x9108
+#define EOS_OC_GetObjectIDs					0x9109
+#define EOS_OC_Capture						0x910f
+#define EOS_OC_SetDevicePropValue			0x9110
+#define EOS_OC_SetPCConnectMode				0x9114
+#define EOS_OC_SetExtendedEventInfo			0x9115
+#define EOS_OC_GetEvent						0x9116
+#define EOS_OC_TransferComplete				0x9117
+#define EOS_OC_CancelTransfer				0x9118
+#define EOS_OC_ResetTransfer				0x9119
+#define EOS_OC_GetDevicePropValue 			0x9127
+#define EOS_OC_GetLiveViewPicture			0x9153
+#define EOS_OC_MoveFocus					0x9155
 
 // PTP Device Properties
-#define PTP_DPC_EOS_CameraDescription			0xD402
+#define EOS_DPC_CameraDescription			0xD402
 
 // Non-PTP Device properties
-#define EOS_DPC_Aperture				0xD101
-#define EOS_DPC_Exposure				0xD102
-#define EOS_DPC_Iso					0xD103
-#define EOS_DPC_ExposureCorrection			0xD104
+#define EOS_DPC_Aperture					0xD101
+#define EOS_DPC_ShutterSpeed				0xD102
+#define EOS_DPC_Iso							0xD103
+#define EOS_DPC_ExposureCompensation		0xD104
 #define EOS_DPC_ShootingMode				0xD105
-#define EOS_DPC_DriveMode				0xD106
+#define EOS_DPC_DriveMode					0xD106
 #define EOS_DPC_ExpMeterringMode			0xD107
-#define EOS_DPC_AFMode					0xD108
+#define EOS_DPC_AFMode						0xD108
 #define EOS_DPC_WhiteBalance				0xD109
 #define EOS_DPC_PictureStyle				0xD110
 #define EOS_DPC_TransferOption				0xD111
-#define EOS_DPC_UnixTime				0xD113
+#define EOS_DPC_UnixTime					0xD113
 #define EOS_DPC_ImageQuality				0xD120
-#define EOS_DPC_LiveView				0xD1B0
+#define EOS_DPC_LiveView					0xD1B0
 #define EOS_DPC_AvailableShots  			0xD11B
-#define EOS_DPC_CaptureDestination    			0xD11C
-#define EOS_DPC_BracketMode           			0xD11D
-
+#define EOS_DPC_CaptureDestination    		0xD11C
+#define EOS_DPC_BracketMode           		0xD11D
 
 // Non-PTP Events
 #define EOS_EC_DevPropChanged				0xC189
@@ -67,13 +68,11 @@
 #define EOS_EC_HalfPushReleaseButton		0xC18E
 
 
-
 class EOSStateHandlers : public PTPStateHandlers
 {
 public:
       virtual void OnSessionOpenedState(PTP *ptp);
 };
-
 
 class ImgQualitySupplier : PTPDataSupplier
 {

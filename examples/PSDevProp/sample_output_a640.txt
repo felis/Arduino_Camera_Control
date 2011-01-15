@@ -1,0 +1,2290 @@
+Start
+Camera disconnected
+Session opened
+Mode:P
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 08 00 00 00 02 D0 04 00
+0010: 00 00 00 00 00 02 06 00 00 00 01 00 02 00 03 00
+0020: 04 00 05 00
+
+Device Property:        D002 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001, 0002, 0003, 0004, 0005}
+
+0000: 2C 00 00 00 02 00 14 10 0A 00 00 00 03 D0 06 00
+0010: 00 01 00 00 00 01 00 00 00 02 04 00 00 00 00 00
+0020: 01 00 00 00 02 00 00 00 03 00 00 00
+
+Device Property:        D003 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000001
+Current Value:          00000001
+Enumeration:            {00000000, 00000001, 00000002, 00000003}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 0E 00 00 00 06 D0 02 00
+0010: 01 05 05 02 03 00 05 03 02
+
+Device Property:        D006 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          05
+Current Value:          05
+Enumeration:            {05, 03, 02}
+
+0000: 16 00 00 00 02 00 14 10 10 00 00 00 07 D0 02 00
+0010: 00 01 01 02 00 00
+
+Device Property:        D007 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          01
+Current Value:          01
+Enumeration:            {}
+
+0000: 1B 00 00 00 02 00 14 10 12 00 00 00 08 D0 02 00
+0010: 01 00 00 02 05 00 00 01 03 07 02
+
+Device Property:        D008 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 03, 07, 02}
+
+Transaction: Response recieve error: 2006
+0000: 1C 00 00 00 02 00 14 10 15 00 00 00 0A D0 02 00
+0010: 01 02 02 02 06 00 00 01 02 05 06 04
+
+Device Property:        D00A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          02
+Current Value:          02
+Enumeration:            {00, 01, 02, 05, 06, 04}
+
+Transaction: Response recieve error: 2006
+0000: 1A 00 00 00 02 00 14 10 18 00 00 00 0C D0 02 00
+0010: 01 01 01 02 04 00 01 02 03 04
+
+Device Property:        D00C (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          01
+Enumeration:            {01, 02, 03, 04}
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 1B 00 00 00 0E D0 02 00
+0010: 00 00 00 02 00 00
+
+Device Property:        D00E (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          00
+Current Value:          00
+Enumeration:            {}
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 1E 00 00 00 10 D0 02 00
+0010: 01 03 03 02 03 00 03 00 01
+
+Device Property:        D010 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {03, 00, 01}
+
+0000: 18 00 00 00 02 00 14 10 20 00 00 00 11 D0 02 00
+0010: 01 01 01 02 02 00 01 03
+
+Device Property:        D011 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          01
+Enumeration:            {01, 03}
+
+0000: 1C 00 00 00 02 00 14 10 22 00 00 00 12 D0 04 00
+0010: 01 01 30 01 30 02 02 00 01 30 03 30
+
+Device Property:        D012 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          3001
+Current Value:          3001
+Enumeration:            {3001, 3003}
+
+0000: 1D 00 00 00 02 00 14 10 24 00 00 00 13 D0 02 00
+0010: 01 00 00 02 07 00 00 01 02 03 04 07 06
+
+Device Property:        D013 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03, 04, 07, 06}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 2E 00 00 00 1C D0 04 00
+0010: 01 00 00 00 00 02 06 00 00 00 45 00 48 00 50 00
+0020: 58 00 60 00
+
+Device Property:        D01C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0045, 0048, 0050, 0058, 0060}
+
+0000: 18 00 00 00 02 00 14 10 30 00 00 00 1D D0 04 00
+0010: 00 28 00 28 00 02 00 00
+
+Device Property:        D01D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0028
+Current Value:          0028
+Enumeration:            {}
+
+0000: 18 00 00 00 02 00 14 10 32 00 00 00 1E D0 04 00
+0010: 00 60 00 60 00 02 00 00
+
+Device Property:        D01E (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0060
+Current Value:          0060
+Enumeration:            {}
+
+0000: 23 00 00 00 02 00 14 10 34 00 00 00 1F D0 02 00
+0010: 01 18 18 02 0D 00 08 0B 0D 10 13 15 18 1B 1D 20
+0020: 23 25 28
+
+Device Property:        D01F (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          18
+Current Value:          18
+Enumeration:            {08, 0B, 0D, 10, 13, 15, 18, 1B, 1D, 20, 23, 25, 28}
+
+0000: 23 00 00 00 02 00 14 10 36 00 00 00 20 D0 02 00
+0010: 01 18 18 02 0D 00 08 0B 0D 10 13 15 18 1B 1D 20
+0020: 23 25 28
+
+Device Property:        D020 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          18
+Current Value:          18
+Enumeration:            {08, 0B, 0D, 10, 13, 15, 18, 1B, 1D, 20, 23, 25, 28}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 2E 00 00 00 02 00 14 10 40 00 00 00 29 D0 04 00
+0010: 01 03 00 03 00 02 0B 00 01 00 02 00 03 00 08 00
+0020: 09 00 0A 00 0B 00 0C 00 0D 00 0E 00 0F 00
+
+Device Property:        D029 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0003
+Current Value:          0003
+Enumeration:            {0001, 0002, 0003, 0008, 0009, 000A, 000B, 000C, 000D, 000E, 000F}
+
+0000: 1C 00 00 00 02 00 14 10 42 00 00 00 2A D0 04 00
+0010: 01 00 00 00 00 01 00 00 0E 00 01 00
+
+Device Property:        D02A (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Range (Min,Max,Step):           {0000, 000E, 0001}
+
+Transaction: Response recieve error: 2006
+0000: F0 01 00 00 02 00 14 10 45 00 00 00 2C D0 06 40
+0010: 00 06 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0020: 00 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00
+0030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0040: 00 00 00 00 00 00 00 00 00 02 0F 00 06 00 00 00
+0050: B0 0A 00 00 40 0E 00 00 01 00 00 00 00 00 00 00
+0060: 00 00 00 00 00 00 00 00 06 00 00 00 B0 0A 00 00
+0070: 40 0E 00 00 06 00 00 00 00 00 00 00 00 00 00 00
+0080: 00 00 00 00 06 00 00 00 B0 0A 00 00 40 0E 00 00
+0090: 0B 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00A0: 06 00 00 00 40 08 00 00 00 0B 00 00 02 00 00 00
+00B0: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+00C0: 40 08 00 00 00 0B 00 00 07 00 00 00 00 00 00 00
+00D0: 00 00 00 00 00 00 00 00 06 00 00 00 40 08 00 00
+00E0: 00 0B 00 00 0C 00 00 00 00 00 00 00 00 00 00 00
+00F0: 00 00 00 00 06 00 00 00 A8 06 00 00 E0 08 00 00
+0100: 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0110: 06 00 00 00 A8 06 00 00 E0 08 00 00 08 00 00 00
+0120: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+0130: A8 06 00 00 E0 08 00 00 0D 00 00 00 00 00 00 00
+0140: 00 00 00 00 00 00 00 00 06 00 00 00 B0 04 00 00
+0150: 40 06 00 00 11 00 00 00 00 00 00 00 00 00 00 00
+0160: 00 00 00 00 06 00 00 00 B0 04 00 00 40 06 00 00
+0170: 12 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0180: 06 00 00 00 B0 04 00 00 40 06 00 00 13 00 00 00
+0190: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+01A0: E0 01 00 00 80 02 00 00 05 00 00 00 00 00 00 00
+01B0: 00 00 00 00 00 00 00 00 06 00 00 00 E0 01 00 00
+01C0: 80 02 00 00 0A 00 00 00 00 00 00 00 00 00 00 00
+01D0: 00 00 00 00 06 00 00 00 E0 01 00 00 80 02 00 00
+01E0: 0F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+Device Property:        D02C (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Current Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Enumeration:            {00000AB0, 00000E40, 00000001, 00000000, 00000000, 0000000000000B00, 00000007, 00000000, 00000000, 00000000, 00000006, 00000840, 00000B00, 0000000C, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000003, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000008, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 0000000D, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000011, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000012, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000013, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 00000005, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000A, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000F, 00000000, 00000000, 00000000
+0000: 3A 00 00 00 02 00 14 10 47 00 00 00 2D D0 06 40
+0010: 00 04 00 00 00 77 00 00 00 00 00 00 00 9F 00 00
+0020: 00 00 00 00 00 04 00 00 00 77 00 00 00 00 00 00
+0030: 00 9F 00 00 00 00 00 00 00 00
+
+Device Property:        D02D (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000077,00000000,0000009F,00000000
+Current Value:          00000077,00000000,0000009F,00000000
+
+0000: 1A 00 00 00 02 00 14 10 49 00 00 00 2E D0 06 00
+0010: 00 00 00 08 00 00 00 08 00 00
+
+Device Property:        D02E (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00080000
+Current Value:          00080000
+
+0000: 1A 00 00 00 02 00 14 10 4B 00 00 00 2F D0 06 00
+0010: 00 00 00 04 00 00 00 04 00 00
+
+Device Property:        D02F (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00040000
+Current Value:          00040000
+
+0000: 1A 00 00 00 02 00 14 10 4D 00 00 00 30 D0 06 00
+0010: 00 00 01 00 00 00 01 00 00 00
+
+Device Property:        D030 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000100
+Current Value:          00000100
+
+0000: 1A 00 00 00 02 00 14 10 4F 00 00 00 31 D0 06 00
+0010: 00 00 00 00 01 00 00 00 01 00
+
+Device Property:        D031 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          01000000
+Current Value:          01000000
+
+0000: 68 00 00 00 02 00 14 10 51 00 00 00 32 D0 FF FF
+0010: 00 15 43 00 61 00 6E 00 6F 00 6E 00 20 00 50 00
+0020: 6F 00 77 00 65 00 72 00 53 00 68 00 6F 00 74 00
+0030: 20 00 41 00 36 00 34 00 30 00 00 00 15 43 00 61
+0040: 00 6E 00 6F 00 6E 00 20 00 50 00 6F 00 77 00 65
+0050: 00 72 00 53 00 68 00 6F 00 74 00 20 00 41 00 36
+0060: 00 34 00 30 00 00 00 00
+
+Device Property:        D032 (Vendor defined)
+Data Type:              STR
+Get/Set:                Get
+Default Value:          Canon PowerShot A640
+Current Value:          Canon PowerShot A640
+
+0000: 1C 00 00 00 02 00 14 10 53 00 00 00 33 D0 02 40
+0010: 01 01 00 00 00 00 01 00 00 00 00 00
+
+Device Property:        D033 (Vendor defined)
+Data Type:              AUINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+
+0000: 1A 00 00 00 02 00 14 10 55 00 00 00 34 D0 06 00
+0010: 01 E8 F7 30 4D E8 F7 30 4D 00
+
+Device Property:        D034 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get/Set
+Default Value:          4D30F7E8
+Current Value:          4D30F7E8
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 58 00 00 00 36 D0 02 00
+0010: 01 03 03 02 03 00 01 02 03
+
+Device Property:        D036 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {01, 02, 03}
+
+0000: 16 00 00 00 02 00 14 10 5A 00 00 00 37 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D037 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 5C 00 00 00 38 D0 04 00
+0010: 00 20 00 20 00 00
+
+Device Property:        D038 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0020
+Current Value:          0020
+
+0000: 16 00 00 00 02 00 14 10 5E 00 00 00 39 D0 04 00
+0010: 00 40 0E 40 0E 00
+
+Device Property:        D039 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0E40
+Current Value:          0E40
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 61 00 00 00 3B D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D03B (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 63 00 00 00 3C D0 04 00
+0010: 00 38 00 38 00 00
+
+Device Property:        D03C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0038
+Current Value:          0038
+
+0000: 16 00 00 00 02 00 14 10 65 00 00 00 3D D0 04 00
+0010: 00 09 00 09 00 00
+
+Device Property:        D03D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0009
+Current Value:          0009
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 1C 00 00 00 02 00 14 10 6A 00 00 00 41 D0 04 00
+0010: 01 01 00 01 00 02 02 00 01 00 00 00
+
+Device Property:        D041 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0001
+Current Value:          0001
+Enumeration:            {0001, 0000}
+
+0000: 18 00 00 00 02 00 14 10 6C 00 00 00 42 D0 04 00
+0010: 00 02 00 02 00 02 00 00
+
+Device Property:        D042 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0002
+Current Value:          0002
+Enumeration:            {}
+
+0000: 16 00 00 00 02 00 14 10 6E 00 00 00 43 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D043 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 1C 00 00 00 02 00 14 10 70 00 00 00 44 D0 04 00
+0010: 01 00 00 00 00 02 02 00 00 00 01 00
+
+Device Property:        D044 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001}
+
+0000: 26 00 00 00 02 00 14 10 72 00 00 00 45 D0 04 00
+0010: 01 02 00 04 00 02 07 00 01 00 02 00 03 00 04 00
+0020: 05 00 06 00 07 00
+
+Device Property:        D045 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0002
+Current Value:          0004
+Enumeration:            {0001, 0002, 0003, 0004, 0005, 0006, 0007}
+
+0000: 16 00 00 00 02 00 14 10 74 00 00 00 46 D0 04 00
+0010: 00 01 01 01 01 00
+
+Device Property:        D046 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0101
+Current Value:          0101
+
+0000: 16 00 00 00 02 00 14 10 76 00 00 00 47 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D047 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: B2 00 00 00 02 00 14 10 78 00 00 00 48 D0 06 40
+0010: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0020: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0030: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0040: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+0050: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+0060: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0070: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0080: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0090: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+00A0: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+00B0: 00 00
+
+Device Property:        D048 (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+Current Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+
+0000: 1A 00 00 00 02 00 14 10 7A 00 00 00 49 D0 06 00
+0010: 00 00 00 03 02 00 00 03 02 00
+
+Device Property:        D049 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          02030000
+Current Value:          02030000
+
+0000: 1A 00 00 00 02 00 14 10 7C 00 00 00 4A D0 02 00
+0010: 01 00 00 02 04 00 00 01 02 03
+
+Device Property:        D04A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+
+Mode:Tv
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 B7 00 00 00 02 D0 04 00
+0010: 00 00 00 00 00 02 06 00 00 00 01 00 02 00 03 00
+0020: 04 00 05 00
+
+Device Property:        D002 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001, 0002, 0003, 0004, 0005}
+
+0000: 2C 00 00 00 02 00 14 10 B9 00 00 00 03 D0 06 00
+0010: 00 01 00 00 00 01 00 00 00 02 04 00 00 00 00 00
+0020: 01 00 00 00 02 00 00 00 03 00 00 00
+
+Device Property:        D003 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000001
+Current Value:          00000001
+Enumeration:            {00000000, 00000001, 00000002, 00000003}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 BD 00 00 00 06 D0 02 00
+0010: 01 05 05 02 03 00 05 03 02
+
+Device Property:        D006 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          05
+Current Value:          05
+Enumeration:            {05, 03, 02}
+
+0000: 16 00 00 00 02 00 14 10 BF 00 00 00 07 D0 02 00
+0010: 00 01 01 02 00 00
+
+Device Property:        D007 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          01
+Current Value:          01
+Enumeration:            {}
+
+0000: 1B 00 00 00 02 00 14 10 C1 00 00 00 08 D0 02 00
+0010: 01 00 00 02 05 00 00 01 03 07 02
+
+Device Property:        D008 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 03, 07, 02}
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 C4 00 00 00 0A D0 02 00
+0010: 01 02 02 02 03 00 00 02 06
+
+Device Property:        D00A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          02
+Current Value:          02
+Enumeration:            {00, 02, 06}
+
+Transaction: Response recieve error: 2006
+0000: 1A 00 00 00 02 00 14 10 C7 00 00 00 0C D0 02 00
+0010: 01 01 02 02 04 00 01 02 03 04
+
+Device Property:        D00C (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          02
+Enumeration:            {01, 02, 03, 04}
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 CA 00 00 00 0E D0 02 00
+0010: 00 00 00 02 00 00
+
+Device Property:        D00E (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          00
+Current Value:          00
+Enumeration:            {}
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 CD 00 00 00 10 D0 02 00
+0010: 01 03 03 02 03 00 03 00 01
+
+Device Property:        D010 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {03, 00, 01}
+
+0000: 18 00 00 00 02 00 14 10 CF 00 00 00 11 D0 02 00
+0010: 01 01 01 02 02 00 01 03
+
+Device Property:        D011 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          01
+Enumeration:            {01, 03}
+
+0000: 1C 00 00 00 02 00 14 10 D1 00 00 00 12 D0 04 00
+0010: 01 01 30 01 30 02 02 00 01 30 03 30
+
+Device Property:        D012 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          3001
+Current Value:          3001
+Enumeration:            {3001, 3003}
+
+0000: 1D 00 00 00 02 00 14 10 D3 00 00 00 13 D0 02 00
+0010: 01 00 00 02 07 00 00 01 02 03 04 07 06
+
+Device Property:        D013 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03, 04, 07, 06}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 DD 00 00 00 1C D0 04 00
+0010: 01 00 00 00 00 02 06 00 00 00 45 00 48 00 50 00
+0020: 58 00 60 00
+
+Device Property:        D01C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0045, 0048, 0050, 0058, 0060}
+
+0000: 18 00 00 00 02 00 14 10 DF 00 00 00 1D D0 04 00
+0010: 00 28 00 28 00 02 00 00
+
+Device Property:        D01D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0028
+Current Value:          0028
+Enumeration:            {}
+
+0000: 76 00 00 00 02 00 14 10 E1 00 00 00 1E D0 04 00
+0010: 01 60 00 60 00 02 2F 00 18 00 1B 00 1D 00 20 00
+0020: 23 00 25 00 28 00 2B 00 2D 00 30 00 33 00 35 00
+0030: 38 00 3B 00 3D 00 40 00 43 00 45 00 48 00 4B 00
+0040: 4D 00 50 00 53 00 55 00 58 00 5B 00 5D 00 60 00
+0050: 63 00 65 00 68 00 6B 00 6D 00 70 00 73 00 75 00
+0060: 78 00 7B 00 7D 00 80 00 83 00 85 00 88 00 8B 00
+0070: 8D 00 90 00 93 00
+
+Device Property:        D01E (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0060
+Current Value:          0060
+Enumeration:            {0018, 001B, 001D, 0020, 0023, 0025, 0028, 002B, 002D, 0030, 0033, 0035, 0038, 003B, 003D, 0040, 0043, 0045, 0048, 004B, 004D, 0050, 0053, 0055, 0058, 005B, 005D, 0060, 0063, 0065, 0068, 006B, 006D, 0070, 0073, 0075, 0078, 007B, 007D, 0080, 0083, 0085, 0088, 008B, 008D, 0090, 0093}
+
+0000: 23 00 00 00 02 00 14 10 E3 00 00 00 1F D0 02 00
+0010: 01 18 18 02 0D 00 08 0B 0D 10 13 15 18 1B 1D 20
+0020: 23 25 28
+
+Device Property:        D01F (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          18
+Current Value:          18
+Enumeration:            {08, 0B, 0D, 10, 13, 15, 18, 1B, 1D, 20, 23, 25, 28}
+
+0000: 23 00 00 00 02 00 14 10 E5 00 00 00 20 D0 02 00
+0010: 01 18 18 02 0D 00 08 0B 0D 10 13 15 18 1B 1D 20
+0020: 23 25 28
+
+Device Property:        D020 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          18
+Current Value:          18
+Enumeration:            {08, 0B, 0D, 10, 13, 15, 18, 1B, 1D, 20, 23, 25, 28}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 2E 00 00 00 02 00 14 10 EF 00 00 00 29 D0 04 00
+0010: 01 03 00 03 00 02 0B 00 01 00 02 00 03 00 08 00
+0020: 09 00 0A 00 0B 00 0C 00 0D 00 0E 00 0F 00
+
+Device Property:        D029 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0003
+Current Value:          0003
+Enumeration:            {0001, 0002, 0003, 0008, 0009, 000A, 000B, 000C, 000D, 000E, 000F}
+
+0000: 1C 00 00 00 02 00 14 10 F1 00 00 00 2A D0 04 00
+0010: 01 00 00 00 00 01 00 00 0E 00 01 00
+
+Device Property:        D02A (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Range (Min,Max,Step):           {0000, 000E, 0001}
+
+Transaction: Response recieve error: 2006
+0000: F0 01 00 00 02 00 14 10 F4 00 00 00 2C D0 06 40
+0010: 00 06 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0020: 00 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00
+0030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0040: 00 00 00 00 00 00 00 00 00 02 0F 00 06 00 00 00
+0050: B0 0A 00 00 40 0E 00 00 01 00 00 00 00 00 00 00
+0060: 00 00 00 00 00 00 00 00 06 00 00 00 B0 0A 00 00
+0070: 40 0E 00 00 06 00 00 00 00 00 00 00 00 00 00 00
+0080: 00 00 00 00 06 00 00 00 B0 0A 00 00 40 0E 00 00
+0090: 0B 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00A0: 06 00 00 00 40 08 00 00 00 0B 00 00 02 00 00 00
+00B0: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+00C0: 40 08 00 00 00 0B 00 00 07 00 00 00 00 00 00 00
+00D0: 00 00 00 00 00 00 00 00 06 00 00 00 40 08 00 00
+00E0: 00 0B 00 00 0C 00 00 00 00 00 00 00 00 00 00 00
+00F0: 00 00 00 00 06 00 00 00 A8 06 00 00 E0 08 00 00
+0100: 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0110: 06 00 00 00 A8 06 00 00 E0 08 00 00 08 00 00 00
+0120: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+0130: A8 06 00 00 E0 08 00 00 0D 00 00 00 00 00 00 00
+0140: 00 00 00 00 00 00 00 00 06 00 00 00 B0 04 00 00
+0150: 40 06 00 00 11 00 00 00 00 00 00 00 00 00 00 00
+0160: 00 00 00 00 06 00 00 00 B0 04 00 00 40 06 00 00
+0170: 12 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0180: 06 00 00 00 B0 04 00 00 40 06 00 00 13 00 00 00
+0190: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+01A0: E0 01 00 00 80 02 00 00 05 00 00 00 00 00 00 00
+01B0: 00 00 00 00 00 00 00 00 06 00 00 00 E0 01 00 00
+01C0: 80 02 00 00 0A 00 00 00 00 00 00 00 00 00 00 00
+01D0: 00 00 00 00 06 00 00 00 E0 01 00 00 80 02 00 00
+01E0: 0F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+Device Property:        D02C (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Current Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Enumeration:            {00000AB0, 00000E40, 00000001, 00000000, 00000000, 0000000000000B00, 00000007, 00000000, 00000000, 00000000, 00000006, 00000840, 00000B00, 0000000C, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000003, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000008, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 0000000D, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000011, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000012, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000013, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 00000005, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000A, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000F, 00000000, 00000000, 00000000
+0000: 3A 00 00 00 02 00 14 10 F6 00 00 00 2D D0 06 40
+0010: 00 04 00 00 00 77 00 00 00 00 00 00 00 9F 00 00
+0020: 00 00 00 00 00 04 00 00 00 77 00 00 00 00 00 00
+0030: 00 9F 00 00 00 00 00 00 00 00
+
+Device Property:        D02D (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000077,00000000,0000009F,00000000
+Current Value:          00000077,00000000,0000009F,00000000
+
+0000: 1A 00 00 00 02 00 14 10 F8 00 00 00 2E D0 06 00
+0010: 00 00 00 08 00 00 00 08 00 00
+
+Device Property:        D02E (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00080000
+Current Value:          00080000
+
+0000: 1A 00 00 00 02 00 14 10 FA 00 00 00 2F D0 06 00
+0010: 00 00 00 04 00 00 00 04 00 00
+
+Device Property:        D02F (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00040000
+Current Value:          00040000
+
+0000: 1A 00 00 00 02 00 14 10 FC 00 00 00 30 D0 06 00
+0010: 00 00 01 00 00 00 01 00 00 00
+
+Device Property:        D030 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000100
+Current Value:          00000100
+
+0000: 1A 00 00 00 02 00 14 10 FE 00 00 00 31 D0 06 00
+0010: 00 00 00 00 01 00 00 00 01 00
+
+Device Property:        D031 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          01000000
+Current Value:          01000000
+
+0000: 68 00 00 00 02 00 14 10 00 01 00 00 32 D0 FF FF
+0010: 00 15 43 00 61 00 6E 00 6F 00 6E 00 20 00 50 00
+0020: 6F 00 77 00 65 00 72 00 53 00 68 00 6F 00 74 00
+0030: 20 00 41 00 36 00 34 00 30 00 00 00 15 43 00 61
+0040: 00 6E 00 6F 00 6E 00 20 00 50 00 6F 00 77 00 65
+0050: 00 72 00 53 00 68 00 6F 00 74 00 20 00 41 00 36
+0060: 00 34 00 30 00 00 00 00
+
+Device Property:        D032 (Vendor defined)
+Data Type:              STR
+Get/Set:                Get
+Default Value:          Canon PowerShot A640
+Current Value:          Canon PowerShot A640
+
+0000: 1C 00 00 00 02 00 14 10 02 01 00 00 33 D0 02 40
+0010: 01 01 00 00 00 00 01 00 00 00 00 00
+
+Device Property:        D033 (Vendor defined)
+Data Type:              AUINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+
+0000: 1A 00 00 00 02 00 14 10 04 01 00 00 34 D0 06 00
+0010: 01 EB F7 30 4D EB F7 30 4D 00
+
+Device Property:        D034 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get/Set
+Default Value:          4D30F7EB
+Current Value:          4D30F7EB
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 07 01 00 00 36 D0 02 00
+0010: 01 03 03 02 03 00 01 02 03
+
+Device Property:        D036 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {01, 02, 03}
+
+0000: 16 00 00 00 02 00 14 10 09 01 00 00 37 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D037 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 0B 01 00 00 38 D0 04 00
+0010: 00 20 00 20 00 00
+
+Device Property:        D038 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0020
+Current Value:          0020
+
+0000: 16 00 00 00 02 00 14 10 0D 01 00 00 39 D0 04 00
+0010: 00 40 0E 40 0E 00
+
+Device Property:        D039 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0E40
+Current Value:          0E40
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 10 01 00 00 3B D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D03B (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 12 01 00 00 3C D0 04 00
+0010: 00 38 00 38 00 00
+
+Device Property:        D03C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0038
+Current Value:          0038
+
+0000: 16 00 00 00 02 00 14 10 14 01 00 00 3D D0 04 00
+0010: 00 09 00 09 00 00
+
+Device Property:        D03D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0009
+Current Value:          0009
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 1C 00 00 00 02 00 14 10 19 01 00 00 41 D0 04 00
+0010: 01 01 00 01 00 02 02 00 01 00 00 00
+
+Device Property:        D041 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0001
+Current Value:          0001
+Enumeration:            {0001, 0000}
+
+0000: 18 00 00 00 02 00 14 10 1B 01 00 00 42 D0 04 00
+0010: 00 02 00 02 00 02 00 00
+
+Device Property:        D042 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0002
+Current Value:          0002
+Enumeration:            {}
+
+0000: 16 00 00 00 02 00 14 10 1D 01 00 00 43 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D043 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 1C 00 00 00 02 00 14 10 1F 01 00 00 44 D0 04 00
+0010: 01 00 00 00 00 02 02 00 00 00 01 00
+
+Device Property:        D044 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001}
+
+0000: 26 00 00 00 02 00 14 10 21 01 00 00 45 D0 04 00
+0010: 01 02 00 04 00 02 07 00 01 00 02 00 03 00 04 00
+0020: 05 00 06 00 07 00
+
+Device Property:        D045 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0002
+Current Value:          0004
+Enumeration:            {0001, 0002, 0003, 0004, 0005, 0006, 0007}
+
+0000: 16 00 00 00 02 00 14 10 23 01 00 00 46 D0 04 00
+0010: 00 01 01 01 01 00
+
+Device Property:        D046 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0101
+Current Value:          0101
+
+0000: 16 00 00 00 02 00 14 10 25 01 00 00 47 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D047 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: B2 00 00 00 02 00 14 10 27 01 00 00 48 D0 06 40
+0010: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0020: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0030: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0040: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+0050: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+0060: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0070: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0080: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0090: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+00A0: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+00B0: 00 00
+
+Device Property:        D048 (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+Current Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+
+0000: 1A 00 00 00 02 00 14 10 29 01 00 00 49 D0 06 00
+0010: 00 00 00 03 02 00 00 03 02 00
+
+Device Property:        D049 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          02030000
+Current Value:          02030000
+
+0000: 1A 00 00 00 02 00 14 10 2B 01 00 00 4A D0 02 00
+0010: 01 00 00 02 04 00 00 01 02 03
+
+Device Property:        D04A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+
+Mode:Av
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 66 01 00 00 02 D0 04 00
+0010: 00 00 00 00 00 02 06 00 00 00 01 00 02 00 03 00
+0020: 04 00 05 00
+
+Device Property:        D002 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001, 0002, 0003, 0004, 0005}
+
+0000: 2C 00 00 00 02 00 14 10 68 01 00 00 03 D0 06 00
+0010: 00 01 00 00 00 01 00 00 00 02 04 00 00 00 00 00
+0020: 01 00 00 00 02 00 00 00 03 00 00 00
+
+Device Property:        D003 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000001
+Current Value:          00000001
+Enumeration:            {00000000, 00000001, 00000002, 00000003}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 6C 01 00 00 06 D0 02 00
+0010: 01 05 05 02 03 00 05 03 02
+
+Device Property:        D006 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          05
+Current Value:          05
+Enumeration:            {05, 03, 02}
+
+0000: 16 00 00 00 02 00 14 10 6E 01 00 00 07 D0 02 00
+0010: 00 01 01 02 00 00
+
+Device Property:        D007 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          01
+Current Value:          01
+Enumeration:            {}
+
+0000: 1B 00 00 00 02 00 14 10 70 01 00 00 08 D0 02 00
+0010: 01 00 00 02 05 00 00 01 03 07 02
+
+Device Property:        D008 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 03, 07, 02}
+
+Transaction: Response recieve error: 2006
+0000: 1A 00 00 00 02 00 14 10 73 01 00 00 0A D0 02 00
+0010: 01 02 02 02 04 00 00 02 06 04
+
+Device Property:        D00A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          02
+Current Value:          02
+Enumeration:            {00, 02, 06, 04}
+
+Transaction: Response recieve error: 2006
+0000: 1A 00 00 00 02 00 14 10 76 01 00 00 0C D0 02 00
+0010: 01 01 03 02 04 00 01 02 03 04
+
+Device Property:        D00C (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          03
+Enumeration:            {01, 02, 03, 04}
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 79 01 00 00 0E D0 02 00
+0010: 00 00 00 02 00 00
+
+Device Property:        D00E (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          00
+Current Value:          00
+Enumeration:            {}
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 7C 01 00 00 10 D0 02 00
+0010: 01 03 03 02 03 00 03 00 01
+
+Device Property:        D010 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {03, 00, 01}
+
+0000: 18 00 00 00 02 00 14 10 7E 01 00 00 11 D0 02 00
+0010: 01 01 01 02 02 00 01 03
+
+Device Property:        D011 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          01
+Enumeration:            {01, 03}
+
+0000: 1C 00 00 00 02 00 14 10 80 01 00 00 12 D0 04 00
+0010: 01 01 30 01 30 02 02 00 01 30 03 30
+
+Device Property:        D012 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          3001
+Current Value:          3001
+Enumeration:            {3001, 3003}
+
+0000: 1D 00 00 00 02 00 14 10 82 01 00 00 13 D0 02 00
+0010: 01 00 00 02 07 00 00 01 02 03 04 07 06
+
+Device Property:        D013 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03, 04, 07, 06}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 8C 01 00 00 1C D0 04 00
+0010: 01 00 00 00 00 02 06 00 00 00 45 00 48 00 50 00
+0020: 58 00 60 00
+
+Device Property:        D01C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0045, 0048, 0050, 0058, 0060}
+
+0000: 2C 00 00 00 02 00 14 10 8E 01 00 00 1D D0 04 00
+0010: 01 28 00 28 00 02 0A 00 20 00 23 00 25 00 28 00
+0020: 2B 00 2D 00 30 00 33 00 35 00 38 00
+
+Device Property:        D01D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0028
+Current Value:          0028
+Enumeration:            {0020, 0023, 0025, 0028, 002B, 002D, 0030, 0033, 0035, 0038}
+
+0000: 18 00 00 00 02 00 14 10 90 01 00 00 1E D0 04 00
+0010: 00 60 00 60 00 02 00 00
+
+Device Property:        D01E (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0060
+Current Value:          0060
+Enumeration:            {}
+
+0000: 23 00 00 00 02 00 14 10 92 01 00 00 1F D0 02 00
+0010: 01 18 18 02 0D 00 08 0B 0D 10 13 15 18 1B 1D 20
+0020: 23 25 28
+
+Device Property:        D01F (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          18
+Current Value:          18
+Enumeration:            {08, 0B, 0D, 10, 13, 15, 18, 1B, 1D, 20, 23, 25, 28}
+
+0000: 23 00 00 00 02 00 14 10 94 01 00 00 20 D0 02 00
+0010: 01 18 18 02 0D 00 08 0B 0D 10 13 15 18 1B 1D 20
+0020: 23 25 28
+
+Device Property:        D020 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          18
+Current Value:          18
+Enumeration:            {08, 0B, 0D, 10, 13, 15, 18, 1B, 1D, 20, 23, 25, 28}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 2E 00 00 00 02 00 14 10 9E 01 00 00 29 D0 04 00
+0010: 01 03 00 03 00 02 0B 00 01 00 02 00 03 00 08 00
+0020: 09 00 0A 00 0B 00 0C 00 0D 00 0E 00 0F 00
+
+Device Property:        D029 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0003
+Current Value:          0003
+Enumeration:            {0001, 0002, 0003, 0008, 0009, 000A, 000B, 000C, 000D, 000E, 000F}
+
+0000: 1C 00 00 00 02 00 14 10 A0 01 00 00 2A D0 04 00
+0010: 01 00 00 00 00 01 00 00 0E 00 01 00
+
+Device Property:        D02A (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Range (Min,Max,Step):           {0000, 000E, 0001}
+
+Transaction: Response recieve error: 2006
+0000: F0 01 00 00 02 00 14 10 A3 01 00 00 2C D0 06 40
+0010: 00 06 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0020: 00 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00
+0030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0040: 00 00 00 00 00 00 00 00 00 02 0F 00 06 00 00 00
+0050: B0 0A 00 00 40 0E 00 00 01 00 00 00 00 00 00 00
+0060: 00 00 00 00 00 00 00 00 06 00 00 00 B0 0A 00 00
+0070: 40 0E 00 00 06 00 00 00 00 00 00 00 00 00 00 00
+0080: 00 00 00 00 06 00 00 00 B0 0A 00 00 40 0E 00 00
+0090: 0B 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00A0: 06 00 00 00 40 08 00 00 00 0B 00 00 02 00 00 00
+00B0: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+00C0: 40 08 00 00 00 0B 00 00 07 00 00 00 00 00 00 00
+00D0: 00 00 00 00 00 00 00 00 06 00 00 00 40 08 00 00
+00E0: 00 0B 00 00 0C 00 00 00 00 00 00 00 00 00 00 00
+00F0: 00 00 00 00 06 00 00 00 A8 06 00 00 E0 08 00 00
+0100: 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0110: 06 00 00 00 A8 06 00 00 E0 08 00 00 08 00 00 00
+0120: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+0130: A8 06 00 00 E0 08 00 00 0D 00 00 00 00 00 00 00
+0140: 00 00 00 00 00 00 00 00 06 00 00 00 B0 04 00 00
+0150: 40 06 00 00 11 00 00 00 00 00 00 00 00 00 00 00
+0160: 00 00 00 00 06 00 00 00 B0 04 00 00 40 06 00 00
+0170: 12 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0180: 06 00 00 00 B0 04 00 00 40 06 00 00 13 00 00 00
+0190: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+01A0: E0 01 00 00 80 02 00 00 05 00 00 00 00 00 00 00
+01B0: 00 00 00 00 00 00 00 00 06 00 00 00 E0 01 00 00
+01C0: 80 02 00 00 0A 00 00 00 00 00 00 00 00 00 00 00
+01D0: 00 00 00 00 06 00 00 00 E0 01 00 00 80 02 00 00
+01E0: 0F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+Device Property:        D02C (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Current Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Enumeration:            {00000AB0, 00000E40, 00000001, 00000000, 00000000, 0000000000000B00, 00000007, 00000000, 00000000, 00000000, 00000006, 00000840, 00000B00, 0000000C, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000003, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000008, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 0000000D, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000011, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000012, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000013, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 00000005, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000A, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000F, 00000000, 00000000, 00000000
+0000: 3A 00 00 00 02 00 14 10 A5 01 00 00 2D D0 06 40
+0010: 00 04 00 00 00 77 00 00 00 00 00 00 00 9F 00 00
+0020: 00 00 00 00 00 04 00 00 00 77 00 00 00 00 00 00
+0030: 00 9F 00 00 00 00 00 00 00 00
+
+Device Property:        D02D (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000077,00000000,0000009F,00000000
+Current Value:          00000077,00000000,0000009F,00000000
+
+0000: 1A 00 00 00 02 00 14 10 A7 01 00 00 2E D0 06 00
+0010: 00 00 00 08 00 00 00 08 00 00
+
+Device Property:        D02E (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00080000
+Current Value:          00080000
+
+0000: 1A 00 00 00 02 00 14 10 A9 01 00 00 2F D0 06 00
+0010: 00 00 00 04 00 00 00 04 00 00
+
+Device Property:        D02F (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00040000
+Current Value:          00040000
+
+0000: 1A 00 00 00 02 00 14 10 AB 01 00 00 30 D0 06 00
+0010: 00 00 01 00 00 00 01 00 00 00
+
+Device Property:        D030 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000100
+Current Value:          00000100
+
+0000: 1A 00 00 00 02 00 14 10 AD 01 00 00 31 D0 06 00
+0010: 00 00 00 00 01 00 00 00 01 00
+
+Device Property:        D031 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          01000000
+Current Value:          01000000
+
+0000: 68 00 00 00 02 00 14 10 AF 01 00 00 32 D0 FF FF
+0010: 00 15 43 00 61 00 6E 00 6F 00 6E 00 20 00 50 00
+0020: 6F 00 77 00 65 00 72 00 53 00 68 00 6F 00 74 00
+0030: 20 00 41 00 36 00 34 00 30 00 00 00 15 43 00 61
+0040: 00 6E 00 6F 00 6E 00 20 00 50 00 6F 00 77 00 65
+0050: 00 72 00 53 00 68 00 6F 00 74 00 20 00 41 00 36
+0060: 00 34 00 30 00 00 00 00
+
+Device Property:        D032 (Vendor defined)
+Data Type:              STR
+Get/Set:                Get
+Default Value:          Canon PowerShot A640
+Current Value:          Canon PowerShot A640
+
+0000: 1C 00 00 00 02 00 14 10 B1 01 00 00 33 D0 02 40
+0010: 01 01 00 00 00 00 01 00 00 00 00 00
+
+Device Property:        D033 (Vendor defined)
+Data Type:              AUINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+
+0000: 1A 00 00 00 02 00 14 10 B3 01 00 00 34 D0 06 00
+0010: 01 EE F7 30 4D EE F7 30 4D 00
+
+Device Property:        D034 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get/Set
+Default Value:          4D30F7EE
+Current Value:          4D30F7EE
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 B6 01 00 00 36 D0 02 00
+0010: 01 03 03 02 03 00 01 02 03
+
+Device Property:        D036 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {01, 02, 03}
+
+0000: 16 00 00 00 02 00 14 10 B8 01 00 00 37 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D037 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 BA 01 00 00 38 D0 04 00
+0010: 00 20 00 20 00 00
+
+Device Property:        D038 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0020
+Current Value:          0020
+
+0000: 16 00 00 00 02 00 14 10 BC 01 00 00 39 D0 04 00
+0010: 00 40 0E 40 0E 00
+
+Device Property:        D039 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0E40
+Current Value:          0E40
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 BF 01 00 00 3B D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D03B (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 C1 01 00 00 3C D0 04 00
+0010: 00 38 00 38 00 00
+
+Device Property:        D03C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0038
+Current Value:          0038
+
+0000: 16 00 00 00 02 00 14 10 C3 01 00 00 3D D0 04 00
+0010: 00 09 00 09 00 00
+
+Device Property:        D03D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0009
+Current Value:          0009
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 1C 00 00 00 02 00 14 10 C8 01 00 00 41 D0 04 00
+0010: 01 01 00 01 00 02 02 00 01 00 00 00
+
+Device Property:        D041 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0001
+Current Value:          0001
+Enumeration:            {0001, 0000}
+
+0000: 18 00 00 00 02 00 14 10 CA 01 00 00 42 D0 04 00
+0010: 00 02 00 02 00 02 00 00
+
+Device Property:        D042 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0002
+Current Value:          0002
+Enumeration:            {}
+
+0000: 16 00 00 00 02 00 14 10 CC 01 00 00 43 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D043 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 1C 00 00 00 02 00 14 10 CE 01 00 00 44 D0 04 00
+0010: 01 00 00 00 00 02 02 00 00 00 01 00
+
+Device Property:        D044 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001}
+
+0000: 26 00 00 00 02 00 14 10 D0 01 00 00 45 D0 04 00
+0010: 01 02 00 04 00 02 07 00 01 00 02 00 03 00 04 00
+0020: 05 00 06 00 07 00
+
+Device Property:        D045 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0002
+Current Value:          0004
+Enumeration:            {0001, 0002, 0003, 0004, 0005, 0006, 0007}
+
+0000: 16 00 00 00 02 00 14 10 D2 01 00 00 46 D0 04 00
+0010: 00 01 01 01 01 00
+
+Device Property:        D046 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0101
+Current Value:          0101
+
+0000: 16 00 00 00 02 00 14 10 D4 01 00 00 47 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D047 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: B2 00 00 00 02 00 14 10 D6 01 00 00 48 D0 06 40
+0010: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0020: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0030: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0040: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+0050: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+0060: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0070: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0080: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0090: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+00A0: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+00B0: 00 00
+
+Device Property:        D048 (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+Current Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+
+0000: 1A 00 00 00 02 00 14 10 D8 01 00 00 49 D0 06 00
+0010: 00 00 00 03 02 00 00 03 02 00
+
+Device Property:        D049 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          02030000
+Current Value:          02030000
+
+0000: 1A 00 00 00 02 00 14 10 DA 01 00 00 4A D0 02 00
+0010: 01 00 00 02 04 00 00 01 02 03
+
+Device Property:        D04A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+
+Mode:M
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 24 00 00 00 02 00 14 10 15 02 00 00 02 D0 04 00
+0010: 00 00 00 00 00 02 06 00 00 00 01 00 02 00 03 00
+0020: 04 00 05 00
+
+Device Property:        D002 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001, 0002, 0003, 0004, 0005}
+
+0000: 2C 00 00 00 02 00 14 10 17 02 00 00 03 D0 06 00
+0010: 00 01 00 00 00 01 00 00 00 02 04 00 00 00 00 00
+0020: 01 00 00 00 02 00 00 00 03 00 00 00
+
+Device Property:        D003 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000001
+Current Value:          00000001
+Enumeration:            {00000000, 00000001, 00000002, 00000003}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 1B 02 00 00 06 D0 02 00
+0010: 01 05 05 02 03 00 05 03 02
+
+Device Property:        D006 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          05
+Current Value:          05
+Enumeration:            {05, 03, 02}
+
+0000: 16 00 00 00 02 00 14 10 1D 02 00 00 07 D0 02 00
+0010: 00 01 01 02 00 00
+
+Device Property:        D007 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          01
+Current Value:          01
+Enumeration:            {}
+
+0000: 1B 00 00 00 02 00 14 10 1F 02 00 00 08 D0 02 00
+0010: 01 00 00 02 05 00 00 01 03 07 02
+
+Device Property:        D008 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 03, 07, 02}
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 22 02 00 00 0A D0 02 00
+0010: 01 02 02 02 03 00 00 02 06
+
+Device Property:        D00A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          02
+Current Value:          02
+Enumeration:            {00, 02, 06}
+
+Transaction: Response recieve error: 2006
+0000: 1A 00 00 00 02 00 14 10 25 02 00 00 0C D0 02 00
+0010: 01 01 04 02 04 00 01 02 03 04
+
+Device Property:        D00C (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          04
+Enumeration:            {01, 02, 03, 04}
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 28 02 00 00 0E D0 02 00
+0010: 00 00 00 02 00 00
+
+Device Property:        D00E (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          00
+Current Value:          00
+Enumeration:            {}
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 2B 02 00 00 10 D0 02 00
+0010: 01 03 03 02 03 00 03 00 01
+
+Device Property:        D010 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {03, 00, 01}
+
+0000: 18 00 00 00 02 00 14 10 2D 02 00 00 11 D0 02 00
+0010: 01 01 01 02 02 00 01 03
+
+Device Property:        D011 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          01
+Current Value:          01
+Enumeration:            {01, 03}
+
+0000: 1C 00 00 00 02 00 14 10 2F 02 00 00 12 D0 04 00
+0010: 01 01 30 01 30 02 02 00 01 30 03 30
+
+Device Property:        D012 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          3001
+Current Value:          3001
+Enumeration:            {3001, 3003}
+
+0000: 1D 00 00 00 02 00 14 10 31 02 00 00 13 D0 02 00
+0010: 01 00 00 02 07 00 00 01 02 03 04 07 06
+
+Device Property:        D013 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03, 04, 07, 06}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 22 00 00 00 02 00 14 10 3B 02 00 00 1C D0 04 00
+0010: 01 48 00 48 00 02 05 00 45 00 48 00 50 00 58 00
+0020: 60 00
+
+Device Property:        D01C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0048
+Current Value:          0048
+Enumeration:            {0045, 0048, 0050, 0058, 0060}
+
+0000: 2C 00 00 00 02 00 14 10 3D 02 00 00 1D D0 04 00
+0010: 01 28 00 28 00 02 0A 00 20 00 23 00 25 00 28 00
+0020: 2B 00 2D 00 30 00 33 00 35 00 38 00
+
+Device Property:        D01D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0028
+Current Value:          0028
+Enumeration:            {0020, 0023, 0025, 0028, 002B, 002D, 0030, 0033, 0035, 0038}
+
+0000: 72 00 00 00 02 00 14 10 3F 02 00 00 1E D0 04 00
+0010: 01 60 00 60 00 02 2D 00 18 00 1B 00 1D 00 20 00
+0020: 23 00 25 00 28 00 2B 00 2D 00 30 00 33 00 35 00
+0030: 38 00 3B 00 3D 00 40 00 43 00 45 00 48 00 4B 00
+0040: 4D 00 50 00 53 00 55 00 58 00 5B 00 5D 00 60 00
+0050: 63 00 65 00 68 00 6B 00 6D 00 70 00 73 00 75 00
+0060: 78 00 7B 00 7D 00 80 00 83 00 85 00 88 00 8B 00
+0070: 8D 00
+
+Device Property:        D01E (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0060
+Current Value:          0060
+Enumeration:            {0018, 001B, 001D, 0020, 0023, 0025, 0028, 002B, 002D, 0030, 0033, 0035, 0038, 003B, 003D, 0040, 0043, 0045, 0048, 004B, 004D, 0050, 0053, 0055, 0058, 005B, 005D, 0060, 0063, 0065, 0068, 006B, 006D, 0070, 0073, 0075, 0078, 007B, 007D, 0080, 0083, 0085, 0088, 008B, 008D}
+
+0000: 16 00 00 00 02 00 14 10 41 02 00 00 1F D0 02 00
+0010: 00 18 18 02 00 00
+
+Device Property:        D01F (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          18
+Current Value:          18
+Enumeration:            {}
+
+0000: 16 00 00 00 02 00 14 10 43 02 00 00 20 D0 02 00
+0010: 00 18 18 02 00 00
+
+Device Property:        D020 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get
+Default Value:          18
+Current Value:          18
+Enumeration:            {}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 2E 00 00 00 02 00 14 10 4D 02 00 00 29 D0 04 00
+0010: 01 03 00 03 00 02 0B 00 01 00 02 00 03 00 08 00
+0020: 09 00 0A 00 0B 00 0C 00 0D 00 0E 00 0F 00
+
+Device Property:        D029 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0003
+Current Value:          0003
+Enumeration:            {0001, 0002, 0003, 0008, 0009, 000A, 000B, 000C, 000D, 000E, 000F}
+
+0000: 1C 00 00 00 02 00 14 10 4F 02 00 00 2A D0 04 00
+0010: 01 00 00 00 00 01 00 00 0E 00 01 00
+
+Device Property:        D02A (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Range (Min,Max,Step):           {0000, 000E, 0001}
+
+Transaction: Response recieve error: 2006
+0000: F0 01 00 00 02 00 14 10 52 02 00 00 2C D0 06 40
+0010: 00 06 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0020: 00 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00
+0030: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0040: 00 00 00 00 00 00 00 00 00 02 0F 00 06 00 00 00
+0050: B0 0A 00 00 40 0E 00 00 01 00 00 00 00 00 00 00
+0060: 00 00 00 00 00 00 00 00 06 00 00 00 B0 0A 00 00
+0070: 40 0E 00 00 06 00 00 00 00 00 00 00 00 00 00 00
+0080: 00 00 00 00 06 00 00 00 B0 0A 00 00 40 0E 00 00
+0090: 0B 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+00A0: 06 00 00 00 40 08 00 00 00 0B 00 00 02 00 00 00
+00B0: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+00C0: 40 08 00 00 00 0B 00 00 07 00 00 00 00 00 00 00
+00D0: 00 00 00 00 00 00 00 00 06 00 00 00 40 08 00 00
+00E0: 00 0B 00 00 0C 00 00 00 00 00 00 00 00 00 00 00
+00F0: 00 00 00 00 06 00 00 00 A8 06 00 00 E0 08 00 00
+0100: 03 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0110: 06 00 00 00 A8 06 00 00 E0 08 00 00 08 00 00 00
+0120: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+0130: A8 06 00 00 E0 08 00 00 0D 00 00 00 00 00 00 00
+0140: 00 00 00 00 00 00 00 00 06 00 00 00 B0 04 00 00
+0150: 40 06 00 00 11 00 00 00 00 00 00 00 00 00 00 00
+0160: 00 00 00 00 06 00 00 00 B0 04 00 00 40 06 00 00
+0170: 12 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+0180: 06 00 00 00 B0 04 00 00 40 06 00 00 13 00 00 00
+0190: 00 00 00 00 00 00 00 00 00 00 00 00 06 00 00 00
+01A0: E0 01 00 00 80 02 00 00 05 00 00 00 00 00 00 00
+01B0: 00 00 00 00 00 00 00 00 06 00 00 00 E0 01 00 00
+01C0: 80 02 00 00 0A 00 00 00 00 00 00 00 00 00 00 00
+01D0: 00 00 00 00 06 00 00 00 E0 01 00 00 80 02 00 00
+01E0: 0F 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+
+
+Device Property:        D02C (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Current Value:          00000000,00000000,00000000,00000000,00000000,00000000
+Enumeration:            {00000AB0, 00000E40, 00000001, 00000000, 00000000, 0000000000000B00, 00000007, 00000000, 00000000, 00000000, 00000006, 00000840, 00000B00, 0000000C, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000003, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 00000008, 00000000, 00000000, 00000000, 00000006, 000006A8, 000008E0, 0000000D, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000011, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000012, 00000000, 00000000, 00000000, 00000006, 000004B0, 00000640, 00000013, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 00000005, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000A, 00000000, 00000000, 00000000, 00000006, 000001E0, 00000280, 0000000F, 00000000, 00000000, 00000000
+0000: 3A 00 00 00 02 00 14 10 54 02 00 00 2D D0 06 40
+0010: 00 04 00 00 00 77 00 00 00 00 00 00 00 9F 00 00
+0020: 00 00 00 00 00 04 00 00 00 77 00 00 00 00 00 00
+0030: 00 9F 00 00 00 00 00 00 00 00
+
+Device Property:        D02D (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00000077,00000000,0000009F,00000000
+Current Value:          00000077,00000000,0000009F,00000000
+
+0000: 1A 00 00 00 02 00 14 10 56 02 00 00 2E D0 06 00
+0010: 00 00 00 08 00 00 00 08 00 00
+
+Device Property:        D02E (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00080000
+Current Value:          00080000
+
+0000: 1A 00 00 00 02 00 14 10 58 02 00 00 2F D0 06 00
+0010: 00 00 00 04 00 00 00 04 00 00
+
+Device Property:        D02F (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00040000
+Current Value:          00040000
+
+0000: 1A 00 00 00 02 00 14 10 5A 02 00 00 30 D0 06 00
+0010: 00 00 01 00 00 00 01 00 00 00
+
+Device Property:        D030 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          00000100
+Current Value:          00000100
+
+0000: 1A 00 00 00 02 00 14 10 5C 02 00 00 31 D0 06 00
+0010: 00 00 00 00 01 00 00 00 01 00
+
+Device Property:        D031 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          01000000
+Current Value:          01000000
+
+0000: 68 00 00 00 02 00 14 10 5E 02 00 00 32 D0 FF FF
+0010: 00 15 43 00 61 00 6E 00 6F 00 6E 00 20 00 50 00
+0020: 6F 00 77 00 65 00 72 00 53 00 68 00 6F 00 74 00
+0030: 20 00 41 00 36 00 34 00 30 00 00 00 15 43 00 61
+0040: 00 6E 00 6F 00 6E 00 20 00 50 00 6F 00 77 00 65
+0050: 00 72 00 53 00 68 00 6F 00 74 00 20 00 41 00 36
+0060: 00 34 00 30 00 00 00 00
+
+Device Property:        D032 (Vendor defined)
+Data Type:              STR
+Get/Set:                Get
+Default Value:          Canon PowerShot A640
+Current Value:          Canon PowerShot A640
+
+0000: 1C 00 00 00 02 00 14 10 60 02 00 00 33 D0 02 40
+0010: 01 01 00 00 00 00 01 00 00 00 00 00
+
+Device Property:        D033 (Vendor defined)
+Data Type:              AUINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+
+0000: 1A 00 00 00 02 00 14 10 62 02 00 00 34 D0 06 00
+0010: 01 F1 F7 30 4D F1 F7 30 4D 00
+
+Device Property:        D034 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get/Set
+Default Value:          4D30F7F1
+Current Value:          4D30F7F1
+
+Transaction: Response recieve error: 2006
+0000: 19 00 00 00 02 00 14 10 65 02 00 00 36 D0 02 00
+0010: 01 03 03 02 03 00 01 02 03
+
+Device Property:        D036 (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          03
+Current Value:          03
+Enumeration:            {01, 02, 03}
+
+0000: 16 00 00 00 02 00 14 10 67 02 00 00 37 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D037 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 69 02 00 00 38 D0 04 00
+0010: 00 20 00 20 00 00
+
+Device Property:        D038 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0020
+Current Value:          0020
+
+0000: 16 00 00 00 02 00 14 10 6B 02 00 00 39 D0 04 00
+0010: 00 40 0E 40 0E 00
+
+Device Property:        D039 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0E40
+Current Value:          0E40
+
+Transaction: Response recieve error: 2006
+0000: 16 00 00 00 02 00 14 10 6E 02 00 00 3B D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D03B (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 16 00 00 00 02 00 14 10 70 02 00 00 3C D0 04 00
+0010: 00 38 00 38 00 00
+
+Device Property:        D03C (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0038
+Current Value:          0038
+
+0000: 16 00 00 00 02 00 14 10 72 02 00 00 3D D0 04 00
+0010: 00 09 00 09 00 00
+
+Device Property:        D03D (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0009
+Current Value:          0009
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+0000: 1C 00 00 00 02 00 14 10 77 02 00 00 41 D0 04 00
+0010: 01 01 00 01 00 02 02 00 01 00 00 00
+
+Device Property:        D041 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0001
+Current Value:          0001
+Enumeration:            {0001, 0000}
+
+0000: 1E 00 00 00 02 00 14 10 79 02 00 00 42 D0 04 00
+0010: 01 00 00 00 00 02 03 00 02 00 01 00 00 00
+
+Device Property:        D042 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0002, 0001, 0000}
+
+0000: 16 00 00 00 02 00 14 10 7B 02 00 00 43 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D043 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: 1C 00 00 00 02 00 14 10 7D 02 00 00 44 D0 04 00
+0010: 01 00 00 00 00 02 02 00 00 00 01 00
+
+Device Property:        D044 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0000
+Current Value:          0000
+Enumeration:            {0000, 0001}
+
+0000: 26 00 00 00 02 00 14 10 7F 02 00 00 45 D0 04 00
+0010: 01 02 00 04 00 02 07 00 01 00 02 00 03 00 04 00
+0020: 05 00 06 00 07 00
+
+Device Property:        D045 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get/Set
+Default Value:          0002
+Current Value:          0004
+Enumeration:            {0001, 0002, 0003, 0004, 0005, 0006, 0007}
+
+0000: 16 00 00 00 02 00 14 10 81 02 00 00 46 D0 04 00
+0010: 00 01 01 01 01 00
+
+Device Property:        D046 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0101
+Current Value:          0101
+
+0000: 16 00 00 00 02 00 14 10 83 02 00 00 47 D0 04 00
+0010: 00 00 00 00 00 00
+
+Device Property:        D047 (Vendor defined)
+Data Type:              UINT16
+Get/Set:                Get
+Default Value:          0000
+Current Value:          0000
+
+0000: B2 00 00 00 02 00 14 10 85 02 00 00 48 D0 06 40
+0010: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0020: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0030: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0040: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+0050: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+0060: 00 13 00 00 00 00 10 40 00 00 80 2A 00 00 48 1F
+0070: 00 00 00 00 00 00 E4 03 00 00 70 26 00 00 50 19
+0080: 00 00 70 11 00 00 00 00 00 00 58 02 00 00 48 12
+0090: 00 00 30 0C 00 00 B0 08 00 00 00 00 00 00 50 01
+00A0: 00 00 00 00 00 00 A8 0F 00 00 B8 08 00 00 58 04
+00B0: 00 00
+
+Device Property:        D048 (Vendor defined)
+Data Type:              AUINT32
+Get/Set:                Get
+Default Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+Current Value:          00401000,002A8000,001F4800,00000000,0003E400,00267000,00195000,00117000,00000000,00025800,00124800,000C3000,0008B000,00000000,00015000,00000000,000FA800,0008B800,00045800
+
+0000: 1A 00 00 00 02 00 14 10 87 02 00 00 49 D0 06 00
+0010: 00 00 00 03 02 00 00 03 02 00
+
+Device Property:        D049 (Vendor defined)
+Data Type:              UINT32
+Get/Set:                Get
+Default Value:          02030000
+Current Value:          02030000
+
+0000: 1A 00 00 00 02 00 14 10 89 02 00 00 4A D0 02 00
+0010: 01 00 00 02 04 00 00 01 02 03
+
+Device Property:        D04A (Vendor defined)
+Data Type:              UINT8
+Get/Set:                Get/Set
+Default Value:          00
+Current Value:          00
+Enumeration:            {00, 01, 02, 03}
+
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006
+Transaction: Response recieve error: 2006

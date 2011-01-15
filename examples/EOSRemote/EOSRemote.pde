@@ -1,5 +1,5 @@
-/* Digital camera controller board test sketch */
-#include <Spi.h>
+/* EOS control terminal */
+//#include <Spi.h>
 #include <Max3421e.h>
 #include <Usb.h>
 #include <simpletimer.h>
@@ -7,8 +7,8 @@
 #include <canoneos.h>
 #include <qep_port.h>
 #include <valuelist.h>
+#include <eosvaluetitles.h>
 
-#include "valuetitles.h"
 #include "eoseventparser.h"
 #include "eosconsole.h"
 
@@ -43,7 +43,7 @@ EEPROMByteList          vlShutterSpeed(EEP_SHTSPEED_LIST_OFFSET, EEP_SHTSPEED_LI
 EEPROMByteList          vlWhiteBalance(EEP_WBALANCE_LIST_OFFSET, EEP_WBALANCE_LIST_SIZE);
 EEPROMByteList          vlPictureStyle(EEP_PICSTYLE_LIST_OFFSET, EEP_PICSTYLE_LIST_SIZE);
 EEPROMByteList          vlIso(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIST_SIZE);
-EEPROMByteList          vlExpCorrection(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIST_SIZE);
+EEPROMByteList          vlExpCompensation(EEP_EXPOCOR_LIST_OFFSET, EEP_EXPOCOR_LIST_SIZE);
 
 class CamStateHandlers : public EOSStateHandlers
 {

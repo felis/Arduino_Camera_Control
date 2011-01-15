@@ -1,0 +1,96 @@
+Session opened
+stateConnected
+
+Object Added:           00000005
+Storage ID:             00010001
+Object Format:          3801    EXIF_JPEG
+Protection Status:      0000
+Object Compressed Size: 00315A1A
+Thumb Format:           3808    JFIF
+Thumb Compressed Size:  0000107A
+Thumb Pix Width:        000000A0
+Thumb Pix Height:       00000078
+Image Pix Width:        00000E40
+Image Pix Height:       00000AB0
+Image Bit Depth:        00000000
+Parent Object:          00000004
+Association Type:       0000
+Association Desc:       00000001
+Sequence Number:        00000000
+File Name:              IMG_0991.JPG
+Capture Date:           20110115T010141.0
+Modification Date:
+Keywords:
+
+Capture complete.
+
+Object Added:           00000006
+Storage ID:             00010001
+Object Format:          3801    EXIF_JPEG
+Protection Status:      0000
+Object Compressed Size: 002F6B25
+Thumb Format:           3808    JFIF
+Thumb Compressed Size:  0000106B
+Thumb Pix Width:        000000A0
+Thumb Pix Height:       00000078
+Image Pix Width:        00000E40
+Image Pix Height:       00000AB0
+Image Bit Depth:        00000000
+Parent Object:          00000004
+Association Type:       0000
+Association Desc:       00000001
+Sequence Number:        00000000
+File Name:              IMG_0992.JPG
+Capture Date:           20110115T010146.0
+Modification Date:
+Keywords:
+
+Capture complete.
+
+Object Added:           00000007
+Storage ID:             00010001
+Object Format:          3801    EXIF_JPEG
+Protection Status:      0000
+Object Compressed Size: 002FE0BF
+Thumb Format:           3808    JFIF
+Thumb Compressed Size:  00001085
+Thumb Pix Width:        000000A0
+Thumb Pix Height:       00000078
+Image Pix Width:        00000E40
+Image Pix Height:       00000AB0
+Image Bit Depth:        00000000
+Parent Object:          00000004
+Association Type:       0000
+Association Desc:       00000001
+Sequence Number:        00000000
+File Name:              IMG_0993.JPG
+Capture Date:           20110115T010151.0
+Modification Date:
+Keywords:
+
+Capture complete.
+
+Object Added:           00000008
+Storage ID:             00010001
+Object Format:          3801    EXIF_JPEG
+Protection Status:      0000
+Object Compressed Size: 002EDF53
+Thumb Format:           3808    JFIF
+Thumb Compressed Size:  00001082
+Thumb Pix Width:        000000A0
+Thumb Pix Height:       00000078
+Image Pix Width:        00000E40
+Image Pix Height:       00000AB0
+Image Bit Depth:        00000000
+Parent Object:          00000004
+Association Type:       0000
+Association Desc:       00000001
+Sequence Number:        00000000
+File Name:              IMG_0994.JPG
+Capture Date:           20110115T010157.0
+Modification Date:
+Keywords:
+
+Capture complete.
+Camera disconnected
+

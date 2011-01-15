@@ -1,18 +1,19 @@
-/*****************************************************************************
-*
-* Copyright (C) 2010 Circuits At Home, LTD. All rights reserved.
-*
-* This software may be distributed and modified under the terms of the GNU
-* General Public License version 2 (GPL) as published by the Free Software
-* Foundation and appearing in the file GPL.TXT included in the packaging of
-* this file. Please note that GPL Section 2[b] requires that all works based
-* on this software must also be made publicly available under the terms of
-* the GPL ("Copyleft").
-*
-* Contact information:
-* Circuits At Home Web site: http://www.circuitsathome.com
-* e-mail: support@circuitsathome.com
-*****************************************************************************/
+/* Copyright (C) 2010-2011 Circuits At Home, LTD. All rights reserved.
+
+This software may be distributed and modified under the terms of the GNU
+General Public License version 2 (GPL2) as published by the Free Software
+Foundation and appearing in the file GPL2.TXT included in the packaging of
+this file. Please note that GPL2 Section 2[b] requires that all works based
+on this software must also be made publicly available under the terms of
+the GPL2 ("Copyleft").
+
+Contact information
+-------------------
+
+Circuits At Home, LTD
+Web      :  http://www.circuitsathome.com
+e-mail   :  support@circuitsathome.com
+*/
 #include "canoneos.h"
 
 
@@ -59,8 +60,8 @@ uint16_t CanonEOS::SetImageQuality(uint32_t format)
 	ImgQualitySupplier		sup;
 	sup.SetPictureFormat(format);
 
-	if ( (ptp_error = Transaction(PTP_OC_EOS_SetDevicePropValue, &flags, NULL, (void*)&sup)) != PTP_RC_OK)
-		Message(PSTR("SetImageQuality error"), ptp_error);
+	if ( (ptp_error = Transaction(EOS_OC_SetDevicePropValue, &flags, NULL, (void*)&sup)) != PTP_RC_OK)
+		PTPTRACE2("SetImageQuality error", ptp_error);
 
 	return ptp_error;
 }
@@ -69,14 +70,14 @@ uint16_t CanonEOS::SetPCConnectMode(uint8_t mode)
 {
 	uint32_t	params[1];
 	params[0] = (uint32_t) mode;
-	return Operation(PTP_OC_EOS_SetPCConnectMode, 1, params);
+	return Operation(EOS_OC_SetPCConnectMode, 1, params);
 }
 
 uint16_t CanonEOS::SetExtendedEventInfo(uint8_t mode)
 {
 	uint32_t	params[1];
 	params[0] = (uint32_t) mode;
-	return Operation(PTP_OC_EOS_SetExtendedEventInfo, 1, params);
+	return Operation(EOS_OC_SetExtendedEventInfo, 1, params);
 }
 
 uint16_t CanonEOS::StartBulb()
@@ -98,18 +99,15 @@ uint16_t CanonEOS::StopBulb()
 {
 	uint32_t	params[3];
 
-    	params[0] = 0xffffffff;
+    params[0] = 0xffffffff;
 	params[1] = 0x00001000;
 	params[2] = 0x00000000;
 	Operation(0x911A, 3, params);
     
-    	params[0] = 0xfffffffc;
+    params[0] = 0xfffffffc;
 	Operation(0x911A, 3, params);
-    
 	Operation(0x9126, 0, NULL);
-    	delay(50);
 	Operation(0x911C, 0, NULL);
-    	delay(50);
 
 	return PTP_RC_OK;
 }
@@ -119,7 +117,7 @@ uint16_t CanonEOS::CancelTransfer(uint32_t object_id)
 	uint32_t	params[1];
 	params[0] = object_id;
 
-	return Operation(PTP_OC_EOS_CancelTransfer, 1, params);
+	return Operation(EOS_OC_CancelTransfer, 1, params);
 }
 
 uint16_t CanonEOS::ResetTransfer(uint32_t object_id)
@@ -127,7 +125,7 @@ uint16_t CanonEOS::ResetTransfer(uint32_t object_id)
 	uint32_t	params[1];
 	params[0] = object_id;
 
-	return Operation(PTP_OC_EOS_ResetTransfer, 1, params);
+	return Operation(EOS_OC_ResetTransfer, 1, params);
 }
 
 uint16_t CanonEOS::SwitchLiveView(bool on)
@@ -140,7 +138,7 @@ uint16_t CanonEOS::SwitchLiveView(bool on)
 		{
 			if ((ptp_error = SetProperty(0xD1B3, 0)) != PTP_RC_OK)
 			{
-				Message(PSTR("LiveView start failure:"), ptp_error);
+				PTPTRACE2("LiveView start failure:", ptp_error);
 				SetProperty(EOS_DPC_LiveView, 0);
 				return PTP_RC_GeneralError;
 			}
@@ -157,10 +155,8 @@ uint16_t CanonEOS::MoveFocus(uint16_t step)
 
 	params[0] = (uint32_t) step;
 
-	if ( (ptp_error = Transaction(PTP_OC_EOS_MoveFocus, &flags, params, NULL)) != PTP_RC_OK)
-		Message(PSTR("MoveFocus error."), ptp_error);
-	else
-		Message(PSTR("MoveFocus: Success."), ptp_error);
+	if ( (ptp_error = Transaction(EOS_OC_MoveFocus, &flags, params, NULL)) != PTP_RC_OK)
+		PTPTRACE2("MoveFocus error: ", ptp_error);
 
 	return ptp_error;
 }
@@ -171,14 +167,14 @@ uint16_t CanonEOS::EventCheck(PTPReadParser *parser)
 	OperFlags	flags		= { 0, 0, 0, 1, 1, 0 };
 
 	if ( (ptp_error = Transaction(0x9116, &flags, NULL, parser)) != PTP_RC_OK)
-		Message(PSTR("EOSEventCheck error:"), ptp_error);
+		PTPTRACE2("EOSEventCheck error:", ptp_error);
 
 	return ptp_error;
 }
 
 uint16_t CanonEOS::Capture()
 {
-	return Operation(PTP_OC_EOS_Capture, 0, NULL);
+	return Operation(EOS_OC_Capture, 0, NULL);
 }
 
 
@@ -192,8 +188,8 @@ uint16_t CanonEOS::SetProperty(uint16_t prop, uint32_t val)
 	params[1] = (uint32_t)prop;
 	params[2] = val;
 
-	if ( (ptp_error = Transaction(PTP_OC_EOS_SetDevicePropValue, &flags, NULL, (void*)params)) != PTP_RC_OK)
-		Message(PSTR("SetProperty error:"), ptp_error);
+	if ( (ptp_error = Transaction(EOS_OC_SetDevicePropValue, &flags, NULL, (void*)params)) != PTP_RC_OK)
+		PTPTRACE2("SetProperty error:", ptp_error);
 
 	return ptp_error;
 }
@@ -206,8 +202,8 @@ uint16_t CanonEOS::GetProperty(uint16_t prop, PTPReadParser *parser)
 
 	params[0] = (uint32_t)prop;
 
-	if ( (ptp_error = Transaction(PTP_OC_EOS_GetDevicePropValue, &flags, params, (void*)parser)) != PTP_RC_OK)
-		Message(PSTR("GetProperty error:"), ptp_error);
+	if ( (ptp_error = Transaction(EOS_OC_GetDevicePropValue, &flags, params, (void*)parser)) != PTP_RC_OK)
+		PTPTRACE2("GetProperty error:", ptp_error);
 
 	return ptp_error;
 }
@@ -217,8 +213,8 @@ uint16_t CanonEOS::GetDeviceInfoEx(PTPReadParser *parser)
 	uint16_t	ptp_error	= PTP_RC_GeneralError;
 	OperFlags	flags		= { 0, 0, 0, 1, 1, 0 };
 
-	if ( (ptp_error = Transaction(PTP_OC_EOS_GetDeviceInfoEx, &flags, NULL, (void*)parser)) != PTP_RC_OK)
-		Message(PSTR("GetDeviceInfo error:"), ptp_error);
+	if ( (ptp_error = Transaction(EOS_OC_GetDeviceInfoEx, &flags, NULL, (void*)parser)) != PTP_RC_OK)
+		PTPTRACE2("GetDeviceInfo error:", ptp_error);
 
 	return ptp_error;
 }
@@ -232,8 +228,8 @@ uint16_t CanonEOS::GetObject(uint32_t object_id, uint32_t parent_id, PTPReadPars
 	params[0] = object_id;
 	params[1] = parent_id;
 
-	if ( (ptp_error = Transaction(PTP_OC_EOS_GetObject, &flags, params, (void*)parser)) != PTP_RC_OK)
-		Message(PSTR("GetObject error:"), ptp_error);
+	if ( (ptp_error = Transaction(EOS_OC_GetObject, &flags, params, (void*)parser)) != PTP_RC_OK)
+		PTPTRACE2("GetObject error:", ptp_error);
 
 	return ptp_error;
 }
