@@ -19,9 +19,9 @@
 #define INTERRUPT_EP    3
 #define CONFIG_NUM      1
 
-//Nikon Coolpix L110
-#define DATA_IN_EP 2
-#define DATA_OUT_EP 1
+//Nikon Coolpix L110, P100
+//#define DATA_IN_EP 2
+//#define DATA_OUT_EP 1
 
 void setup();
 void loop();
