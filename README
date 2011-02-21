@@ -1,1 +1,5 @@
-PTP and camera-specific libraries for Arduino USB Host Project. The project is hosted at http://www.circuitsathome.com
+PTP and camera-specific libraries for Arduino USB Host Project.
+
+This library depends on <a href="<a href="https://github.com/felis/USB_Host_Shield">USB_Host_Shield library</a> written to support <a href="/arduino_usb_host_shield_projects">USB Host Shield</a>. 
+
+The project is hosted at http://www.circuitsathome.com
