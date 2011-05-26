@@ -175,6 +175,7 @@ const ValueTitle<VT_SHSPEED, VT_SHSPEED_TEXT_LEN> ShutterSpeedTitles[] PROGMEM =
 
 const ValueTitle<VT_ISO, VT_ISO_TEXT_LEN> IsoTitles[] PROGMEM =
 {
+	{0x00,	{'A','U','T','O',0} },
 	{0x28,	{'6',' ',' ',' ',0} },
 	{0x30,	{'1','2',' ',' ',0} },
 	{0x38,	{'2','5',' ',' ',0} },
@@ -192,8 +193,14 @@ const ValueTitle<VT_ISO, VT_ISO_TEXT_LEN> IsoTitles[] PROGMEM =
 	{0x63,	{'1','0','0','0',0} },
 	{0x65,	{'1','2','5','0',0} },
 	{0x68,	{'1','6','0','0',0} },
+	{0x6b,	{'2','0','0','0',0} },
+	{0x6d,	{'2','5','0','0',0} },
 	{0x70,	{'3','2','0','0',0} },
-	{0x78,	{'6','4','0','0',0} }
+	{0x73,	{'4','0','0','0',0} },
+	{0x75,	{'5','0','0','0',0} },
+	{0x78,	{'6','4','0','0',0} },
+	{0x80,	{'H','1',' ',' ',0} },
+	{0x88,	{'H','2',' ',' ',0} } 
 };
 
 // Exposure Compensation Title Array
@@ -268,7 +275,8 @@ const ValueTitle<VT_WB, VT_WB_TEXT_LEN> WbTitles[] PROGMEM =
 	{4, {'F','l','r',0} },            // Fluoriscent
 	{5,	{'S','t','r',0} },            // Strobe
 	{6, {'W','/','P',0} },            // White Paper
-	{8,	{'S','h','d',0} }             // Shade
+	{8,	{'S','h','d',0} },            // Shade
+	{9,	{'M','a','n',0} }             // Manual White Balance
 };
 
 // Picture Style Title Array
